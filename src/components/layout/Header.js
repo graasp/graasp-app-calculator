@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import AppBar from '@material-ui/core/AppBar';
 import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -8,7 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 import { withTranslation } from 'react-i18next';
 import { ReactComponent as Logo } from '../../resources/logo.svg';
 import './Header.css';
-import { addQueryParamsToUrl } from '../../utils/url';
 
 class Header extends Component {
   static propTypes = {
@@ -17,8 +15,6 @@ class Header extends Component {
       logo: PropTypes.string,
       grow: PropTypes.string,
     }).isRequired,
-    appInstanceId: PropTypes.string,
-    spaceId: PropTypes.string,
   };
 
   static styles = (theme) => ({
@@ -34,43 +30,6 @@ class Header extends Component {
     },
   });
 
-  static defaultProps = {
-    appInstanceId: null,
-    spaceId: null,
-  };
-
-  renderAppInstanceLink = () => {
-    const { appInstanceId, t } = this.props;
-    if (!appInstanceId) {
-      return (
-        <a
-          href={addQueryParamsToUrl({
-            appInstanceId: '6156e70ab253020033364411',
-          })}
-          className="HeaderLink"
-        >
-          {t('Use Sample App Instance')}
-        </a>
-      );
-    }
-    return <div />;
-  };
-
-  renderSpaceLink = () => {
-    const { spaceId, t } = this.props;
-    if (!spaceId) {
-      return (
-        <a
-          href={addQueryParamsToUrl({ spaceId: '5b56e70ab253020033364411' })}
-          className="HeaderLink"
-        >
-          {t('Use Sample Space')}
-        </a>
-      );
-    }
-    return <div />;
-  };
-
   render() {
     const { t, classes } = this.props;
     return (
@@ -81,8 +40,6 @@ class Header extends Component {
             <Typography variant="h6" color="inherit" className={classes.grow}>
               {t('Calculator')}
             </Typography>
-            {this.renderSpaceLink()}
-            {this.renderAppInstanceLink()}
           </Toolbar>
         </AppBar>
       </header>
@@ -90,12 +47,6 @@ class Header extends Component {
   }
 }
 
-const mapStateToProps = ({ context }) => ({
-  appInstanceId: context.appInstanceId,
-  spaceId: context.spaceId,
-});
-
-const ConnectedComponent = connect(mapStateToProps)(Header);
-const TranslatedComponent = withTranslation()(ConnectedComponent);
+const TranslatedComponent = withTranslation()(Header);
 
 export default withStyles(Header.styles)(TranslatedComponent);

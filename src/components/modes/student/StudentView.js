@@ -3,8 +3,7 @@ import PropTypes from 'prop-types';
 import { withTranslation } from 'react-i18next';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Paper from '@material-ui/core/Paper';
-import { addQueryParamsToUrl } from '../../../utils/url';
+import Calculator from '../../common/Calculator';
 
 const styles = (theme) => ({
   main: {
@@ -19,27 +18,15 @@ const styles = (theme) => ({
   },
 });
 
-export const StudentView = ({ t, classes }) => (
+export const StudentView = ({ classes }) => (
   <Grid container spacing={10}>
     <Grid item xs={12} className={classes.main}>
-      <Paper className={classes.message}>
-        {t(
-          'This is the student view. Switch to the teacher view by clicking on the URL below.',
-        )}
-        <a href={addQueryParamsToUrl({ mode: 'teacher' })}>
-          <pre>
-            {`${window.location.host}/${addQueryParamsToUrl({
-              mode: 'teacher',
-            })}`}
-          </pre>
-        </a>
-      </Paper>
+      <Calculator />
     </Grid>
   </Grid>
 );
 
 StudentView.propTypes = {
-  t: PropTypes.func.isRequired,
   classes: PropTypes.shape({
     main: PropTypes.string,
     message: PropTypes.string,
