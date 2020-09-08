@@ -1,12 +1,10 @@
 {
-  "name": "graasp-app-starter-react",
-  "version": "0.6.0",
+  "name": "graasp-app-calculator",
+  "version": "0.1.0",
   "private": true,
   "author": "EPFL",
   "contributors": [
-    "Juan Carlos Farah",
-    "Hassan Abdul Ghaffar",
-    "Mashkour Abdel Aziz"
+    "Kim Lan Phan Hoang"
   ],
   "homepage": ".",
   "license": "MIT",

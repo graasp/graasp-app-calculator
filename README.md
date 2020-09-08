@@ -1,1 +1,1 @@
-# Graasp App: graasp-app-calculator
+# Graasp App: Calculator
