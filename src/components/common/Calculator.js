@@ -25,8 +25,9 @@ class Calculator extends Component {
   evalResult = (result) => {
     const { t } = this.props;
     try {
-      // replace result string characters with corresponding operation in mathjs
+      // remove curvy parenthesis of katex to evaluate in mathjs
       let parsedResult = result.replaceAll('{', '').replaceAll('}', '');
+      // replace result string characters with corresponding operation in mathjs
       BUTTONS.filter(({ operation: op }) => op).forEach(
         ({ text, operation }) => {
           parsedResult = parsedResult.replaceAll(text, operation);
@@ -81,6 +82,7 @@ class Calculator extends Component {
         newResult = this.backspace(newResult);
         break;
       case BUTTONS_NAMES.POWER:
+        // add parenthesis to correctly handle more than one digit powers
         newResult += `${text}{(`;
         break;
       case BUTTONS_NAMES.MULTIPLY:

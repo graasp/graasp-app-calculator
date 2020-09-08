@@ -12,6 +12,7 @@ const styles = (theme) => ({
     minHeight: '4rem',
     padding: theme.spacing(0, 1),
 
+    // override katex default styles with app theme
     '& > span': {
       color: 'black !important',
       fontFamily: theme.typography.fontFamily,

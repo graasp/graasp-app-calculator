@@ -59,7 +59,6 @@ const getApiContext = (getState) => {
   // these bits of context are needed when running online
   if (!offline) {
     if (!apiHost) {
-      console.log('ioefjknm,');
       throw Error(MISSING_API_HOST_MESSAGE);
     }
     if (!appInstanceId) {
