@@ -11,6 +11,7 @@ import {
   BUTTONS,
   BUTTONS_NAMES,
   TIMES_SYMBOL,
+  PI_SYMBOL,
 } from '../../constants/constants';
 
 class Calculator extends Component {
@@ -60,14 +61,16 @@ class Calculator extends Component {
         newResult += ')}';
         break;
       case BUTTONS_NAMES.PI: {
-        // we add a times operation if the last entry is a number
-        const addTimes = !_.isNaN(parseInt(newResult.slice(-1), 10));
+        // we add a times operation if the last entry is a number or pi
+        const lastCharacter = newResult.slice(-1);
+        const addTimes =
+          !_.isNaN(parseInt(lastCharacter, 10)) || lastCharacter === PI_SYMBOL;
         const pi = addTimes ? `${TIMES_SYMBOL}${text}` : text;
         newResult += pi;
         break;
       }
       case BUTTONS_NAMES.SQUARE:
-        newResult += '^2';
+        newResult += '^{2}';
         break;
       case BUTTONS_NAMES.SQRT:
         newResult = this.sqrt(newResult);
