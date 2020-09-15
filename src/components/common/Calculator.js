@@ -35,7 +35,9 @@ class Calculator extends Component {
           parsedResult = replaceAll(parsedResult, text, operation);
         },
       );
-      return evaluate(parsedResult) || '';
+
+      const evaluatedResult = evaluate(parsedResult) || '';
+      return t(evaluatedResult);
     } catch (err) {
       console.error(err);
       return this.setState({
@@ -47,9 +49,11 @@ class Calculator extends Component {
   onClick = ({ name, text }) => {
     const { t } = this.props;
     const { result } = this.state;
-    let newResult = [t(RESULT_ERROR_MESSAGE), 'undefined', 'Infinity'].includes(
-      result,
-    )
+    let newResult = [
+      t(RESULT_ERROR_MESSAGE),
+      'undefined',
+      t('Infinity'),
+    ].includes(result)
       ? ''
       : result;
 
