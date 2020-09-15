@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import katex from 'katex';
 import { withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import { replaceAll } from '../../utils/string';
 
 const styles = (theme) => ({
   result: {
@@ -28,6 +29,11 @@ const styles = (theme) => ({
 });
 
 const Result = ({ result, classes }) => {
+  const html = katex.renderToString(result, {
+    throwOnError: false,
+  });
+  const parsedHtml = replaceAll(html, /[{}]/g, '');
+
   return (
     <Grid item xs={12}>
       <Typography
@@ -35,13 +41,8 @@ const Result = ({ result, classes }) => {
         className={classes.result}
         variant="h3"
         dangerouslySetInnerHTML={{
-          __html: katex
-            .renderToString(result, {
-              throwOnError: false,
-            })
-            // hide curvy parenthesis
-            .replaceAll('{', '')
-            .replaceAll('}', ''),
+          __html: parsedHtml,
+          // hide curvy parenthesis
         }}
       />
     </Grid>

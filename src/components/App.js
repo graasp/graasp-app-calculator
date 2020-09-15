@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import StudentMode from './modes/student/StudentMode';
-import { getContext } from '../actions';
+import { getContext, getAppInstance } from '../actions';
 import { DEFAULT_LANG, DEFAULT_MODE } from '../config/settings';
 import { DEFAULT_VIEW } from '../config/views';
 import TeacherMode from './modes/teacher/TeacherMode';
@@ -22,6 +22,8 @@ export class App extends Component {
       changeLanguage: PropTypes.func,
     }).isRequired,
     dispatchGetContext: PropTypes.func.isRequired,
+    dispatchGetAppInstance: PropTypes.func.isRequired,
+    appInstanceId: PropTypes.string,
     lang: PropTypes.string,
     mode: PropTypes.string,
     view: PropTypes.string,
@@ -34,12 +36,15 @@ export class App extends Component {
     lang: DEFAULT_LANG,
     mode: DEFAULT_MODE,
     view: DEFAULT_VIEW,
+    appInstanceId: null,
   };
 
   constructor(props) {
     super(props);
     // first thing to do is get the context
     props.dispatchGetContext();
+    // then get the app instance
+    props.dispatchGetAppInstance();
   }
 
   componentDidMount() {
@@ -48,11 +53,15 @@ export class App extends Component {
     this.handleChangeLang(lang);
   }
 
-  componentDidUpdate({ lang: prevLang }) {
-    const { lang } = this.props;
+  componentDidUpdate({ lang: prevLang, appInstanceId: prevAppInstanceId }) {
+    const { lang, appInstanceId, dispatchGetAppInstance } = this.props;
     // handle a change of language
     if (lang !== prevLang) {
       this.handleChangeLang(lang);
+    }
+    // handle receiving the app instance id
+    if (appInstanceId !== prevAppInstanceId) {
+      dispatchGetAppInstance();
     }
   }
 
@@ -101,12 +110,14 @@ const mapStateToProps = ({ context, appInstance }) => ({
   lang: context.lang,
   mode: context.mode,
   view: context.view,
+  appInstanceId: context.appInstanceId,
   ready: appInstance.ready,
   standalone: context.standalone,
 });
 
 const mapDispatchToProps = {
   dispatchGetContext: getContext,
+  dispatchGetAppInstance: getAppInstance,
 };
 
 const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);

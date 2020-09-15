@@ -13,6 +13,7 @@ import {
   TIMES_SYMBOL,
   PI_SYMBOL,
 } from '../../constants/constants';
+import { replaceAll } from '../../utils/string';
 
 class Calculator extends Component {
   static propTypes = {
@@ -27,11 +28,11 @@ class Calculator extends Component {
     const { t } = this.props;
     try {
       // remove curvy parenthesis of katex to evaluate in mathjs
-      let parsedResult = result.replaceAll('{', '').replaceAll('}', '');
+      let parsedResult = replaceAll(result, /[{}]/, '');
       // replace result string characters with corresponding operation in mathjs
       BUTTONS.filter(({ operation: op }) => op).forEach(
         ({ text, operation }) => {
-          parsedResult = parsedResult.replaceAll(text, operation);
+          parsedResult = replaceAll(parsedResult, text, operation);
         },
       );
       return evaluate(parsedResult) || '';
