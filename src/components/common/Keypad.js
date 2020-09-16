@@ -46,12 +46,12 @@ class KeyPad extends Component {
     // the event target might be a child of the button
     const {
       name,
-      dataset: { text },
+      dataset: { text, katex: katexString, mathjs },
     } = e.target.closest(`.${KEYPAD_BUTTON_CLASS}`);
-    onClick({ name, text });
+    onClick({ name, text, katex: katexString, mathjs });
   };
 
-  renderButton = ({ name, text }) => {
+  renderButton = ({ name, text, katex: katexString, mathjs }) => {
     const { classes } = this.props;
 
     return (
@@ -62,6 +62,8 @@ class KeyPad extends Component {
           className={KEYPAD_BUTTON_CLASS}
           name={name}
           data-text={text}
+          data-katex={katexString}
+          data-mathjs={mathjs}
           onClick={this.handleOnClick}
           dangerouslySetInnerHTML={{
             __html: katex.renderToString(text, {

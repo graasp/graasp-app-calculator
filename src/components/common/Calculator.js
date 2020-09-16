@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { evaluate, sqrt } from 'mathjs';
+import { evaluate } from 'mathjs';
 import PropTypes from 'prop-types';
 import _ from 'lodash';
 import Grid from '@material-ui/core/Grid';
@@ -7,13 +7,7 @@ import { withTranslation } from 'react-i18next';
 import Result from './Result';
 import KeyPad from './Keypad';
 import { RESULT_ERROR_MESSAGE } from '../../constants/messages';
-import {
-  BUTTONS,
-  BUTTONS_NAMES,
-  TIMES_SYMBOL,
-  PI_SYMBOL,
-} from '../../constants/constants';
-import { replaceAll } from '../../utils/string';
+import { BUTTONS_NAMES, MAX_NUMBER_PRECISION } from '../../constants/constants';
 
 class Calculator extends Component {
   static propTypes = {
@@ -21,99 +15,64 @@ class Calculator extends Component {
   };
 
   state = {
+    mathjs: '',
     result: '',
   };
 
-  evalResult = (result) => {
+  onClick = ({ name, text, katex, mathjs }) => {
     const { t } = this.props;
-    try {
-      // remove curvy parenthesis of katex to evaluate in mathjs
-      let parsedResult = replaceAll(result, /[{}]/, '');
-      // replace result string characters with corresponding operation in mathjs
-      BUTTONS.filter(({ operation: op }) => op).forEach(
-        ({ text, operation }) => {
-          parsedResult = replaceAll(parsedResult, text, operation);
-        },
-      );
-
-      const evaluatedResult = evaluate(parsedResult) || '';
-      return t(evaluatedResult);
-    } catch (err) {
-      console.error(err);
-      return this.setState({
-        result: t(RESULT_ERROR_MESSAGE),
-      });
-    }
-  };
-
-  onClick = ({ name, text }) => {
-    const { t } = this.props;
-    const { result } = this.state;
-    let newResult = [
+    const { result, mathjs: mathjsString } = this.state;
+    const needReset = [
       t(RESULT_ERROR_MESSAGE),
       'undefined',
       t('Infinity'),
-    ].includes(result)
-      ? ''
-      : result;
+    ].includes(result);
+    let newResult = needReset ? '' : result;
+    let newMathjs = needReset ? '' : mathjsString;
 
     switch (name) {
-      // append curvy parenthesis to correctly handle groups in katex
-      case BUTTONS_NAMES.OPEN_PARENTHESIS:
-        newResult += '{(';
-        break;
-      case BUTTONS_NAMES.CLOSING_PARENTHESIS:
-        newResult += ')}';
-        break;
-      case BUTTONS_NAMES.PI: {
-        // we add a times operation if the last entry is a number or pi
-        const lastCharacter = newResult.slice(-1);
-        const addTimes =
-          !_.isNaN(parseInt(lastCharacter, 10)) || lastCharacter === PI_SYMBOL;
-        const pi = addTimes ? `${TIMES_SYMBOL}${text}` : text;
-        newResult += pi;
-        break;
-      }
-      case BUTTONS_NAMES.SQUARE:
-        newResult += '^{2}';
-        break;
       case BUTTONS_NAMES.SQRT:
-        newResult = this.sqrt(newResult);
+        newMathjs = this.compute(`sqrt(${newMathjs})`);
+        newResult = newMathjs;
         break;
       case BUTTONS_NAMES.EQUAL:
-        newResult = this.calculate(newResult);
+        newMathjs = this.compute(newMathjs);
+        newResult = newMathjs;
         break;
       case BUTTONS_NAMES.CLEAR:
-        newResult = this.reset();
+        newMathjs = '';
+        newResult = '';
         break;
       case BUTTONS_NAMES.CE:
         newResult = this.backspace(newResult);
-        break;
-      case BUTTONS_NAMES.POWER:
-        // add parenthesis to correctly handle more than one digit powers
-        newResult += `${text}{(`;
-        break;
-      case BUTTONS_NAMES.MULTIPLY:
-      case BUTTONS_NAMES.DIVIDE:
-        newResult += text;
+        newMathjs = this.backspace(newMathjs);
         break;
       default:
-        newResult += name;
+        newResult += katex || text;
+        newMathjs += mathjs || text;
+        break;
     }
 
     this.setState({
       result: newResult,
+      mathjs: newMathjs,
     });
   };
 
-  sqrt = (result) => {
-    return sqrt(this.evalResult(result)).toString();
-  };
-
-  calculate = (result) => {
+  compute = (mathjs) => {
     const { t } = this.props;
     try {
-      return this.evalResult(result).toString();
+      let result = evaluate(mathjs);
+
+      // translate result in case of non-number message
+      if (!_.isNumber(result)) {
+        return t(result);
+      }
+      // prettify number in case of big numbers
+      if (result.toString().length > MAX_NUMBER_PRECISION) {
+        result = result.toPrecision(MAX_NUMBER_PRECISION);
+      }
+      return result.toString();
     } catch (e) {
       console.log(e);
       return t(RESULT_ERROR_MESSAGE);
@@ -125,7 +84,15 @@ class Calculator extends Component {
   };
 
   backspace = (result) => {
-    return result.slice(0, -1);
+    const lastChar = result.slice(-1);
+    let newStr = result.slice(0, -1);
+    // if removed char is part of a group
+    // remove one more visible character
+    const reg = RegExp('[\\{\\}A-Za-z]', 'g');
+    if (reg.exec(lastChar)?.[0]) {
+      newStr = this.backspace(newStr);
+    }
+    return newStr;
   };
 
   render() {
