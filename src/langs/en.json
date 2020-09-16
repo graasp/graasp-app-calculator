@@ -2,6 +2,8 @@
   "translations": {
     "Calculator": "Calculator",
     "Error": "Error",
-    "Infinity": "Infinity"
+    "Infinity": "Infinity",
+    "The keyboard is enabled": "The keyboard is enabled",
+    "The keyboard is disabled": "The keyboard is disabled"
   }
 }

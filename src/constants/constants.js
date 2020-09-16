@@ -1,4 +1,7 @@
 export const MAX_NUMBER_PRECISION = 15;
+export const CALCULATOR_MAX_WIDTH = 500;
+export const ENABLED_COLOR = 'green';
+export const DISABLED_COLOR = 'red';
 
 export const BUTTONS_NAMES = {
   MULTIPLY: 'multiply',
@@ -17,6 +20,7 @@ export const BUTTONS_NAMES = {
 export const PI_SYMBOL = 'π';
 export const TIMES_SYMBOL = '×';
 export const DIVIDE_SYMBOL = '÷';
+export const POWER_SYMBOL = '^';
 
 /**
  * BUTTONS defines the buttons on the keypad. The buttons are displayed in order.

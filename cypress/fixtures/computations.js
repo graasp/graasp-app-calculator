@@ -8,7 +8,7 @@ import {
 
 // minus symbol is rendered differently in katex
 // if the equation is valid
-const KATEX_MINUS_SYMBOL = '−';
+export const KATEX_MINUS_SYMBOL = '−';
 
 // eslint-disable-next-line import/prefer-default-export
 export const FIXTURES_COMPUTATIONS = [
