@@ -4,9 +4,12 @@ import katex from 'katex';
 import { withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { KEYPAD_BUTTON_CLASS } from '../../constants/selectors';
-import { BUTTONS } from '../../constants/constants';
+import { BUTTONS, SCIENTIFIC_BUTTONS } from '../../constants/constants';
 
 const styles = (theme) => ({
+  scientificWrapper: {
+    marginRight: theme.spacing(1),
+  },
   buttonWrapper: {
     '& .katex': { fontFamily: theme.typography.fontFamily },
 
@@ -37,8 +40,10 @@ class KeyPad extends Component {
   static propTypes = {
     classes: PropTypes.shape({
       buttonWrapper: PropTypes.string.isRequired,
+      scientificWrapper: PropTypes.string.isRequired,
     }).isRequired,
     onClick: PropTypes.func.isRequired,
+    scientificMode: PropTypes.bool.isRequired,
   };
 
   handleOnClick = (e) => {
@@ -51,11 +56,11 @@ class KeyPad extends Component {
     onClick({ name, text, katex: katexString, mathjs });
   };
 
-  renderButton = ({ name, text, katex: katexString, mathjs }) => {
+  renderButton = ({ name, text, katex: katexString, mathjs }, xs) => {
     const { classes } = this.props;
 
     return (
-      <Grid key={name} item xs={3} className={classes.buttonWrapper}>
+      <Grid key={name} item xs={xs} className={classes.buttonWrapper}>
         <button
           data-cy={name}
           type="button"
@@ -77,7 +82,25 @@ class KeyPad extends Component {
   };
 
   render() {
-    return BUTTONS.map((button) => this.renderButton(button));
+    const { scientificMode, classes } = this.props;
+
+    return (
+      <>
+        {scientificMode && (
+          <Grid
+            container
+            xs={6}
+            spacing={2}
+            className={classes.scientificWrapper}
+          >
+            {SCIENTIFIC_BUTTONS.map((button) => this.renderButton(button, 4))}
+          </Grid>
+        )}
+        <Grid container xs={scientificMode ? 6 : 12} spacing={2}>
+          {BUTTONS.map((button) => this.renderButton(button, 3))}
+        </Grid>
+      </>
+    );
   }
 }
 
