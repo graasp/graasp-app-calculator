@@ -16,6 +16,7 @@ export const BUTTONS_NAMES = {
 
 export const PI_SYMBOL = 'π';
 export const TIMES_SYMBOL = '×';
+export const DIVIDE_SYMBOL = '÷';
 
 /**
  * BUTTONS defines the buttons on the keypad. The buttons are displayed in order.
@@ -32,7 +33,7 @@ export const BUTTONS = [
   { name: BUTTONS_NAMES.PI, text: PI_SYMBOL, mathjs: 'pi' },
   { name: BUTTONS_NAMES.OPEN_PARENTHESIS, text: '(', katex: '{(' },
   { name: BUTTONS_NAMES.CLOSING_PARENTHESIS, text: ')', katex: ')}' },
-  { name: BUTTONS_NAMES.DIVIDE, text: '÷', mathjs: '/' },
+  { name: BUTTONS_NAMES.DIVIDE, text: DIVIDE_SYMBOL, mathjs: '/' },
   { name: '7', text: '7' },
   { name: '8', text: '8' },
   { name: '9', text: '9' },

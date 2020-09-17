@@ -5,6 +5,7 @@ import katex from 'katex';
 import { withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { replaceAll } from '../../utils/string';
+import { RESULT_TEXT_NAME } from '../../constants/selectors';
 
 const styles = (theme) => ({
   result: {
@@ -32,17 +33,19 @@ const Result = ({ result, classes }) => {
   const html = katex.renderToString(result, {
     throwOnError: false,
   });
+
+  // hide curvy parenthesis
   const parsedHtml = replaceAll(html, /[{}]/g, '');
 
   return (
     <Grid item xs={12}>
       <Typography
+        data-cy={RESULT_TEXT_NAME}
         align="right"
         className={classes.result}
         variant="h3"
         dangerouslySetInnerHTML={{
           __html: parsedHtml,
-          // hide curvy parenthesis
         }}
       />
     </Grid>

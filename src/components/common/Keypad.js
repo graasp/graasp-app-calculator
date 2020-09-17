@@ -57,6 +57,7 @@ class KeyPad extends Component {
     return (
       <Grid key={name} item xs={3} className={classes.buttonWrapper}>
         <button
+          data-cy={name}
           type="button"
           label={`button ${name}`}
           className={KEYPAD_BUTTON_CLASS}

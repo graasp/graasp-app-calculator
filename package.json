@@ -53,13 +53,16 @@
     "report": "cat ./coverage/lcov.info | codacy-coverage",
     "eject": "react-scripts eject",
     "release": "git fetch --tags && git add CHANGELOG.md && standard-version -a",
-    "release:first": "git fetch --tags && git add CHANGELOG.md && standard-version -a --first-release"
+    "release:first": "git fetch --tags && git add CHANGELOG.md && standard-version -a --first-release",
+    "cypress:open": "cypress open",
+    "cypress": "npm-run-all --parallel start cypress:open"
   },
   "devDependencies": {
     "@commitlint/cli": "9.1.1",
     "@commitlint/config-conventional": "9.1.1",
     "codacy-coverage": "3.4.0",
     "cross-env": "7.0.2",
+    "cypress": "5.2.0",
     "env-cmd": "10.1.0",
     "eslint-config-airbnb": "18.2.0",
     "eslint-config-prettier": "6.11.0",

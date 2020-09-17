@@ -7,7 +7,12 @@ import { withTranslation } from 'react-i18next';
 import Result from './Result';
 import KeyPad from './Keypad';
 import { RESULT_ERROR_MESSAGE } from '../../constants/messages';
-import { BUTTONS_NAMES, MAX_NUMBER_PRECISION } from '../../constants/constants';
+import {
+  BUTTONS_NAMES,
+  MAX_NUMBER_PRECISION,
+  PI_SYMBOL,
+  TIMES_SYMBOL,
+} from '../../constants/constants';
 
 class Calculator extends Component {
   static propTypes = {
@@ -47,6 +52,15 @@ class Calculator extends Component {
         newResult = this.backspace(newResult);
         newMathjs = this.backspace(newMathjs);
         break;
+      case BUTTONS_NAMES.PI: {
+        // we add a times operation if the last entry is a number or pi
+        const lastCharacter = newResult.slice(-1);
+        const addTimes =
+          !_.isNaN(parseInt(lastCharacter, 10)) || lastCharacter === PI_SYMBOL;
+        newResult += addTimes ? `${TIMES_SYMBOL}${PI_SYMBOL}` : PI_SYMBOL;
+        newMathjs += addTimes ? `*${mathjs}` : mathjs;
+        break;
+      }
       default:
         newResult += katex || text;
         newMathjs += mathjs || text;
