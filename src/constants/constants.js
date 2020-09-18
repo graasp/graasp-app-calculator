@@ -11,7 +11,7 @@ export const BUTTONS_NAMES = {
   EQUAL: 'equal',
   POWER: 'power',
   OPEN_PARENTHESIS: 'openParenthesis',
-  CLOSING_PARENTHESIS: 'closingParenthesis',
+  CLOSE_PARENTHESIS: 'closeParenthesis',
 };
 
 export const PI_SYMBOL = 'π';
@@ -32,7 +32,7 @@ export const BUTTONS = [
   { name: BUTTONS_NAMES.CLEAR, text: 'C' },
   { name: BUTTONS_NAMES.PI, text: PI_SYMBOL, mathjs: 'pi' },
   { name: BUTTONS_NAMES.OPEN_PARENTHESIS, text: '(', katex: '{(' },
-  { name: BUTTONS_NAMES.CLOSING_PARENTHESIS, text: ')', katex: ')}' },
+  { name: BUTTONS_NAMES.CLOSE_PARENTHESIS, text: ')', katex: ')}' },
   { name: BUTTONS_NAMES.DIVIDE, text: DIVIDE_SYMBOL, mathjs: '/' },
   { name: '7', text: '7' },
   { name: '8', text: '8' },

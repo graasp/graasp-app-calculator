@@ -53,7 +53,7 @@ const theme = createMuiTheme({
   },
   typography: {
     useNextVariants: true,
-    fontFamily: 'Arial, sans-serif',
+    fontFamily: 'Helvetica, sans-serif',
     fontSize: 13,
   },
   spacing: 4,

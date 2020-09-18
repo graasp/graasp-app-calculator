@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import _ from 'lodash';
 import Typography from '@material-ui/core/Typography';
 import katex from 'katex';
 import { withStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import { replaceAll } from '../../utils/string';
 import { RESULT_TEXT_NAME } from '../../constants/selectors';
 
 const styles = (theme) => ({
@@ -35,7 +35,7 @@ const Result = ({ result, classes }) => {
   });
 
   // hide curvy parenthesis
-  const parsedHtml = replaceAll(html, /[{}]/g, '');
+  const parsedHtml = _.replace(html, /[{}]/g, '');
 
   return (
     <Grid item xs={12}>

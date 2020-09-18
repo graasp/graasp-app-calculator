@@ -18,7 +18,7 @@ const styles = (theme) => ({
       border: 'none',
       padding: theme.spacing(1, 0),
 
-      // override katex katex default styles with app theme
+      // override katex default styles with app theme
       '& > span': {
         fontSize: '2.3rem',
         color: `${theme.palette.secondary.main} !important`,
