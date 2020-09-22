@@ -23,7 +23,7 @@ function getModalStyle() {
 const styles = (theme) => ({
   paper: {
     position: 'absolute',
-    width: theme.spacing(50),
+    width: theme.spacing(100),
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
     padding: theme.spacing(4),
@@ -43,7 +43,6 @@ class Settings extends Component {
     activity: PropTypes.bool.isRequired,
     settings: PropTypes.shape({
       headerVisible: PropTypes.bool.isRequired,
-      studentsOnly: PropTypes.bool.isRequired,
     }).isRequired,
     t: PropTypes.func.isRequired,
     dispatchCloseSettings: PropTypes.func.isRequired,

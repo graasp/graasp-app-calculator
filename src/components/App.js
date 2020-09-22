@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
+import katex from 'katex';
+import 'katex/dist/katex.min.css';
 import StudentMode from './modes/student/StudentMode';
 import { getContext, getAppInstance } from '../actions';
 import { DEFAULT_LANG, DEFAULT_MODE } from '../config/settings';
@@ -9,6 +11,9 @@ import { DEFAULT_VIEW } from '../config/views';
 import TeacherMode from './modes/teacher/TeacherMode';
 import Header from './layout/Header';
 import Loader from './common/Loader';
+
+// bind katex to the window object
+window.katex = katex;
 
 export class App extends Component {
   static propTypes = {
