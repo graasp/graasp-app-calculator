@@ -9,6 +9,10 @@ import { BUTTONS, SCIENTIFIC_BUTTONS } from '../../constants/constants';
 const styles = (theme) => ({
   scientificWrapper: {
     marginRight: theme.spacing(1),
+    [theme.breakpoints.down('sm')]: {
+      marginRight: theme.spacing(0),
+      marginBottom: theme.spacing(1),
+    },
   },
   buttonWrapper: {
     '& .katex': { fontFamily: theme.typography.fontFamily },
@@ -89,14 +93,14 @@ class KeyPad extends Component {
         {scientificMode && (
           <Grid
             container
-            xs={6}
+            sm={6}
             spacing={2}
             className={classes.scientificWrapper}
           >
             {SCIENTIFIC_BUTTONS.map((button) => this.renderButton(button, 4))}
           </Grid>
         )}
-        <Grid container xs={scientificMode ? 6 : 12} spacing={2}>
+        <Grid container sm={scientificMode ? 6 : 12} spacing={2}>
           {BUTTONS.map((button) => this.renderButton(button, 3))}
         </Grid>
       </>
