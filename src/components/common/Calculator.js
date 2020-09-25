@@ -27,6 +27,7 @@ const styles = () => ({
   indicator: {
     fontSize: '1rem',
   },
+  wrapper: { margin: 'auto', maxWidth: CALCULATOR_MAX_WIDTH },
 });
 
 class Calculator extends Component {
@@ -35,6 +36,7 @@ class Calculator extends Component {
     standalone: PropTypes.bool.isRequired,
     classes: PropTypes.shape({
       indicator: PropTypes.string.isRequired,
+      wrapper: PropTypes.string.isRequired,
     }).isRequired,
   };
 
@@ -232,9 +234,10 @@ class Calculator extends Component {
   };
 
   render() {
+    const { classes } = this.props;
     const { result } = this.state;
     return (
-      <div style={{ margin: 'auto', maxWidth: CALCULATOR_MAX_WIDTH }}>
+      <div className={classes.wrapper}>
         <Grid
           container
           direction="row"
