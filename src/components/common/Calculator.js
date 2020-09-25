@@ -1,30 +1,128 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { evaluate } from 'mathjs';
+import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import InfoIcon from '@material-ui/icons/Info';
 import _ from 'lodash';
+import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import { withTranslation } from 'react-i18next';
 import Result from './Result';
 import KeyPad from './Keypad';
 import { RESULT_ERROR_MESSAGE } from '../../constants/messages';
 import {
-  BUTTONS_NAMES,
+  BUTTONS,
   MAX_NUMBER_PRECISION,
+  BUTTONS_NAMES,
+  POWER_SYMBOL,
+  CALCULATOR_MAX_WIDTH,
+  ENABLED_COLOR,
+  DISABLED_COLOR,
   PI_SYMBOL,
   TIMES_SYMBOL,
 } from '../../constants/constants';
 
+const styles = () => ({
+  indicator: {
+    fontSize: '1rem',
+  },
+  wrapper: { margin: 'auto', maxWidth: CALCULATOR_MAX_WIDTH },
+});
+
 class Calculator extends Component {
   static propTypes = {
     t: PropTypes.func.isRequired,
+    standalone: PropTypes.bool.isRequired,
+    classes: PropTypes.shape({
+      indicator: PropTypes.string.isRequired,
+      wrapper: PropTypes.string.isRequired,
+    }).isRequired,
   };
 
   state = {
     mathjs: '',
     result: '',
+    isFocused: false,
   };
 
-  onClick = ({ name, text, katex, mathjs }) => {
+  componentDidMount() {
+    const { standalone } = this.props;
+
+    // handle keyboard input
+    if (standalone) {
+      this.setState({ isFocused: true });
+      window.addEventListener('keydown', this.handleKeydown);
+    }
+    // handle keyboard only when the iframe is focused
+    else {
+      window.addEventListener('focus', () => {
+        this.setState({ isFocused: true });
+        return window.addEventListener('keydown', this.handleKeydown);
+      });
+      window.addEventListener('blur', () => {
+        this.setState({ isFocused: false });
+        return window.removeEventListener('keydown', this.handleKeydown);
+      });
+    }
+  }
+
+  handleKeydown = (event) => {
+    const { key } = event;
+
+    // remove focus on previous clicked element
+    document.activeElement.blur();
+    let buttonName = null;
+    switch (key) {
+      case '0':
+      case '1':
+      case '2':
+      case '3':
+      case '4':
+      case '5':
+      case '6':
+      case '7':
+      case '8':
+      case '9':
+      case '+':
+      case '-':
+      case '.':
+        // find corresponding button object
+        buttonName = key;
+        break;
+      case 'Enter':
+      case '=':
+        buttonName = BUTTONS_NAMES.EQUAL;
+        break;
+      case 'Backspace':
+        buttonName = BUTTONS_NAMES.CE;
+        break;
+      case '*':
+        buttonName = BUTTONS_NAMES.MULTIPLY;
+        break;
+      case '/':
+        buttonName = BUTTONS_NAMES.DIVIDE;
+        break;
+      case POWER_SYMBOL:
+        buttonName = BUTTONS_NAMES.POWER;
+        break;
+      case '(':
+        buttonName = BUTTONS_NAMES.OPEN_PARENTHESIS;
+        break;
+      case ')':
+        buttonName = BUTTONS_NAMES.CLOSE_PARENTHESIS;
+        break;
+      default:
+        break;
+    }
+
+    if (buttonName) {
+      const button = BUTTONS.find(({ name }) => name === buttonName);
+      this.updateResult(button);
+    }
+  };
+
+  updateResult = ({ name, text, katex, mathjs }) => {
     const { t } = this.props;
     const { result, mathjs: mathjsString } = this.state;
     const needReset = [
@@ -109,10 +207,37 @@ class Calculator extends Component {
     return newStr;
   };
 
+  renderFocusIndicator = () => {
+    const { t, classes } = this.props;
+    const { isFocused } = this.state;
+    const text = isFocused
+      ? t('The keyboard is enabled')
+      : t('The keyboard is disabled');
+    const focusColor = isFocused ? ENABLED_COLOR : DISABLED_COLOR;
+    return (
+      <>
+        <Grid item xs={1}>
+          <InfoIcon style={{ color: focusColor }} />
+        </Grid>
+        <Grid item xs={11}>
+          <Typography
+            align="left"
+            style={{ color: focusColor }}
+            className={`${classes.indicator}`}
+            variant="h6"
+          >
+            {text}
+          </Typography>
+        </Grid>
+      </>
+    );
+  };
+
   render() {
+    const { classes } = this.props;
     const { result } = this.state;
     return (
-      <div>
+      <div className={classes.wrapper}>
         <Grid
           container
           direction="row"
@@ -121,11 +246,18 @@ class Calculator extends Component {
           spacing={2}
         >
           <Result result={result} />
-          <KeyPad onClick={this.onClick} />
+          <KeyPad onClick={this.updateResult} />
+          {this.renderFocusIndicator()}
         </Grid>
       </div>
     );
   }
 }
 
-export default withTranslation()(Calculator);
+const mapStateToProps = ({ context }) => ({
+  standalone: context.standalone,
+});
+
+const ConnectedComponent = connect(mapStateToProps, null)(Calculator);
+const StyledComponent = withStyles(styles)(ConnectedComponent);
+export default withTranslation()(StyledComponent);

@@ -13,6 +13,7 @@ const styles = (theme) => ({
     wordBreak: 'break-all',
     minHeight: '4rem',
     padding: theme.spacing(0, 1),
+    overflowX: 'auto',
 
     // override katex default styles with app theme
     '& > span': {
