@@ -4,9 +4,9 @@ export const SCIENTIFIC_CALCULATOR_MAX_WIDTH = 700;
 export const ENABLED_COLOR = 'green';
 export const DISABLED_COLOR = 'red';
 
-export const BUTTONS_NAMES = {
+export const BUTTON_NAMES = {
   ADDITION: 'addition',
-  SUBSTRACTION: 'substraction',
+  SUBTRACTION: 'subtraction',
   MULTIPLY: 'multiply',
   DIVIDE: 'divide',
   SQUARE: 'square',
@@ -45,26 +45,26 @@ export const POWER_SYMBOL = '^';
  * {string=} BUTTONS[].mathjs: operation to be computed using mathjs
  * */
 export const BUTTONS = [
-  { name: BUTTONS_NAMES.CLEAR, text: 'C' },
-  { name: BUTTONS_NAMES.OPEN_PARENTHESIS, text: '(', katex: '{(' },
-  { name: BUTTONS_NAMES.CLOSE_PARENTHESIS, text: ')', katex: ')}' },
-  { name: BUTTONS_NAMES.DIVIDE, text: DIVIDE_SYMBOL, mathjs: '/' },
+  { name: BUTTON_NAMES.CLEAR, text: 'C' },
+  { name: BUTTON_NAMES.OPEN_PARENTHESIS, text: '(', katex: '{(' },
+  { name: BUTTON_NAMES.CLOSE_PARENTHESIS, text: ')', katex: ')}' },
+  { name: BUTTON_NAMES.DIVIDE, text: DIVIDE_SYMBOL, mathjs: '/' },
   { name: '7', text: '7' },
   { name: '8', text: '8' },
   { name: '9', text: '9' },
-  { name: BUTTONS_NAMES.MULTIPLY, text: TIMES_SYMBOL, mathjs: '*' },
+  { name: BUTTON_NAMES.MULTIPLY, text: TIMES_SYMBOL, mathjs: '*' },
   { name: '4', text: '4' },
   { name: '5', text: '5' },
   { name: '6', text: '6' },
-  { name: BUTTONS_NAMES.SUBSTRACTION, text: '-' },
+  { name: BUTTON_NAMES.SUBTRACTION, text: '-' },
   { name: '1', text: '1' },
   { name: '2', text: '2' },
   { name: '3', text: '3' },
-  { name: BUTTONS_NAMES.ADDITION, text: '+' },
-  { name: BUTTONS_NAMES.DOT, text: '.' },
+  { name: BUTTON_NAMES.ADDITION, text: '+' },
+  { name: BUTTON_NAMES.DOT, text: '.' },
   { name: '0', text: '0' },
-  { name: BUTTONS_NAMES.CE, text: 'CE' },
-  { name: BUTTONS_NAMES.EQUAL, text: '=' },
+  { name: BUTTON_NAMES.CE, text: 'CE' },
+  { name: BUTTON_NAMES.EQUAL, text: '=' },
 ];
 
 /**
@@ -75,37 +75,37 @@ export const BUTTONS = [
  * {string=} SCIENTIFIC_BUTTONS[].mathjs: operation to be computed using mathjs
  * */
 export const SCIENTIFIC_BUTTONS = [
-  { name: BUTTONS_NAMES.SQUARE, text: 'x^2', katex: '^{(2)}', mathjs: '^(2)' },
-  { name: BUTTONS_NAMES.SQRT, text: '\\sqrt{x}' },
-  { name: BUTTONS_NAMES.POWER, text: '^', katex: '^{(', mathjs: '^(' },
-  { name: BUTTONS_NAMES.PI, text: PI_SYMBOL, mathjs: 'pi' },
-  { name: BUTTONS_NAMES.ABS, text: '|x|' },
-  { name: BUTTONS_NAMES.PERCENT, text: '\\%', mathjs: '/100' },
-  { name: BUTTONS_NAMES.EXP, text: 'e^x', katex: 'e^{(', mathjs: 'e^(' },
+  { name: BUTTON_NAMES.SQUARE, text: 'x^2', katex: '^{(2)}', mathjs: '^(2)' },
+  { name: BUTTON_NAMES.SQRT, text: '\\sqrt{x}' },
+  { name: BUTTON_NAMES.POWER, text: '^', katex: '^{(', mathjs: '^(' },
+  { name: BUTTON_NAMES.PI, text: PI_SYMBOL, mathjs: 'pi' },
+  { name: BUTTON_NAMES.ABS, text: '|x|' },
+  { name: BUTTON_NAMES.PERCENT, text: '\\%', mathjs: '/100' },
+  { name: BUTTON_NAMES.EXP, text: 'e^x', katex: 'e^{(', mathjs: 'e^(' },
   {
-    name: BUTTONS_NAMES.LOG,
+    name: BUTTON_NAMES.LOG,
     text: 'log',
     katex: 'log{(',
     mathjs: 'log(',
   },
-  { name: BUTTONS_NAMES.LN, text: 'ln', katex: 'ln{(', mathjs: 'ln(' },
-  { name: BUTTONS_NAMES.SIN, text: 'sin', katex: 'sin{(', mathjs: 'sin(' },
-  { name: BUTTONS_NAMES.COS, text: 'cos', katex: 'cos{(', mathjs: 'cos(' },
-  { name: BUTTONS_NAMES.TAN, text: 'tan', katex: 'tan{(', mathjs: 'tan(' },
+  { name: BUTTON_NAMES.LN, text: 'ln', katex: 'ln{(', mathjs: 'ln(' },
+  { name: BUTTON_NAMES.SIN, text: 'sin', katex: 'sin{(', mathjs: 'sin(' },
+  { name: BUTTON_NAMES.COS, text: 'cos', katex: 'cos{(', mathjs: 'cos(' },
+  { name: BUTTON_NAMES.TAN, text: 'tan', katex: 'tan{(', mathjs: 'tan(' },
   {
-    name: BUTTONS_NAMES.ASIN,
+    name: BUTTON_NAMES.ASIN,
     text: 'sin^{-1}',
     katex: 'sin^{(-1)}{(',
     mathjs: 'asin(',
   },
   {
-    name: BUTTONS_NAMES.ACOS,
+    name: BUTTON_NAMES.ACOS,
     text: 'cos^{-1}',
     katex: 'cos^{(-1)}{(',
     mathjs: 'acos(',
   },
   {
-    name: BUTTONS_NAMES.ATAN,
+    name: BUTTON_NAMES.ATAN,
     text: 'tan^{-1}',
     katex: 'tan^{(-1)}{(',
     mathjs: 'atan(',

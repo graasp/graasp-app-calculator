@@ -1,5 +1,5 @@
 import {
-  BUTTONS_NAMES,
+  BUTTON_NAMES,
   DIVIDE_SYMBOL,
   TIMES_SYMBOL,
 } from '../../src/constants/constants';
@@ -117,7 +117,7 @@ describe('Keyboard', () => {
 
   afterEach(() => {
     // clear calculator
-    cy.get(`[data-cy="${BUTTONS_NAMES.CLEAR}"]`).click();
+    cy.get(`[data-cy="${BUTTON_NAMES.CLEAR}"]`).click();
     cy.get(resultSelector).should('have.text', '');
   });
 });

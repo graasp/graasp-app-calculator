@@ -14,7 +14,7 @@ import {
   FIXTURES_NEGATIVE_INFINITY_SCIENTIFIC_COMPUTATIONS,
   FIXTURES_TYPO_ERROR_SCIENTIFIC_COMPUTATIONS,
 } from '../fixtures/scientificComputations';
-import { ANGLE_UNITS, BUTTONS_NAMES } from '../../src/constants/constants';
+import { ANGLE_UNITS, BUTTON_NAMES } from '../../src/constants/constants';
 import { RESULT_ERROR_MESSAGE } from '../../src/constants/messages';
 import { DEFAULT_MODE } from '../../src/config/settings';
 import { KATEX_MINUS_SYMBOL } from '../constants';
@@ -89,7 +89,7 @@ describe('Calculator', () => {
 
     afterEach(() => {
       // clear calculator
-      cy.get(`[data-cy="${BUTTONS_NAMES.CLEAR}"]`).click();
+      cy.get(`[data-cy="${BUTTON_NAMES.CLEAR}"]`).click();
       cy.get(resultSelector).should('have.text', '');
     });
   });
@@ -114,7 +114,7 @@ describe('Calculator', () => {
         cy.get(resultSelector).should('have.text', katex);
 
         // compute
-        cy.get(`[data-cy="${BUTTONS_NAMES.EQUAL}"]`).click();
+        cy.get(`[data-cy="${BUTTON_NAMES.EQUAL}"]`).click();
 
         // check result is correct
         cy.get(resultSelector).should('have.text', result);
@@ -214,7 +214,7 @@ describe('Calculator', () => {
       });
 
       it('tan(90 rad) should not return Infinity', () => {
-        [BUTTONS_NAMES.TAN, '9', '0', BUTTONS_NAMES.CLOSE_PARENTHESIS].forEach(
+        [BUTTON_NAMES.TAN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
           (selector) => {
             cy.clickButton(`[data-cy="${selector}"]`);
           },
@@ -229,11 +229,11 @@ describe('Calculator', () => {
 
       it('cos(180 rad) should not return -1', () => {
         [
-          BUTTONS_NAMES.COS,
+          BUTTON_NAMES.COS,
           '1',
           '8',
           '0',
-          BUTTONS_NAMES.CLOSE_PARENTHESIS,
+          BUTTON_NAMES.CLOSE_PARENTHESIS,
         ].forEach((selector) => {
           cy.clickButton(`[data-cy="${selector}"]`);
         });
@@ -246,7 +246,7 @@ describe('Calculator', () => {
       });
 
       it('sin(90 rad) should not return 1', () => {
-        [BUTTONS_NAMES.SIN, '9', '0', BUTTONS_NAMES.CLOSE_PARENTHESIS].forEach(
+        [BUTTON_NAMES.SIN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
           (selector) => {
             cy.clickButton(`[data-cy="${selector}"]`);
           },
@@ -260,7 +260,7 @@ describe('Calculator', () => {
       });
 
       it('acos(0) should not return 90deg', () => {
-        [BUTTONS_NAMES.ACOS, '0', BUTTONS_NAMES.CLOSE_PARENTHESIS].forEach(
+        [BUTTON_NAMES.ACOS, '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
           (selector) => {
             cy.clickButton(`[data-cy="${selector}"]`);
           },
@@ -274,7 +274,7 @@ describe('Calculator', () => {
       });
 
       it('atan(1) should not return 45deg', () => {
-        [BUTTONS_NAMES.ATAN, '1', BUTTONS_NAMES.CLOSE_PARENTHESIS].forEach(
+        [BUTTON_NAMES.ATAN, '1', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
           (selector) => {
             cy.clickButton(`[data-cy="${selector}"]`);
           },
@@ -294,7 +294,7 @@ describe('Calculator', () => {
 
     afterEach(() => {
       // clear calculator
-      cy.get(`[data-cy="${BUTTONS_NAMES.CLEAR}"]`).click();
+      cy.get(`[data-cy="${BUTTON_NAMES.CLEAR}"]`).click();
       cy.get(resultSelector).should('have.text', '');
     });
   });

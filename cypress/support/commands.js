@@ -1,5 +1,5 @@
 const { DEFAULT_MODE } = require('../../src/config/settings');
-const { ANGLE_UNITS, BUTTONS_NAMES } = require('../../src/constants/constants');
+const { ANGLE_UNITS, BUTTON_NAMES } = require('../../src/constants/constants');
 const {
   SCIENTIFIC_MODE_SWITCH_NAME,
   ANGLE_UNIT_SWITCH_NAME,
@@ -39,7 +39,7 @@ Cypress.Commands.add('clickButton', (selector) => {
 });
 
 Cypress.Commands.add('equal', () => {
-  cy.get(`[data-cy="${BUTTONS_NAMES.EQUAL}"]`).click();
+  cy.get(`[data-cy="${BUTTON_NAMES.EQUAL}"]`).click();
 });
 
 Cypress.Commands.add('toggleAngleUnit', (angleUnit) => {
