@@ -16,7 +16,7 @@ import { RESULT_ERROR_MESSAGE } from '../../constants/messages';
 import {
   MAX_NUMBER_PRECISION,
   KEYPAD_BUTTONS,
-  BUTTONS_NAMES,
+  BUTTON_NAMES,
   POWER_SYMBOL,
   CALCULATOR_MAX_WIDTH,
   ENABLED_COLOR,
@@ -160,35 +160,35 @@ class Calculator extends Component {
         buttonName = key;
         break;
       case '+':
-        buttonName = BUTTONS_NAMES.ADDITION;
+        buttonName = BUTTON_NAMES.ADDITION;
         break;
       case '-':
-        buttonName = BUTTONS_NAMES.SUBSTRACTION;
+        buttonName = BUTTON_NAMES.SUBTRACTION;
         break;
       case '.':
-        buttonName = BUTTONS_NAMES.DOT;
+        buttonName = BUTTON_NAMES.DOT;
         break;
       case 'Enter':
       case '=':
-        buttonName = BUTTONS_NAMES.EQUAL;
+        buttonName = BUTTON_NAMES.EQUAL;
         break;
       case 'Backspace':
-        buttonName = BUTTONS_NAMES.CE;
+        buttonName = BUTTON_NAMES.CE;
         break;
       case '*':
-        buttonName = BUTTONS_NAMES.MULTIPLY;
+        buttonName = BUTTON_NAMES.MULTIPLY;
         break;
       case '/':
-        buttonName = BUTTONS_NAMES.DIVIDE;
+        buttonName = BUTTON_NAMES.DIVIDE;
         break;
       case POWER_SYMBOL:
-        buttonName = BUTTONS_NAMES.POWER;
+        buttonName = BUTTON_NAMES.POWER;
         break;
       case '(':
-        buttonName = BUTTONS_NAMES.OPEN_PARENTHESIS;
+        buttonName = BUTTON_NAMES.OPEN_PARENTHESIS;
         break;
       case ')':
-        buttonName = BUTTONS_NAMES.CLOSE_PARENTHESIS;
+        buttonName = BUTTON_NAMES.CLOSE_PARENTHESIS;
         break;
       default:
         break;
@@ -214,34 +214,34 @@ class Calculator extends Component {
     let newHistory = [...history];
 
     switch (name) {
-      case BUTTONS_NAMES.SQRT:
+      case BUTTON_NAMES.SQRT:
         newMathjs = this.compute(`sqrt(${newMathjs})`);
         newResult = newMathjs;
         newHistory = [];
         break;
-      case BUTTONS_NAMES.EQUAL:
+      case BUTTON_NAMES.EQUAL:
         newMathjs = this.compute(newMathjs);
         newResult = newMathjs;
         newHistory = [];
         break;
-      case BUTTONS_NAMES.ABS:
+      case BUTTON_NAMES.ABS:
         newMathjs = this.compute(`abs(${newMathjs})`);
         newResult = newMathjs;
         newHistory = [];
         break;
-      case BUTTONS_NAMES.CLEAR:
+      case BUTTON_NAMES.CLEAR:
         newMathjs = '';
         newResult = '';
         newHistory = [];
         break;
-      case BUTTONS_NAMES.CE:
+      case BUTTON_NAMES.CE:
         [newResult, newMathjs] = this.backSpace(
           newResult,
           newMathjs,
           newHistory,
         );
         break;
-      case BUTTONS_NAMES.PI: {
+      case BUTTON_NAMES.PI: {
         // we add a times operation if the last entry is a number or pi
         const lastCharacter = newResult.slice(-1);
         const addTimes =
@@ -249,7 +249,7 @@ class Calculator extends Component {
         newResult += addTimes ? `${TIMES_SYMBOL}${PI_SYMBOL}` : PI_SYMBOL;
         newMathjs += addTimes ? `*${mathjs}` : mathjs;
         if (addTimes) {
-          newHistory.push(BUTTONS_NAMES.MULTIPLY);
+          newHistory.push(BUTTON_NAMES.MULTIPLY);
         }
         newHistory.push(name);
         break;
@@ -340,7 +340,7 @@ class Calculator extends Component {
           {this.renderScientificSwitch()}
           {scientificMode && (
             <AngleUnitSwitch
-              onChange={this.onChangeAngleUnit}
+              setAngleUnit={this.setAngleUnit}
               angleUnit={angleUnit}
             />
           )}
@@ -349,11 +349,9 @@ class Calculator extends Component {
     );
   };
 
-  onChangeAngleUnit = () => {
-    const { angleUnit } = this.state;
+  setAngleUnit = (angleUnit) => {
     this.setState({
-      angleUnit:
-        angleUnit === ANGLE_UNITS.DEG ? ANGLE_UNITS.RAD : ANGLE_UNITS.DEG,
+      angleUnit,
     });
   };
 

@@ -23,7 +23,13 @@ const styles = (theme) => ({
 });
 
 const AngleUnitSwitch = (props) => {
-  const { angleUnit, onChange, classes, t } = props;
+  const { angleUnit, setAngleUnit, classes, t } = props;
+
+  const onChange = () => {
+    const newAngleUnit =
+      angleUnit === ANGLE_UNITS.DEG ? ANGLE_UNITS.RAD : ANGLE_UNITS.DEG;
+    setAngleUnit(newAngleUnit);
+  };
 
   return (
     <Grid
@@ -46,7 +52,7 @@ const AngleUnitSwitch = (props) => {
           color="primary"
           checked={angleUnit === ANGLE_UNITS.DEG}
           onChange={onChange}
-          name="checkedC"
+          name={t('angle switch')}
         />
       </Grid>
       <Grid item className={classes.label}>
@@ -58,7 +64,7 @@ const AngleUnitSwitch = (props) => {
 
 AngleUnitSwitch.propTypes = {
   angleUnit: PropTypes.oneOf(Object.values(ANGLE_UNITS)).isRequired,
-  onChange: PropTypes.func.isRequired,
+  setAngleUnit: PropTypes.func.isRequired,
   classes: PropTypes.shape({
     switchBase: PropTypes.string.isRequired,
     angleUnitWrapper: PropTypes.string.isRequired,
