@@ -3,7 +3,11 @@
     "Calculator": "Calculatrice",
     "Error": "Erreur",
     "Infinity": "Infini",
+    "-Infinity": "-Infini",
     "The keyboard is enabled": "Le clavier est activé",
-    "The keyboard is disabled": "Le clavier est désactivé"
+    "The keyboard is disabled": "Le clavier est désactivé",
+    "Radian": "Radians",
+    "Degree": "Degrés",
+    "Scientific Mode": "Mode Scientifique"
   }
 }
