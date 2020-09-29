@@ -52,7 +52,6 @@ const AngleUnitSwitch = (props) => {
           color="primary"
           checked={angleUnit === ANGLE_UNITS.DEG}
           onChange={onChange}
-          name={t('angle switch')}
         />
       </Grid>
       <Grid item className={classes.label}>
