@@ -107,13 +107,16 @@ class Calculator extends Component {
 
   updateAngleUnit = (angleUnit) => {
     parser.set('tan', (content) => {
-      // set this formula because
-      // if (content === 90 && angleUnit === ANGLE_UNITS.DEG) {
-      //   return 'Infinity';
-      // }
-      // if (content === -90 && angleUnit === ANGLE_UNITS.DEG) {
-      //   return '-Infinity';
-      // }
+      // set corner cases because of rounding error
+      const angle = (content / 90.0) % 4;
+      if (angleUnit === ANGLE_UNITS.DEG) {
+        if (angle === 1 || angle === 3) {
+          return 'Infinity';
+        }
+        if (angle === -1 || angle === -3) {
+          return '-Infinity';
+        }
+      }
       return math.tan(math.unit(content, angleUnit));
     });
     parser.set('sin', (content) => {
