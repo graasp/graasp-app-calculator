@@ -411,3 +411,21 @@ export const FIXTURES_NEGATIVE_INFINITY_SCIENTIFIC_COMPUTATIONS = [
     katex: `ln(0)`,
   },
 ];
+
+export const FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS = [
+  {
+    name: 'abs',
+    ending: BUTTON_NAMES.ABS,
+    selectors: [
+      [BUTTON_NAMES.SUBTRACTION, '2'],
+      ['2', BUTTON_NAMES.SUBTRACTION, '2'],
+    ],
+    result: '0',
+  },
+  {
+    name: 'sqrt',
+    ending: BUTTON_NAMES.SQRT,
+    selectors: [['2'], ['2', BUTTON_NAMES.SUBTRACTION, '2']],
+    result: '0',
+  },
+];
