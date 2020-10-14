@@ -208,6 +208,75 @@ describe('Calculator', () => {
       },
     );
 
+    describe('use degree values', () => {
+      it('tan(90 deg) should return Infinity', () => {
+        [BUTTON_NAMES.TAN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
+          (selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          },
+        );
+
+        // check result is correct
+        cy.equal();
+        cy.get(resultSelector).should('have.text', `Infinity`);
+      });
+
+      it('tan(270 deg) should return Infinity', () => {
+        [
+          BUTTON_NAMES.TAN,
+          '2',
+          '7',
+          '0',
+          BUTTON_NAMES.CLOSE_PARENTHESIS,
+        ].forEach((selector) => {
+          cy.clickButton(`[data-cy="${selector}"]`);
+        });
+
+        // check result is correct
+        cy.equal();
+        cy.get(resultSelector).should('have.text', `Infinity`);
+      });
+
+      it('tan(-90 deg) should return -Infinity', () => {
+        [
+          BUTTON_NAMES.TAN,
+          BUTTON_NAMES.SUBTRACTION,
+          '9',
+          '0',
+          BUTTON_NAMES.CLOSE_PARENTHESIS,
+        ].forEach((selector) => {
+          cy.clickButton(`[data-cy="${selector}"]`);
+        });
+
+        // check result is correct
+        cy.equal();
+        cy.get(resultSelector).should(
+          'have.text',
+          `${KATEX_MINUS_SYMBOL}Infinity`,
+        );
+      });
+
+      it('tan(-270 deg) should return -Infinity', () => {
+        [
+          BUTTON_NAMES.TAN,
+          BUTTON_NAMES.SUBTRACTION,
+          '2',
+          '7',
+          '0',
+          BUTTON_NAMES.CLOSE_PARENTHESIS,
+        ].forEach((selector) => {
+          cy.clickButton(`[data-cy="${selector}"]`);
+        });
+
+        // check result is correct
+        cy.equal();
+        cy.get(resultSelector).should(
+          'have.text',
+          `${KATEX_MINUS_SYMBOL}Infinity`,
+        );
+      });
+    });
+
     describe('use radian values', () => {
       before(() => {
         cy.toggleAngleUnit(ANGLE_UNITS.RAD);
