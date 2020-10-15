@@ -3,9 +3,8 @@ import {
   TIMES_SYMBOL,
   DIVIDE_SYMBOL,
   PI_SYMBOL,
-  MAX_NUMBER_PRECISION,
+  KATEX_MINUS_SYMBOL,
 } from '../../src/constants/constants';
-import { KATEX_MINUS_SYMBOL } from '../constants';
 
 export const FIXTURES_SCIENTIFIC_COMPUTATIONS = [
   {
@@ -59,19 +58,19 @@ export const FIXTURES_SCIENTIFIC_COMPUTATIONS = [
     name: `${PI_SYMBOL}`,
     selectors: [BUTTON_NAMES.PI],
     katex: `${PI_SYMBOL}`,
-    result: Math.PI.toFixed(MAX_NUMBER_PRECISION),
+    result: 3.14159265358979,
   },
   {
     name: `2${PI_SYMBOL}`,
     selectors: ['2', BUTTON_NAMES.PI],
     katex: `2${TIMES_SYMBOL}${PI_SYMBOL}`,
-    result: (2 * Math.PI).toFixed(MAX_NUMBER_PRECISION),
+    result: 6.28318530717959,
   },
   {
     name: `2*${PI_SYMBOL}`,
     selectors: ['2', BUTTON_NAMES.MULTIPLY, BUTTON_NAMES.PI],
     katex: `2${TIMES_SYMBOL}${PI_SYMBOL}`,
-    result: (2 * Math.PI).toFixed(MAX_NUMBER_PRECISION),
+    result: 6.28318530717959,
   },
   {
     name: '5+2^(3+2)*4',
@@ -115,7 +114,7 @@ export const FIXTURES_SCIENTIFIC_COMPUTATIONS = [
     name: `${PI_SYMBOL}x${PI_SYMBOL}`,
     selectors: [BUTTON_NAMES.PI, BUTTON_NAMES.PI],
     katex: `${PI_SYMBOL}${TIMES_SYMBOL}${PI_SYMBOL}`,
-    result: (Math.PI * Math.PI).toFixed(MAX_NUMBER_PRECISION),
+    result: 9.86960440108936,
   },
   {
     name: '123456789^(9)',
@@ -134,7 +133,7 @@ export const FIXTURES_SCIENTIFIC_COMPUTATIONS = [
       BUTTON_NAMES.CLOSE_PARENTHESIS,
     ],
     katex: `123456789(9)`,
-    result: `6.662462759719942e+72`,
+    result: `6.66246275971994e+72`,
   },
   {
     name: '3^(3)',
@@ -180,6 +179,81 @@ export const FIXTURES_SCIENTIFIC_COMPUTATIONS = [
     result: '5',
   },
   {
+    name: 'i',
+    selectors: [BUTTON_NAMES.I],
+    katex: `i`,
+    result: 'i',
+  },
+  {
+    name: 'i^2',
+    selectors: [
+      BUTTON_NAMES.I,
+      BUTTON_NAMES.POWER,
+      '2',
+      BUTTON_NAMES.CLOSE_PARENTHESIS,
+    ],
+    katex: `i(2)`,
+    result: `${KATEX_MINUS_SYMBOL}1`,
+  },
+  {
+    name: '2*i^2',
+    selectors: [
+      '2',
+      BUTTON_NAMES.MULTIPLY,
+      BUTTON_NAMES.I,
+      BUTTON_NAMES.POWER,
+      '2',
+      BUTTON_NAMES.CLOSE_PARENTHESIS,
+    ],
+    katex: `2${TIMES_SYMBOL}i(2)`,
+    result: `${KATEX_MINUS_SYMBOL}2`,
+  },
+  {
+    name: 'e',
+    selectors: [BUTTON_NAMES.E],
+    katex: `e`,
+    result: '2.71828182845905',
+  },
+  {
+    name: 'e*5',
+    selectors: [BUTTON_NAMES.E, BUTTON_NAMES.MULTIPLY, '5'],
+    katex: `e${TIMES_SYMBOL}5`,
+    result: `13.5914091422952`,
+  },
+  {
+    name: '5e',
+    selectors: ['5', BUTTON_NAMES.E],
+    katex: `5e`,
+    result: `13.5914091422952`,
+  },
+  {
+    name: '123456 EE',
+    selectors: ['1', '2', '3', '4', '5', '6', BUTTON_NAMES.EE],
+    katex: `1.23456e(5)`,
+    result: '123456',
+  },
+  {
+    name: '123 EE',
+    selectors: ['1', '2', '3', BUTTON_NAMES.EE],
+    katex: `1.23e(2)`,
+    result: `123`,
+  },
+  {
+    name: 'ln(4)*tan(4) EE',
+    selectors: [
+      BUTTON_NAMES.LN,
+      '4',
+      BUTTON_NAMES.CLOSE_PARENTHESIS,
+      BUTTON_NAMES.MULTIPLY,
+      BUTTON_NAMES.TAN,
+      '4',
+      BUTTON_NAMES.CLOSE_PARENTHESIS,
+      BUTTON_NAMES.EE,
+    ],
+    katex: `9.69391450883795e(−2)`,
+    result: `0.0969391450883795`,
+  },
+  {
     name: 'e^(123)',
     selectors: [
       BUTTON_NAMES.EXP,
@@ -189,7 +263,7 @@ export const FIXTURES_SCIENTIFIC_COMPUTATIONS = [
       BUTTON_NAMES.CLOSE_PARENTHESIS,
     ],
     katex: `e(123)`,
-    result: '2.6195173187490456e+53',
+    result: '2.61951731874905e+53',
   },
   {
     name: 'e^(ln(2))',
@@ -276,7 +350,7 @@ export const FIXTURES_SCIENTIFIC_BACKSPACE = [
     name: `2*${PI_SYMBOL} with backspace`,
     selectors: ['2', BUTTON_NAMES.PI, BUTTON_NAMES.CE, BUTTON_NAMES.PI],
     katex: `2${TIMES_SYMBOL}${PI_SYMBOL}`,
-    result: (Math.PI * 2).toFixed(MAX_NUMBER_PRECISION),
+    result: 6.28318530717959,
   },
   {
     name: `sin(3+cos(3)) with backspace`,
@@ -294,7 +368,7 @@ export const FIXTURES_SCIENTIFIC_BACKSPACE = [
       BUTTON_NAMES.CLOSE_PARENTHESIS,
     ],
     katex: `sin(3+cos(3))`,
-    result: '0.069732612859157',
+    result: '0.0697326128591565',
   },
   {
     name: `e with backspace`,
@@ -306,7 +380,7 @@ export const FIXTURES_SCIENTIFIC_BACKSPACE = [
       BUTTON_NAMES.CLOSE_PARENTHESIS,
     ],
     katex: `e(1)`,
-    result: '2.718281828459045',
+    result: '2.71828182845905',
   },
   {
     name: '3^(2) with backspace',
@@ -348,6 +422,51 @@ export const FIXTURES_SCIENTIFIC_BACKSPACE = [
     ],
     katex: `cos(cos(${KATEX_MINUS_SYMBOL}1)(1))`,
     result: '1',
+  },
+  {
+    name: '1+3*-3.3 toggle sign with backspace',
+    selectors: [
+      '1',
+      BUTTON_NAMES.ADDITION,
+      '3',
+      BUTTON_NAMES.TOGGLE_SIGN,
+      BUTTON_NAMES.CE,
+      BUTTON_NAMES.MULTIPLY,
+      '3',
+      BUTTON_NAMES.DOT,
+      '3',
+      BUTTON_NAMES.TOGGLE_SIGN,
+      BUTTON_NAMES.TOGGLE_SIGN,
+      BUTTON_NAMES.CE,
+    ],
+    katex: `1+3${TIMES_SYMBOL}${KATEX_MINUS_SYMBOL}3.3`,
+    result: `${KATEX_MINUS_SYMBOL}8.9`,
+  },
+  {
+    name: 'pi - e^(-3) + sin(3pi) toggle sign with backspace',
+    selectors: [
+      BUTTON_NAMES.PI,
+      BUTTON_NAMES.SUBTRACTION,
+      BUTTON_NAMES.EXP,
+      BUTTON_NAMES.CE,
+      BUTTON_NAMES.EXP,
+      BUTTON_NAMES.SUBTRACTION,
+      '3',
+      BUTTON_NAMES.TOGGLE_SIGN,
+      BUTTON_NAMES.CE,
+      BUTTON_NAMES.CLOSE_PARENTHESIS,
+      BUTTON_NAMES.ADDITION,
+      BUTTON_NAMES.SIN,
+      '3',
+      BUTTON_NAMES.PI,
+      BUTTON_NAMES.TOGGLE_SIGN,
+      BUTTON_NAMES.TOGGLE_SIGN,
+      BUTTON_NAMES.CE,
+      BUTTON_NAMES.CE,
+      BUTTON_NAMES.CLOSE_PARENTHESIS,
+    ],
+    katex: `${PI_SYMBOL}${KATEX_MINUS_SYMBOL}e(${KATEX_MINUS_SYMBOL}3)+sin(3${TIMES_SYMBOL}${PI_SYMBOL})`,
+    result: `3.2555581822124`,
   },
 ];
 
@@ -421,6 +540,15 @@ export const FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS = [
       ['2', BUTTON_NAMES.SUBTRACTION, '2'],
     ],
     result: '0',
+  },
+  {
+    name: `abs with ${PI_SYMBOL}`,
+    ending: BUTTON_NAMES.ABS,
+    selectors: [
+      [BUTTON_NAMES.SUBTRACTION, '2'],
+      [BUTTON_NAMES.PI, BUTTON_NAMES.SUBTRACTION, '2'],
+    ],
+    result: 1.14159265358979,
   },
   {
     name: 'sqrt',

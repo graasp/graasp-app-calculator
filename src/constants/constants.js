@@ -28,14 +28,23 @@ export const BUTTON_NAMES = {
   LN: 'ln',
   ABS: 'abs',
   PERCENT: 'percent',
-  EXP: 'e',
+  EXP: 'exp',
   DOT: 'dot',
+  EE: 'ee',
+  FACTORIAL: 'factorial',
+  E: 'e',
+  TOGGLE_SIGN: 'toggleSign',
+  I: 'i',
 };
 
 export const PI_SYMBOL = 'π';
 export const TIMES_SYMBOL = '×';
 export const DIVIDE_SYMBOL = '÷';
 export const POWER_SYMBOL = '^';
+
+// minus symbol is rendered differently in katex
+// if the equation is valid
+export const KATEX_MINUS_SYMBOL = '−';
 
 /**
  * BUTTONS defines the buttons on the keypad. The buttons are displayed in order.
@@ -78,9 +87,11 @@ export const SCIENTIFIC_BUTTONS = [
   { name: BUTTON_NAMES.SQUARE, text: 'x^2', katex: '^{(2)}', mathjs: '^(2)' },
   { name: BUTTON_NAMES.SQRT, text: '\\sqrt{x}' },
   { name: BUTTON_NAMES.POWER, text: '^', katex: '^{(', mathjs: '^(' },
-  { name: BUTTON_NAMES.PI, text: PI_SYMBOL, mathjs: 'pi' },
   { name: BUTTON_NAMES.ABS, text: '|x|' },
   { name: BUTTON_NAMES.PERCENT, text: '\\%', mathjs: '/100' },
+  { name: BUTTON_NAMES.I, text: 'i' },
+  { name: BUTTON_NAMES.E, text: 'e' },
+  { name: BUTTON_NAMES.EE, text: 'EE' },
   { name: BUTTON_NAMES.EXP, text: 'e^x', katex: 'e^{(', mathjs: 'e^(' },
   {
     name: BUTTON_NAMES.LOG,
@@ -89,9 +100,11 @@ export const SCIENTIFIC_BUTTONS = [
     mathjs: 'log(',
   },
   { name: BUTTON_NAMES.LN, text: 'ln', katex: 'ln{(', mathjs: 'ln(' },
+  { name: BUTTON_NAMES.PI, text: PI_SYMBOL, mathjs: 'pi' },
   { name: BUTTON_NAMES.SIN, text: 'sin', katex: 'sin{(', mathjs: 'sin(' },
   { name: BUTTON_NAMES.COS, text: 'cos', katex: 'cos{(', mathjs: 'cos(' },
   { name: BUTTON_NAMES.TAN, text: 'tan', katex: 'tan{(', mathjs: 'tan(' },
+  { name: BUTTON_NAMES.FACTORIAL, text: 'x!' },
   {
     name: BUTTON_NAMES.ASIN,
     text: 'sin^{-1}',
@@ -110,6 +123,7 @@ export const SCIENTIFIC_BUTTONS = [
     katex: 'tan^{(-1)}{(',
     mathjs: 'atan(',
   },
+  { name: BUTTON_NAMES.TOGGLE_SIGN, text: '+/-' },
 ];
 
 export const KEYPAD_BUTTONS = [...BUTTONS, ...SCIENTIFIC_BUTTONS];

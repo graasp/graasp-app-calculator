@@ -2,9 +2,9 @@ import {
   BUTTON_NAMES,
   DIVIDE_SYMBOL,
   TIMES_SYMBOL,
+  KATEX_MINUS_SYMBOL,
 } from '../../src/constants/constants';
 import { RESULT_TEXT_NAME } from '../../src/constants/selectors';
-import { KATEX_MINUS_SYMBOL } from '../fixtures/computations';
 import { appQueryParameters } from '../fixtures/queryParameters';
 
 describe('Keyboard', () => {
@@ -113,6 +113,16 @@ describe('Keyboard', () => {
   it(`typing backspace removes last operation`, () => {
     cy.get('body').type('1+{backspace}');
     cy.get(resultSelector).should('have.text', '1');
+  });
+
+  it(`typing i shows i`, () => {
+    cy.get('body').type('i');
+    cy.get(resultSelector).should('have.text', 'i');
+  });
+
+  it(`typing e rshows e`, () => {
+    cy.get('body').type('e');
+    cy.get(resultSelector).should('have.text', 'e');
   });
 
   afterEach(() => {
