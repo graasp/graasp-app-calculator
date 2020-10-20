@@ -246,10 +246,12 @@ class Calculator extends Component {
           newHistory,
         );
         break;
-      // APPENDING OPERATIONS
+      // appending operators
 
       case BUTTON_NAMES.PI: {
         // start new computation at the end of previous computation
+        // pi acts as a number, so it should start a new computation
+        // after an equal operation
         newResult = isNewComputation ? '' : newResult;
         newMathjs = isNewComputation ? '' : newMathjs;
 
