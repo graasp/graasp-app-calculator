@@ -160,3 +160,24 @@ export const FIXTURES_BACKSPACE = [
     result: '36',
   },
 ];
+
+export const FIXTURES_CHAINED_COMPUTATIONS = [
+  {
+    name: 'equal',
+    ending: BUTTON_NAMES.EQUAL,
+    selectors: [
+      ['2', BUTTON_NAMES.ADDITION, '2'],
+      ['2', BUTTON_NAMES.SUBTRACTION, '2'],
+    ],
+    result: '0',
+  },
+  {
+    name: 'clear',
+    ending: BUTTON_NAMES.CLEAR,
+    selectors: [
+      ['2', BUTTON_NAMES.SUBTRACTION],
+      ['2', BUTTON_NAMES.SUBTRACTION, '2'],
+    ],
+    result: '0',
+  },
+];

@@ -5,6 +5,7 @@ import {
   FIXTURES_BACKSPACE,
   FIXTURES_ERROR_COMPUTATIONS,
   FIXTURES_TYPO_ERROR_COMPUTATIONS,
+  FIXTURES_CHAINED_COMPUTATIONS,
 } from '../fixtures/computations';
 import {
   FIXTURES_SCIENTIFIC_COMPUTATIONS,
@@ -13,6 +14,7 @@ import {
   FIXTURES_POSITIVE_INFINITY_SCIENTIFIC_COMPUTATIONS,
   FIXTURES_NEGATIVE_INFINITY_SCIENTIFIC_COMPUTATIONS,
   FIXTURES_TYPO_ERROR_SCIENTIFIC_COMPUTATIONS,
+  FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS,
 } from '../fixtures/scientificComputations';
 import { ANGLE_UNITS, BUTTON_NAMES } from '../../src/constants/constants';
 import { RESULT_ERROR_MESSAGE } from '../../src/constants/messages';
@@ -86,6 +88,30 @@ describe('Calculator', () => {
         cy.get(resultSelector).should('have.text', RESULT_ERROR_MESSAGE);
       });
     });
+
+    FIXTURES_CHAINED_COMPUTATIONS.forEach(
+      ({ name, selectors, ending, result }) => {
+        it(`reset computation after ${name}`, () => {
+          // click on buttons
+          selectors[0].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // click on ending button
+          cy.clickButton(`[data-cy="${ending}"]`);
+
+          // second computation
+          selectors[1].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          cy.equal();
+
+          // check result is correct
+          cy.get(resultSelector).should('have.text', result);
+        });
+      },
+    );
 
     afterEach(() => {
       // clear calculator
@@ -204,6 +230,30 @@ describe('Calculator', () => {
             'have.text',
             `${KATEX_MINUS_SYMBOL}Infinity`,
           );
+        });
+      },
+    );
+
+    FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS.forEach(
+      ({ name, selectors, ending, result }) => {
+        it(`reset computation after ${name}`, () => {
+          // click on buttons
+          selectors[0].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // click on ending button
+          cy.clickButton(`[data-cy="${ending}"]`);
+
+          // second computation
+          selectors[1].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          cy.equal();
+
+          // check result is correct
+          cy.get(resultSelector).should('have.text', result);
         });
       },
     );

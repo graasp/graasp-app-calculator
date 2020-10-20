@@ -206,12 +206,14 @@ class Calculator extends Component {
   updateResult = ({ name, text, katex, mathjs }) => {
     const { t } = this.props;
     const { result, mathjs: mathjsString, history } = this.state;
+    // start a new computation on error, infinity or on empty history
     const needReset = [
       t(RESULT_ERROR_MESSAGE),
       'undefined',
       t('Infinity'),
       t('-Infinity'),
     ].includes(result);
+    const isNewComputation = !history.length;
     let newResult = needReset ? '' : result;
     let newMathjs = needReset ? '' : mathjsString;
     let newHistory = [...history];
@@ -244,7 +246,15 @@ class Calculator extends Component {
           newHistory,
         );
         break;
+      // appending operators
+
       case BUTTON_NAMES.PI: {
+        // start new computation at the end of previous computation
+        // pi acts as a number, so it should start a new computation
+        // after an equal operation
+        newResult = isNewComputation ? '' : newResult;
+        newMathjs = isNewComputation ? '' : newMathjs;
+
         // we add a times operation if the last entry is a number or pi
         const lastCharacter = newResult.slice(-1);
         const addTimes =
@@ -258,6 +268,10 @@ class Calculator extends Component {
         break;
       }
       default:
+        // start new computation at the end of previous computation
+        newResult = isNewComputation ? '' : newResult;
+        newMathjs = isNewComputation ? '' : newMathjs;
+
         newResult += katex || text;
         newMathjs += mathjs || text;
         newHistory.push(name);
