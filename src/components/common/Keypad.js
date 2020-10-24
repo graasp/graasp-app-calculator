@@ -6,37 +6,41 @@ import Grid from '@material-ui/core/Grid';
 import { KEYPAD_BUTTON_CLASS } from '../../constants/selectors';
 import { BUTTONS, SCIENTIFIC_BUTTONS } from '../../constants/constants';
 
-const styles = (theme) => ({
-  scientificWrapper: {
-    marginRight: theme.spacing(1),
-    [theme.breakpoints.down('sm')]: {
-      marginRight: theme.spacing(0),
-      marginBottom: theme.spacing(1),
-    },
-  },
-  buttonWrapper: {
-    '& .katex': { fontFamily: theme.typography.fontFamily },
+const BUTTON_FONT_SIZE = '2.3rem'
+const buildButtonWrapperStyles = (theme, fontSize) => ({
+  '& .katex': { fontFamily: theme.typography.fontFamily },
 
-    '& button': {
-      width: '100%',
-      height: '100%',
-      background: theme.palette.primary.main,
-      fontSize: '2.3rem',
-      border: 'none',
-      padding: theme.spacing(1, 0),
+  '& button': {
+    width: '100%',
+    height: '100%',
+    background: theme.palette.primary.main,
+    fontSize,
+    border: 'none',
+    padding: theme.spacing(1, 0),
 
-      // override katex default styles with app theme
-      '& > span': {
-        fontSize: '2.3rem',
-        color: `${theme.palette.secondary.main} !important`,
+    // override katex default styles with app theme
+    '& > span': {
+      fontSize,
+      color: `${theme.palette.secondary.main} !important`,
 
-        // message style (infinite, error...)
-        '& .mathnormal': {
-          fontFamily: theme.typography.fontFamily,
-          fontStyle: 'normal',
-        },
+      // message style (infinite, error...)
+      '& .mathnormal': {
+        fontFamily: theme.typography.fontFamily,
+        fontStyle: 'normal',
       },
     },
+  },
+})
+
+const styles = (theme) => ({
+  buttonWrapper: buildButtonWrapperStyles(theme, BUTTON_FONT_SIZE),
+  scientificWrapper: {
+    marginRight: theme.spacing(1),
+    [theme.breakpoints.down('xs')]: {
+      marginRight: theme.spacing(-1),
+      marginBottom: theme.spacing(1),
+    },
+    ...buildButtonWrapperStyles(theme, '1.9rem')
   },
 });
 
@@ -97,7 +101,7 @@ class KeyPad extends Component {
             spacing={2}
             className={classes.scientificWrapper}
           >
-            {SCIENTIFIC_BUTTONS.map((button) => this.renderButton(button, 4))}
+            {SCIENTIFIC_BUTTONS.map((button) => this.renderButton(button, 3))}
           </Grid>
         )}
         <Grid container sm={scientificMode ? 6 : 12} spacing={2}>

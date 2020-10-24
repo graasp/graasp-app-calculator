@@ -16,10 +16,15 @@ import {
   FIXTURES_TYPO_ERROR_SCIENTIFIC_COMPUTATIONS,
   FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS,
 } from '../fixtures/scientificComputations';
-import { ANGLE_UNITS, BUTTON_NAMES } from '../../src/constants/constants';
+import {
+  ANGLE_UNITS,
+  BUTTON_NAMES,
+  KATEX_MINUS_SYMBOL,
+  PI_SYMBOL,
+  TIMES_SYMBOL,
+} from '../../src/constants/constants';
 import { RESULT_ERROR_MESSAGE } from '../../src/constants/messages';
 import { DEFAULT_MODE } from '../../src/config/settings';
-import { KATEX_MINUS_SYMBOL } from '../constants';
 
 describe('Calculator', () => {
   const resultSelector = `[data-cy="${RESULT_TEXT_NAME}"] .katex-html`;
@@ -123,6 +128,12 @@ describe('Calculator', () => {
   describe('scientific mode = true', () => {
     before(() => {
       cy.visitAsStudent({ appQueryParameters }, DEFAULT_MODE, true);
+    });
+
+    afterEach(() => {
+      // clear calculator
+      cy.get(`[data-cy="${BUTTON_NAMES.CLEAR}"]`).click();
+      cy.get(resultSelector).should('have.text', '');
     });
 
     [
@@ -236,7 +247,7 @@ describe('Calculator', () => {
 
     FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS.forEach(
       ({ name, selectors, ending, result }) => {
-        it(`reset computation after ${name}`, () => {
+        it.only(`reset computation after ${name}`, () => {
           // click on buttons
           selectors[0].forEach((selector) => {
             cy.clickButton(`[data-cy="${selector}"]`);
@@ -327,6 +338,231 @@ describe('Calculator', () => {
       });
     });
 
+    describe('toggle sign', () => {
+      it('+-1', () => {
+        ['1', BUTTON_NAMES.TOGGLE_SIGN].forEach((selector) => {
+          cy.clickButton(`[data-cy="${selector}"]`);
+        });
+
+        cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+
+        cy.clickButton(`[data-cy="${BUTTON_NAMES.TOGGLE_SIGN}"]`);
+
+        cy.get(resultSelector).should('have.text', `1`);
+
+        cy.equal();
+
+        cy.get(resultSelector).should('have.text', `1`);
+      });
+
+      it('-+1', () => {
+        [BUTTON_NAMES.SUBTRACTION, '1', BUTTON_NAMES.TOGGLE_SIGN].forEach(
+          (selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          },
+        );
+
+        cy.get(resultSelector).should('have.text', `1`);
+
+        cy.clickButton(`[data-cy="${BUTTON_NAMES.TOGGLE_SIGN}"]`);
+
+        cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+
+        cy.equal();
+
+        cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+      });
+      it('+-3.3', () => {
+        ['3', BUTTON_NAMES.DOT, '3', BUTTON_NAMES.TOGGLE_SIGN].forEach(
+          (selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          },
+        );
+
+        cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}3.3`);
+
+        cy.clickButton(`[data-cy="${BUTTON_NAMES.TOGGLE_SIGN}"]`);
+
+        cy.get(resultSelector).should('have.text', `3.3`);
+
+        cy.equal();
+
+        cy.get(resultSelector).should('have.text', `3.3`);
+      });
+
+      it('-+3.3', () => {
+        [
+          BUTTON_NAMES.SUBTRACTION,
+          '3',
+          BUTTON_NAMES.DOT,
+          '3',
+          BUTTON_NAMES.TOGGLE_SIGN,
+        ].forEach((selector) => {
+          cy.clickButton(`[data-cy="${selector}"]`);
+        });
+
+        cy.get(resultSelector).should('have.text', `3.3`);
+
+        cy.clickButton(`[data-cy="${BUTTON_NAMES.TOGGLE_SIGN}"]`);
+
+        cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}3.3`);
+
+        cy.equal();
+
+        cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}3.3`);
+      });
+
+      it('2 -+ 3', () => {
+        ['2', BUTTON_NAMES.SUBTRACTION, '3', BUTTON_NAMES.TOGGLE_SIGN].forEach(
+          (selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          },
+        );
+
+        cy.get(resultSelector).should('have.text', `2+3`);
+
+        cy.clickButton(`[data-cy="${BUTTON_NAMES.TOGGLE_SIGN}"]`);
+
+        cy.get(resultSelector).should('have.text', `2${KATEX_MINUS_SYMBOL}3`);
+
+        cy.equal();
+
+        cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+      });
+
+      it('2 +- 3', () => {
+        ['2', BUTTON_NAMES.ADDITION, '3', BUTTON_NAMES.TOGGLE_SIGN].forEach(
+          (selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          },
+        );
+
+        cy.get(resultSelector).should('have.text', `2${KATEX_MINUS_SYMBOL}3`);
+
+        cy.clickButton(`[data-cy="${BUTTON_NAMES.TOGGLE_SIGN}"]`);
+
+        cy.get(resultSelector).should('have.text', `2+3`);
+
+        cy.equal();
+
+        cy.get(resultSelector).should('have.text', `5`);
+      });
+
+      it(`${PI_SYMBOL} -+ 6`, () => {
+        [
+          BUTTON_NAMES.PI,
+          BUTTON_NAMES.SUBTRACTION,
+          '6',
+          BUTTON_NAMES.TOGGLE_SIGN,
+        ].forEach((selector) => {
+          cy.clickButton(`[data-cy="${selector}"]`);
+        });
+
+        cy.get(resultSelector).should('have.text', `${PI_SYMBOL}+6`);
+
+        cy.clickButton(`[data-cy="${BUTTON_NAMES.TOGGLE_SIGN}"]`);
+
+        cy.get(resultSelector).should(
+          'have.text',
+          `${PI_SYMBOL}${KATEX_MINUS_SYMBOL}6`,
+        );
+
+        cy.equal();
+
+        cy.get(resultSelector).should(
+          'have.text',
+          `${KATEX_MINUS_SYMBOL}2.858407346410207`,
+        );
+      });
+
+      it(`${PI_SYMBOL} +- 6`, () => {
+        [
+          BUTTON_NAMES.PI,
+          BUTTON_NAMES.ADDITION,
+          '6',
+          BUTTON_NAMES.TOGGLE_SIGN,
+        ].forEach((selector) => {
+          cy.clickButton(`[data-cy="${selector}"]`);
+        });
+
+        cy.get(resultSelector).should(
+          'have.text',
+          `${PI_SYMBOL}${KATEX_MINUS_SYMBOL}6`,
+        );
+
+        cy.clickButton(`[data-cy="${BUTTON_NAMES.TOGGLE_SIGN}"]`);
+
+        cy.get(resultSelector).should('have.text', `${PI_SYMBOL}+6`);
+
+        cy.equal();
+
+        cy.get(resultSelector).should('have.text', `9.141592653589793`);
+      });
+
+      it(`e +- 6 -+ tan(+-5)`, () => {
+        [
+          BUTTON_NAMES.E,
+          BUTTON_NAMES.ADDITION,
+          '6',
+          BUTTON_NAMES.TOGGLE_SIGN,
+          BUTTON_NAMES.SUBTRACTION,
+          BUTTON_NAMES.TAN,
+          BUTTON_NAMES.TOGGLE_SIGN,
+          BUTTON_NAMES.ADDITION,
+          '5',
+          BUTTON_NAMES.TOGGLE_SIGN,
+          BUTTON_NAMES.CLOSE_PARENTHESIS,
+        ].forEach((selector) => {
+          cy.clickButton(`[data-cy="${selector}"]`);
+        });
+
+        cy.get(resultSelector).should(
+          'have.text',
+          `e${KATEX_MINUS_SYMBOL}6+tan(${KATEX_MINUS_SYMBOL}5)`,
+        );
+
+        cy.equal();
+
+        cy.get(resultSelector).should(
+          'have.text',
+          `${KATEX_MINUS_SYMBOL}3.369206835066879`,
+        );
+      });
+
+      it(`e^(-+3) * pi`, () => {
+        [
+          BUTTON_NAMES.EXP,
+          BUTTON_NAMES.SUBTRACTION,
+          '3',
+          BUTTON_NAMES.CLOSE_PARENTHESIS,
+          BUTTON_NAMES.TOGGLE_SIGN,
+          BUTTON_NAMES.MULTIPLY,
+          BUTTON_NAMES.PI,
+        ].forEach((selector) => {
+          cy.clickButton(`[data-cy="${selector}"]`);
+        });
+
+        cy.get(resultSelector).should(
+          'have.text',
+          `e(3)${TIMES_SYMBOL}${PI_SYMBOL}`,
+        );
+
+        cy.clickButton(`[data-cy="${BUTTON_NAMES.TOGGLE_SIGN}"]`);
+
+        cy.get(resultSelector).should(
+          'have.text',
+          `e(3)${TIMES_SYMBOL}${KATEX_MINUS_SYMBOL}${PI_SYMBOL}`,
+        );
+
+        cy.equal();
+
+        cy.get(resultSelector).should(
+          'have.text',
+          `${KATEX_MINUS_SYMBOL}63.1005752412929`,
+        );
+      });
+    });
+
     describe('use radian values', () => {
       before(() => {
         cy.toggleAngleUnit(ANGLE_UNITS.RAD);
@@ -409,12 +645,6 @@ describe('Calculator', () => {
       after(() => {
         cy.toggleAngleUnit(ANGLE_UNITS.DEG);
       });
-    });
-
-    afterEach(() => {
-      // clear calculator
-      cy.get(`[data-cy="${BUTTON_NAMES.CLEAR}"]`).click();
-      cy.get(resultSelector).should('have.text', '');
     });
   });
 });

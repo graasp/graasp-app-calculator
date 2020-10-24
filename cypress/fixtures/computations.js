@@ -1,12 +1,9 @@
 import {
   BUTTON_NAMES,
   DIVIDE_SYMBOL,
+  KATEX_MINUS_SYMBOL,
   TIMES_SYMBOL,
 } from '../../src/constants/constants';
-
-// minus symbol is rendered differently in katex
-// if the equation is valid
-export const KATEX_MINUS_SYMBOL = '−';
 
 // eslint-disable-next-line import/prefer-default-export
 export const FIXTURES_COMPUTATIONS = [
