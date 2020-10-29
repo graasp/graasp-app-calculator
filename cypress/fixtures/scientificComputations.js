@@ -468,6 +468,18 @@ export const FIXTURES_SCIENTIFIC_BACKSPACE = [
     katex: `${PI_SYMBOL}${KATEX_MINUS_SYMBOL}e(${KATEX_MINUS_SYMBOL}3)+sin(3${TIMES_SYMBOL}${PI_SYMBOL})`,
     result: `3.2555581822124`,
   },
+  {
+    name: '44% with backspace',
+    selectors: [
+      '4',
+      '4',
+      BUTTON_NAMES.PERCENT,
+      BUTTON_NAMES.CE,
+      BUTTON_NAMES.PERCENT,
+    ],
+    katex: '44%',
+    result: '0.44',
+  },
 ];
 
 export const FIXTURES_TYPO_ERROR_SCIENTIFIC_COMPUTATIONS = [

@@ -12,6 +12,7 @@ export const parse = (str) => {
     ['^', '\\^'],
     ['+', '\\+'],
     ['-', '\\-'],
+    ['%', '\\%'],
   ];
   let result = str;
   replacement.forEach(([a, b]) => {
