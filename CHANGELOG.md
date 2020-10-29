@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/graasp/graasp-app-calculator/compare/v0.1.1...v0.1.2) (2020-10-29)
+
+### Features
+
+- add i, e, EE and toggle sign, write tests ([98a4cba](https://github.com/graasp/graasp-app-calculator/commit/98a4cba9b2e363c76b8cc791ee016e48699d72b2)), closes [#14](https://github.com/graasp/graasp-app-calculator/issues/14)
+
+### Bug Fixes
+
+- reset computation on equal ([f3a26c9](https://github.com/graasp/graasp-app-calculator/commit/f3a26c9fd393eb059c9338495378799b2e055ab9))
+- tan 90 and related returns infinity ([ac19e2f](https://github.com/graasp/graasp-app-calculator/commit/ac19e2f2d1904627a7cde5dcf7d8d2418d590a38))
+
+### Tests
+
+- test tan values in degree ([a150fc7](https://github.com/graasp/graasp-app-calculator/commit/a150fc72ea9fd1675694f9ab600b5539441e9c58))
+
 ### 0.1.1 (2020-10-05)
 
 ### Features
