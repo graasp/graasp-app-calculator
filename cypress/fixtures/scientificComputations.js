@@ -479,6 +479,19 @@ export const FIXTURES_SCIENTIFIC_BACKSPACE = [
     ],
     katex: '44%',
     result: '0.44',
+  },{
+    name: '(3+3)^2 with equal and backspace',
+    selectors: [
+      '3',
+      BUTTON_NAMES.ADDITION,
+      '3',
+      BUTTON_NAMES.EQUAL,
+      BUTTON_NAMES.SQUARE,
+      BUTTON_NAMES.CE,
+      BUTTON_NAMES.SQUARE,
+    ],
+    katex: '6(2)',
+    result: '36',
   },
 ];
 
@@ -543,7 +556,7 @@ export const FIXTURES_NEGATIVE_INFINITY_SCIENTIFIC_COMPUTATIONS = [
   },
 ];
 
-export const FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS = [
+export const FIXTURES_UNCHAINED_SCIENTIFIC_COMPUTATIONS = [
   {
     name: 'abs',
     ending: BUTTON_NAMES.ABS,
@@ -567,5 +580,65 @@ export const FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS = [
     ending: BUTTON_NAMES.SQRT,
     selectors: [['2'], ['2', BUTTON_NAMES.SUBTRACTION, '2']],
     result: '0',
+  },
+];
+
+export const FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS = [
+  {
+    name: '+',
+    ending: BUTTON_NAMES.EQUAL,
+    selectors: [
+      [BUTTON_NAMES.SUBTRACTION, '2'],
+      [BUTTON_NAMES.ADDITION, '2'],
+    ],
+    result: `0`,
+  },
+  {
+    name: `-`,
+    ending: BUTTON_NAMES.EQUAL,
+    selectors: [
+      [BUTTON_NAMES.SUBTRACTION, '2'],
+      [BUTTON_NAMES.SUBTRACTION, '2'],
+    ],
+    result: `${KATEX_MINUS_SYMBOL}4`,
+  },
+  {
+    name: '*',
+    ending: BUTTON_NAMES.EQUAL,
+    selectors: [
+      ['2', BUTTON_NAMES.ADDITION, '3'],
+      [BUTTON_NAMES.MULTIPLY, '2'],
+    ],
+    result: '10',
+  },
+  {
+    name: '/',
+    ending: BUTTON_NAMES.EQUAL,
+    selectors: [
+      ['2', BUTTON_NAMES.ADDITION, '3'],
+      [BUTTON_NAMES.DIVIDE, '2'],
+    ],
+    result: '2.5',
+  },
+  {
+    name: '^2',
+    ending: BUTTON_NAMES.EQUAL,
+    selectors: [['2', BUTTON_NAMES.ADDITION, '3'], [BUTTON_NAMES.SQUARE]],
+    result: '25',
+  },
+  {
+    name: '^3',
+    ending: BUTTON_NAMES.EQUAL,
+    selectors: [
+      ['2', BUTTON_NAMES.ADDITION, '3'],
+      [BUTTON_NAMES.POWER, '3', BUTTON_NAMES.CLOSE_PARENTHESIS],
+    ],
+    result: '125',
+  },
+  {
+    name: '%',
+    ending: BUTTON_NAMES.EQUAL,
+    selectors: [['2', BUTTON_NAMES.ADDITION, '3'], [BUTTON_NAMES.PERCENT]],
+    result: '0.05',
   },
 ];

@@ -37,6 +37,16 @@ export const BUTTON_NAMES = {
   I: 'i',
 };
 
+export const OPERATIONS = [
+  BUTTON_NAMES.ADDITION,
+  BUTTON_NAMES.SUBTRACTION,
+  BUTTON_NAMES.MULTIPLY,
+  BUTTON_NAMES.DIVIDE,
+  BUTTON_NAMES.PERCENT,
+  BUTTON_NAMES.POWER,
+  BUTTON_NAMES.SQUARE,
+];
+
 export const PI_SYMBOL = 'π';
 export const TIMES_SYMBOL = '×';
 export const DIVIDE_SYMBOL = '÷';

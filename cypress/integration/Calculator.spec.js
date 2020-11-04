@@ -15,6 +15,7 @@ import {
   FIXTURES_NEGATIVE_INFINITY_SCIENTIFIC_COMPUTATIONS,
   FIXTURES_TYPO_ERROR_SCIENTIFIC_COMPUTATIONS,
   FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS,
+  FIXTURES_UNCHAINED_SCIENTIFIC_COMPUTATIONS,
 } from '../fixtures/scientificComputations';
 import {
   ANGLE_UNITS,
@@ -245,9 +246,33 @@ describe('Calculator', () => {
       },
     );
 
+    FIXTURES_UNCHAINED_SCIENTIFIC_COMPUTATIONS.forEach(
+      ({ name, selectors, ending, result }) => {
+        it(`reset computation after ${name}`, () => {
+          // click on buttons
+          selectors[0].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // click on ending button
+          cy.clickButton(`[data-cy="${ending}"]`);
+
+          // second computation
+          selectors[1].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          cy.equal();
+
+          // check result is correct
+          cy.get(resultSelector).should('have.text', result);
+        });
+      },
+    );
+
     FIXTURES_CHAINED_SCIENTIFIC_COMPUTATIONS.forEach(
       ({ name, selectors, ending, result }) => {
-        it.only(`reset computation after ${name}`, () => {
+        it(`does not reset computation after ${name}`, () => {
           // click on buttons
           selectors[0].forEach((selector) => {
             cy.clickButton(`[data-cy="${selector}"]`);
@@ -471,7 +496,7 @@ describe('Calculator', () => {
 
         cy.get(resultSelector).should(
           'have.text',
-          `${KATEX_MINUS_SYMBOL}2.858407346410207`,
+          `${KATEX_MINUS_SYMBOL}2.85840734641021`,
         );
       });
 
@@ -496,7 +521,7 @@ describe('Calculator', () => {
 
         cy.equal();
 
-        cy.get(resultSelector).should('have.text', `9.141592653589793`);
+        cy.get(resultSelector).should('have.text', `9.14159265358979`);
       });
 
       it(`e +- 6 -+ tan(+-5)`, () => {
@@ -525,7 +550,7 @@ describe('Calculator', () => {
 
         cy.get(resultSelector).should(
           'have.text',
-          `${KATEX_MINUS_SYMBOL}3.369206835066879`,
+          `${KATEX_MINUS_SYMBOL}3.36920683506688`,
         );
       });
 
@@ -579,7 +604,7 @@ describe('Calculator', () => {
         cy.equal();
         cy.get(resultSelector)
           .should('not.have.text', `Infinity`)
-          .should('have.text', '−1.995200412208242');
+          .should('have.text', '−1.99520041220824');
       });
 
       it('cos(180 rad) should not return -1', () => {
@@ -625,7 +650,7 @@ describe('Calculator', () => {
         cy.equal();
         cy.get(resultSelector)
           .should('not.have.text', `90`)
-          .should('have.text', '1.570796326794897');
+          .should('have.text', '1.5707963267949');
       });
 
       it('atan(1) should not return 45deg', () => {

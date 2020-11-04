@@ -26,6 +26,7 @@ import {
   SCIENTIFIC_CALCULATOR_MAX_WIDTH,
   ANGLE_UNITS,
   KATEX_MINUS_SYMBOL,
+  OPERATIONS,
 } from '../../constants/constants';
 import { parse } from '../../utils/string';
 import { SCIENTIFIC_MODE_SWITCH_NAME } from '../../constants/selectors';
@@ -220,7 +221,7 @@ class Calculator extends Component {
         t('Infinity'),
         t('-Infinity'),
       ].includes(result);
-      const isNewComputation = !history.length;
+      const isNewComputation = !history.length && !OPERATIONS.includes(name);
       let newResult = needReset ? '' : result;
       let newMathjs = needReset ? '' : mathjsString;
       let newHistory = [...history];
