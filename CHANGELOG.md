@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.3](https://github.com/graasp/graasp-app-calculator/compare/v0.1.2...v0.1.3) (2020-11-05)
+
+### Features
+
+- do not reset computation on operations ([dda244f](https://github.com/graasp/graasp-app-calculator/commit/dda244fc1e320284557ebfb9389166d3246e2be5))
+
+### Bug Fixes
+
+- correctly CE percent operation ([924c3c5](https://github.com/graasp/graasp-app-calculator/commit/924c3c545cb9135db1044c7bf811ee415940bdd3))
+
 ### [0.1.2](https://github.com/graasp/graasp-app-calculator/compare/v0.1.1...v0.1.2) (2020-10-29)
 
 ### Features
