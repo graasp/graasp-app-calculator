@@ -48,34 +48,47 @@ const radToDegree = (rad) => {
   return rad * (180 / Math.PI);
 };
 
-// use special cases because of rounding error
-const getSpecialCase = (angle, fn, isRadian) => {
-  let quarter;
+/**
+ * handle special cases of trigonometric functions
+ * because of rounding error
+ * without this function cos(90) would not give 0
+ *
+ * @param {number} value value in the trigonometric function
+ * @param {string} fn trigonometric function name
+ * @param {boolean} isRadian whether value's unit is radian
+ * @returns {false|number} false if no special case is found, otherwise the value of the special case
+ *  */
+const getSpecialCase = (value, fn, isRadian) => {
+  let angle;
   let remaining;
+
+  // compute angle in degree to detect special case
+  // compute remaining to validate it is special case
   if (isRadian) {
     // radian
-    quarter = Math.ceil((angle / (Math.PI / 4)) * 45) % 360;
-    remaining = angle % (Math.PI / 4);
+    angle = Math.ceil((value / (Math.PI / 4)) * 45) % 360;
+    remaining = value % (Math.PI / 4);
   } else {
     // degree
-    quarter = angle % 360;
-    remaining = angle % 45;
+    angle = value % 360;
+    remaining = value % 45;
   }
 
-  if (angle < 0) {
-    quarter += 360;
-  }
-
-  // not a special case
+  // accept a certain amount of computation error
+  // to consider the value as a special case
+  // because of round off errors
   if (remaining > ROUND_OFF_ERROR_MARGIN) {
     return false;
   }
 
-  const res = TRIGONOMETRY_SPECIAL_CASES[fn][quarter];
-  if (res === undefined) {
-    return false;
+  // use positive value for mapping
+  // eg: cos(-90)
+  if (value < 0) {
+    angle += 360;
   }
-  return res;
+
+  const res = TRIGONOMETRY_SPECIAL_CASES[fn][angle];
+  return res === undefined ? false : res;
 };
 
 const styles = () => ({
