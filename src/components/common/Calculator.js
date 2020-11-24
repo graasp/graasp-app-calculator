@@ -27,6 +27,9 @@ import {
   ANGLE_UNITS,
   KATEX_MINUS_SYMBOL,
   OPERATIONS,
+  ROUND_OFF_ERROR_MARGIN,
+  TRIGONOMETRY_SPECIAL_CASES,
+  TRIGONOMETRY_FUNCTIONS,
 } from '../../constants/constants';
 import { parse } from '../../utils/string';
 import { SCIENTIFIC_MODE_SWITCH_NAME } from '../../constants/selectors';
@@ -43,6 +46,49 @@ parser.set('ln', (content) => {
 
 const radToDegree = (rad) => {
   return rad * (180 / Math.PI);
+};
+
+/**
+ * handle special cases of trigonometric functions
+ * because of rounding error
+ * without this function cos(90) would not give 0
+ *
+ * @param {number} value value in the trigonometric function
+ * @param {string} fn trigonometric function name
+ * @param {boolean} isRadian whether value's unit is radian
+ * @returns {false|number} false if no special case is found, otherwise the value of the special case
+ *  */
+const getSpecialCase = (value, fn, isRadian) => {
+  let angle;
+  let remaining;
+
+  // compute angle in degree to detect special case
+  // compute remaining to validate it is special case
+  if (isRadian) {
+    // radian
+    angle = Math.ceil((value / (Math.PI / 4)) * 45) % 360;
+    remaining = value % (Math.PI / 4);
+  } else {
+    // degree
+    angle = value % 360;
+    remaining = value % 45;
+  }
+
+  // accept a certain amount of computation error
+  // to consider the value as a special case
+  // because of round off errors
+  if (remaining > ROUND_OFF_ERROR_MARGIN) {
+    return false;
+  }
+
+  // use positive value for mapping
+  // eg: cos(-90)
+  if (value < 0) {
+    angle += 360;
+  }
+
+  const res = TRIGONOMETRY_SPECIAL_CASES[fn][angle];
+  return res === undefined ? false : res;
 };
 
 const styles = () => ({
@@ -108,39 +154,46 @@ class Calculator extends Component {
   }
 
   updateAngleUnit = (angleUnit) => {
+    const isRadian = angleUnit === ANGLE_UNITS.RAD;
+
     parser.set('tan', (content) => {
-      // set corner cases because of rounding error
-      const angle = (content / 90.0) % 4;
-      if (angleUnit === ANGLE_UNITS.DEG) {
-        if (angle === 1 || angle === 3) {
-          return 'Infinity';
-        }
-        if (angle === -1 || angle === -3) {
-          return '-Infinity';
-        }
-      }
-      return math.tan(math.unit(content, angleUnit));
+      const value = getSpecialCase(
+        content,
+        TRIGONOMETRY_FUNCTIONS.TAN,
+        isRadian,
+      );
+      return value !== false ? value : math.tan(math.unit(content, angleUnit));
     });
     parser.set('sin', (content) => {
-      return math.sin(math.unit(content, angleUnit));
+      const value = getSpecialCase(
+        content,
+        TRIGONOMETRY_FUNCTIONS.SIN,
+        isRadian,
+      );
+      return value !== false ? value : math.sin(math.unit(content, angleUnit));
     });
     parser.set('cos', (content) => {
-      return math.cos(math.unit(content, angleUnit));
+      const value = getSpecialCase(
+        content,
+        TRIGONOMETRY_FUNCTIONS.COS,
+        isRadian,
+      );
+      return value !== false ? value : math.cos(math.unit(content, angleUnit));
     });
     parser.set('acos', (content) => {
       // default is rad
       const acos = math.acos(content);
-      return angleUnit === ANGLE_UNITS.DEG ? radToDegree(acos) : acos;
+      return isRadian ? acos : radToDegree(acos);
     });
     parser.set('asin', (content) => {
       // default is rad
       const asin = math.asin(content);
-      return angleUnit === ANGLE_UNITS.DEG ? radToDegree(asin) : asin;
+      return isRadian ? asin : radToDegree(asin);
     });
     parser.set('atan', (content) => {
       // default is rad
       const atan = math.atan(content);
-      return angleUnit === ANGLE_UNITS.DEG ? radToDegree(atan) : atan;
+      return isRadian ? atan : radToDegree(atan);
     });
   };
 

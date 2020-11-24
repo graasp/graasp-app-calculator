@@ -142,3 +142,35 @@ export const ANGLE_UNITS = {
   DEG: 'deg',
   RAD: 'rad',
 };
+
+export const TRIGONOMETRY_FUNCTIONS = {
+  TAN: 'tan',
+  COS: 'cos',
+  SIN: 'sin',
+};
+
+export const TRIGONOMETRY_SPECIAL_CASES = {
+  [TRIGONOMETRY_FUNCTIONS.TAN]: {
+    0: 0,
+    45: 1,
+    90: 'Infinity',
+    135: -1,
+    225: 1,
+    270: '-Infinity',
+    315: -1,
+  },
+  [TRIGONOMETRY_FUNCTIONS.SIN]: {
+    0: 0,
+    90: 1,
+    180: 0,
+    270: -1,
+  },
+  [TRIGONOMETRY_FUNCTIONS.COS]: {
+    0: 1,
+    90: 0,
+    180: -1,
+    270: 0,
+  },
+};
+
+export const ROUND_OFF_ERROR_MARGIN = 1.58;

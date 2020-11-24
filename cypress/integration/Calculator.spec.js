@@ -294,72 +294,313 @@ describe('Calculator', () => {
       },
     );
 
-    describe('use degree values', () => {
-      it('tan(90 deg) should return Infinity', () => {
-        [BUTTON_NAMES.TAN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
-          (selector) => {
+    describe.only('trigonometric functions with degree', () => {
+      describe('tan', () => {
+        it('tan(90 deg) should return Infinity', () => {
+          [BUTTON_NAMES.TAN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
+            (selector) => {
+              cy.clickButton(`[data-cy="${selector}"]`);
+            },
+          );
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `Infinity`);
+        });
+
+        it('tan(270 deg) should return -Infinity', () => {
+          [
+            BUTTON_NAMES.TAN,
+            '2',
+            '7',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
             cy.clickButton(`[data-cy="${selector}"]`);
-          },
-        );
+          });
 
-        // check result is correct
-        cy.equal();
-        cy.get(resultSelector).should('have.text', `Infinity`);
-      });
-
-      it('tan(270 deg) should return Infinity', () => {
-        [
-          BUTTON_NAMES.TAN,
-          '2',
-          '7',
-          '0',
-          BUTTON_NAMES.CLOSE_PARENTHESIS,
-        ].forEach((selector) => {
-          cy.clickButton(`[data-cy="${selector}"]`);
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should(
+            'have.text',
+            `${KATEX_MINUS_SYMBOL}Infinity`,
+          );
         });
 
-        // check result is correct
-        cy.equal();
-        cy.get(resultSelector).should('have.text', `Infinity`);
-      });
+        it('tan(-90 deg) should return -Infinity', () => {
+          [
+            BUTTON_NAMES.TAN,
+            BUTTON_NAMES.SUBTRACTION,
+            '9',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
 
-      it('tan(-90 deg) should return -Infinity', () => {
-        [
-          BUTTON_NAMES.TAN,
-          BUTTON_NAMES.SUBTRACTION,
-          '9',
-          '0',
-          BUTTON_NAMES.CLOSE_PARENTHESIS,
-        ].forEach((selector) => {
-          cy.clickButton(`[data-cy="${selector}"]`);
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should(
+            'have.text',
+            `${KATEX_MINUS_SYMBOL}Infinity`,
+          );
         });
 
-        // check result is correct
-        cy.equal();
-        cy.get(resultSelector).should(
-          'have.text',
-          `${KATEX_MINUS_SYMBOL}Infinity`,
-        );
-      });
+        it('tan(-270 deg) should return Infinity', () => {
+          [
+            BUTTON_NAMES.TAN,
+            BUTTON_NAMES.SUBTRACTION,
+            '2',
+            '7',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
 
-      it('tan(-270 deg) should return -Infinity', () => {
-        [
-          BUTTON_NAMES.TAN,
-          BUTTON_NAMES.SUBTRACTION,
-          '2',
-          '7',
-          '0',
-          BUTTON_NAMES.CLOSE_PARENTHESIS,
-        ].forEach((selector) => {
-          cy.clickButton(`[data-cy="${selector}"]`);
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `Infinity`);
         });
 
-        // check result is correct
-        cy.equal();
-        cy.get(resultSelector).should(
-          'have.text',
-          `${KATEX_MINUS_SYMBOL}Infinity`,
-        );
+        it('tan(45 deg) should return 1', () => {
+          [BUTTON_NAMES.TAN, '4', '5', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
+            (selector) => {
+              cy.clickButton(`[data-cy="${selector}"]`);
+            },
+          );
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `1`);
+        });
+
+        it('tan(135 deg) should return -1', () => {
+          [
+            BUTTON_NAMES.TAN,
+            '1',
+            '3',
+            '5',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+        });
+
+        it('tan(225 deg) should return 1', () => {
+          [
+            BUTTON_NAMES.TAN,
+            '2',
+            '2',
+            '5',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `1`);
+        });
+
+        it('tan(-225 deg) should return -1', () => {
+          [
+            BUTTON_NAMES.TAN,
+            BUTTON_NAMES.SUBTRACTION,
+            '2',
+            '2',
+            '5',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+        });
+
+        it('tan(-90 deg) should return -Infinity', () => {
+          [
+            BUTTON_NAMES.TAN,
+            BUTTON_NAMES.SUBTRACTION,
+            '9',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should(
+            'have.text',
+            `${KATEX_MINUS_SYMBOL}Infinity`,
+          );
+        });
+
+        it('tan(450 deg) should return Infinity', () => {
+          [
+            BUTTON_NAMES.TAN,
+            '4',
+            '5',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `Infinity`);
+        });
+
+        it('tan(-135 deg) should return 1', () => {
+          [
+            BUTTON_NAMES.TAN,
+            BUTTON_NAMES.SUBTRACTION,
+            '1',
+            '3',
+            '5',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `1`);
+        });
+      });
+
+      describe('cos', () => {
+        it('cos(90 deg) should return 0', () => {
+          [BUTTON_NAMES.COS, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
+            (selector) => {
+              cy.clickButton(`[data-cy="${selector}"]`);
+            },
+          );
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `0`);
+        });
+
+        it('cos(-90 deg) should return 0', () => {
+          [
+            BUTTON_NAMES.COS,
+            BUTTON_NAMES.SUBTRACTION,
+            '9',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `0`);
+        });
+
+        it('cos(-180 deg) should return -1', () => {
+          [
+            BUTTON_NAMES.COS,
+            BUTTON_NAMES.SUBTRACTION,
+            '1',
+            '8',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+        });
+
+        it('cos(360 deg) should return 1', () => {
+          [
+            BUTTON_NAMES.COS,
+            '3',
+            '6',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `1`);
+        });
+      });
+
+      describe('sin', () => {
+        it('sin(-90 deg) should return -1', () => {
+          [
+            BUTTON_NAMES.SIN,
+            BUTTON_NAMES.SUBTRACTION,
+            '9',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+        });
+
+        it('sin(90 deg) should return 1', () => {
+          [BUTTON_NAMES.SIN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
+            (selector) => {
+              cy.clickButton(`[data-cy="${selector}"]`);
+            },
+          );
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `1`);
+        });
+
+        it('sin(-180 deg) should return 0', () => {
+          [
+            BUTTON_NAMES.SIN,
+            BUTTON_NAMES.SUBTRACTION,
+            '1',
+            '8',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `0`);
+        });
+
+        it('sin(180 deg) should return 0', () => {
+          [
+            BUTTON_NAMES.SIN,
+            '1',
+            '8',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `0`);
+        });
       });
     });
 
@@ -588,55 +829,9 @@ describe('Calculator', () => {
       });
     });
 
-    describe('use radian values', () => {
+    describe.only('trigonometric functions with radian values', () => {
       before(() => {
         cy.toggleAngleUnit(ANGLE_UNITS.RAD);
-      });
-
-      it('tan(90 rad) should not return Infinity', () => {
-        [BUTTON_NAMES.TAN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
-          (selector) => {
-            cy.clickButton(`[data-cy="${selector}"]`);
-          },
-        );
-
-        // check result is correct
-        cy.equal();
-        cy.get(resultSelector)
-          .should('not.have.text', `Infinity`)
-          .should('have.text', '−1.99520041220824');
-      });
-
-      it('cos(180 rad) should not return -1', () => {
-        [
-          BUTTON_NAMES.COS,
-          '1',
-          '8',
-          '0',
-          BUTTON_NAMES.CLOSE_PARENTHESIS,
-        ].forEach((selector) => {
-          cy.clickButton(`[data-cy="${selector}"]`);
-        });
-
-        // check result is correct
-        cy.equal();
-        cy.get(resultSelector)
-          .should('not.have.text', `${KATEX_MINUS_SYMBOL}1`)
-          .should('have.text', '−0.598460069057858');
-      });
-
-      it('sin(90 rad) should not return 1', () => {
-        [BUTTON_NAMES.SIN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
-          (selector) => {
-            cy.clickButton(`[data-cy="${selector}"]`);
-          },
-        );
-
-        // check result is correct
-        cy.equal();
-        cy.get(resultSelector)
-          .should('not.have.text', `1`)
-          .should('have.text', '0.893996663600558');
       });
 
       it('acos(0) should not return 90deg', () => {
@@ -665,6 +860,322 @@ describe('Calculator', () => {
         cy.get(resultSelector)
           .should('not.have.text', `45`)
           .should('have.text', '0.785398163397448');
+      });
+
+      describe('tan', () => {
+        it('tan(90 rad) should not return Infinity', () => {
+          [BUTTON_NAMES.TAN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
+            (selector) => {
+              cy.clickButton(`[data-cy="${selector}"]`);
+            },
+          );
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector)
+            .should('not.have.text', `Infinity`)
+            .should('have.text', '−1.99520041220824');
+        });
+
+        it('tan(pi/2 rad) should return Infinity', () => {
+          [
+            BUTTON_NAMES.TAN,
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '2',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `Infinity`);
+        });
+
+        it('tan(pi/4 rad) should return 1', () => {
+          [
+            BUTTON_NAMES.TAN,
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '4',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `1`);
+        });
+
+        it('tan(3pi/4 rad) should return -1', () => {
+          [
+            BUTTON_NAMES.TAN,
+            '3',
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '4',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+        });
+
+        it('tan(-5pi/4 rad) should return -1', () => {
+          [
+            BUTTON_NAMES.TAN,
+            BUTTON_NAMES.SUBTRACTION,
+            '5',
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '4',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+        });
+
+        it('tan(5pi/4 rad) should return 1', () => {
+          [
+            BUTTON_NAMES.TAN,
+            '5',
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '4',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `1`);
+        });
+
+        it('tan(-pi/2 rad) should return -Infinity', () => {
+          [
+            BUTTON_NAMES.TAN,
+            BUTTON_NAMES.SUBTRACTION,
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '2',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should(
+            'have.text',
+            `${KATEX_MINUS_SYMBOL}Infinity`,
+          );
+        });
+
+        it('tan(5pi/2 rad) should return Infinity', () => {
+          [
+            BUTTON_NAMES.TAN,
+            '5',
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '2',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `Infinity`);
+        });
+
+        it('tan(-3pi/4 rad) should return 1', () => {
+          [
+            BUTTON_NAMES.TAN,
+            BUTTON_NAMES.SUBTRACTION,
+            '3',
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '4',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `1`);
+        });
+      });
+
+      describe('cos', () => {
+        it('cos(180 rad) should not return -1', () => {
+          [
+            BUTTON_NAMES.COS,
+            '1',
+            '8',
+            '0',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector)
+            .should('not.have.text', `${KATEX_MINUS_SYMBOL}1`)
+            .should('have.text', '−0.598460069057858');
+        });
+
+        it('cos(pi/2 rad) should return 0', () => {
+          [
+            BUTTON_NAMES.COS,
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '2',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `0`);
+        });
+
+        it('cos(-pi/2 rad) should return 0', () => {
+          [
+            BUTTON_NAMES.COS,
+            BUTTON_NAMES.SUBTRACTION,
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '2',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `0`);
+        });
+
+        it('cos(-pi rad) should return -1', () => {
+          [
+            BUTTON_NAMES.COS,
+            BUTTON_NAMES.SUBTRACTION,
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+        });
+
+        it('cos(2pi rad) should return 1', () => {
+          [
+            BUTTON_NAMES.COS,
+            '2',
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `1`);
+        });
+      });
+
+      describe('sin', () => {
+        it('sin(90 rad) should not return 1', () => {
+          [BUTTON_NAMES.SIN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
+            (selector) => {
+              cy.clickButton(`[data-cy="${selector}"]`);
+            },
+          );
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector)
+            .should('not.have.text', `1`)
+            .should('have.text', '0.893996663600558');
+        });
+
+        it('sin(-pi/2 rad) should return -1', () => {
+          [
+            BUTTON_NAMES.SIN,
+            BUTTON_NAMES.SUBTRACTION,
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '2',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `${KATEX_MINUS_SYMBOL}1`);
+        });
+
+        it('sin(pi/2 rad) should return 1', () => {
+          [
+            BUTTON_NAMES.SIN,
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.DIVIDE,
+            '2',
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `1`);
+        });
+
+        it('sin(-pi rad) should return 0', () => {
+          [
+            BUTTON_NAMES.SIN,
+            BUTTON_NAMES.SUBTRACTION,
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `0`);
+        });
+
+        it('sin(pi rad) should return 0', () => {
+          [
+            BUTTON_NAMES.SIN,
+            BUTTON_NAMES.PI,
+            BUTTON_NAMES.CLOSE_PARENTHESIS,
+          ].forEach((selector) => {
+            cy.clickButton(`[data-cy="${selector}"]`);
+          });
+
+          // check result is correct
+          cy.equal();
+          cy.get(resultSelector).should('have.text', `0`);
+        });
       });
 
       after(() => {
