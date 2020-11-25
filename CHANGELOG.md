@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.4](https://github.com/graasp/graasp-app-calculator/compare/v0.1.3...v0.1.4) (2020-11-25)
+
+### Bug Fixes
+
+- add special cases for trigonometric fn ([2568a34](https://github.com/graasp/graasp-app-calculator/commit/2568a34155945e1e33e877dea67c2a13814026f4))
+
 ### [0.1.3](https://github.com/graasp/graasp-app-calculator/compare/v0.1.2...v0.1.3) (2020-11-05)
 
 ### Features
