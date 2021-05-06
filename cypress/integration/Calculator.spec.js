@@ -294,7 +294,7 @@ describe('Calculator', () => {
       },
     );
 
-    describe.only('trigonometric functions with degree', () => {
+    describe('trigonometric functions with degree', () => {
       describe('tan', () => {
         it('tan(90 deg) should return Infinity', () => {
           [BUTTON_NAMES.TAN, '9', '0', BUTTON_NAMES.CLOSE_PARENTHESIS].forEach(
@@ -829,7 +829,7 @@ describe('Calculator', () => {
       });
     });
 
-    describe.only('trigonometric functions with radian values', () => {
+    describe('trigonometric functions with radian values', () => {
       before(() => {
         cy.toggleAngleUnit(ANGLE_UNITS.RAD);
       });
