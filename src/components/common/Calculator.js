@@ -74,6 +74,7 @@ const getSpecialCase = (value, fn, isRadian) => {
     remaining = value % 45;
   }
 
+  // detect whether the given value is a special case, eg: remaining should be less than a margin error
   // accept a certain amount of computation error
   // to consider the value as a special case
   // because of round off errors
@@ -87,6 +88,8 @@ const getSpecialCase = (value, fn, isRadian) => {
     angle += 360;
   }
 
+  // hard coded trigonometric cases values given rounded angle
+  // if it does not correspond to a special case, return false and compute operation normally
   const res = TRIGONOMETRY_SPECIAL_CASES[fn][angle];
   return res === undefined ? false : res;
 };
@@ -153,6 +156,8 @@ class Calculator extends Component {
     }
   }
 
+  // parse trigonometric functions and given value
+  // trigonometric values special cases return wrong result because of numerical precision
   updateAngleUnit = (angleUnit) => {
     const isRadian = angleUnit === ANGLE_UNITS.RAD;
 
