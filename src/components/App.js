@@ -10,7 +10,6 @@ import { DEFAULT_LANG, DEFAULT_MODE } from '../config/settings';
 import { DEFAULT_VIEW } from '../config/views';
 import TeacherMode from './modes/teacher/TeacherMode';
 import Header from './layout/Header';
-import Loader from './common/Loader';
 
 // bind katex to the window object
 window.katex = katex;
@@ -22,13 +21,10 @@ export class App extends Component {
       changeLanguage: PropTypes.func,
     }).isRequired,
     dispatchGetContext: PropTypes.func.isRequired,
-    dispatchGetAppInstance: PropTypes.func.isRequired,
-    appInstanceId: PropTypes.string,
     lang: PropTypes.string,
     mode: PropTypes.string,
     view: PropTypes.string,
     headerVisible: PropTypes.bool.isRequired,
-    ready: PropTypes.bool.isRequired,
     standalone: PropTypes.bool.isRequired,
   };
 
@@ -36,15 +32,15 @@ export class App extends Component {
     lang: DEFAULT_LANG,
     mode: DEFAULT_MODE,
     view: DEFAULT_VIEW,
-    appInstanceId: null,
   };
 
+  // eslint-disable-next-line no-useless-constructor
   constructor(props) {
     super(props);
     // first thing to do is get the context
     props.dispatchGetContext();
     // then get the app instance
-    props.dispatchGetAppInstance();
+    // props.dispatchGetAppInstance();
   }
 
   componentDidMount() {
@@ -53,17 +49,17 @@ export class App extends Component {
     this.handleChangeLang(lang);
   }
 
-  componentDidUpdate({ lang: prevLang, appInstanceId: prevAppInstanceId }) {
-    const { lang, appInstanceId, dispatchGetAppInstance } = this.props;
-    // handle a change of language
-    if (lang !== prevLang) {
-      this.handleChangeLang(lang);
-    }
-    // handle receiving the app instance id
-    if (appInstanceId !== prevAppInstanceId) {
-      dispatchGetAppInstance();
-    }
-  }
+  // componentDidUpdate({ lang: prevLang, appInstanceId: prevAppInstanceId }) {
+  //   const { lang, appInstanceId, dispatchGetAppInstance } = this.props;
+  //   // handle a change of language
+  //   if (lang !== prevLang) {
+  //     this.handleChangeLang(lang);
+  //   }
+  //   // handle receiving the app instance id
+  //   // if (appInstanceId !== prevAppInstanceId) {
+  //   //   dispatchGetAppInstance();
+  //   // }
+  // }
 
   handleChangeLang = (lang) => {
     const { i18n } = this.props;
@@ -71,11 +67,11 @@ export class App extends Component {
   };
 
   render() {
-    const { mode, view, headerVisible, ready, standalone } = this.props;
+    const { mode, view, headerVisible, standalone } = this.props;
 
-    if (!standalone && !ready) {
-      return <Loader />;
-    }
+    // if (!standalone && !ready) {
+    //   return <Loader />;
+    // }
 
     switch (mode) {
       // show teacher view when in producer (educator) mode
