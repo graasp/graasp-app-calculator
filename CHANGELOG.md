@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.5](https://github.com/graasp/graasp-app-calculator/compare/v0.1.4...v0.1.5) (2022-07-28)
+
+### Features
+
+- add ci/cd workflows to automate deployment ([bafd3f8](https://github.com/graasp/graasp-app-calculator/commit/bafd3f8c573cbab2535361ee0c244ec4ea8a5250))
+
+### Bug Fixes
+
+- disable unused workflows ([eccbce3](https://github.com/graasp/graasp-app-calculator/commit/eccbce3a90b1ed312cda5dbac35d2e93e11f77df))
+- remove unused workflows ([3da4123](https://github.com/graasp/graasp-app-calculator/commit/3da4123fc165b80ec5c760c8c3326541f575cc73))
+- secret names ([b3244f8](https://github.com/graasp/graasp-app-calculator/commit/b3244f8523da10ead02262b4429dc36726aabdd3))
+
+### Build System
+
+- add more comments, release with github actions ([0a372ab](https://github.com/graasp/graasp-app-calculator/commit/0a372ab7077d5f8eaa53722f32b9055b80ea4baa))
+
 ### [0.1.4](https://github.com/graasp/graasp-app-calculator/compare/v0.1.3...v0.1.4) (2020-11-25)
 
 ### Bug Fixes
