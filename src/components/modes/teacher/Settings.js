@@ -1,14 +1,12 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
-import Switch from '@material-ui/core/Switch';
-import { connect } from 'react-redux';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Typography from '@mui/material/Typography';
+import Modal from '@mui/material/Modal';
+import Switch from '@mui/material/Switch';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import { withTranslation } from 'react-i18next';
-import { closeSettings, patchAppInstance } from '../../../actions';
 import Loader from '../../common/Loader';
+import { Box, styled } from '@mui/material';
 
 function getModalStyle() {
   const top = 50;
@@ -20,19 +18,14 @@ function getModalStyle() {
   };
 }
 
-const styles = (theme) => ({
-  paper: {
-    position: 'absolute',
-    width: theme.spacing(100),
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(4),
-    outline: 'none',
-  },
-  button: {
-    margin: theme.spacing(),
-  },
-});
+const StyledBox = styled(Box)(({ theme }) => ({
+  position: 'absolute',
+  width: theme.spacing(100),
+  backgroundColor: theme.palette.background.paper,
+  boxShadow: theme.shadows[5],
+  padding: theme.spacing(4),
+  outline: 'none',
+}));
 
 class Settings extends Component {
   static propTypes = {
@@ -104,7 +97,7 @@ class Settings extends Component {
   }
 
   render() {
-    const { open, classes, t } = this.props;
+    const { open, t } = this.props;
 
     return (
       <div>
@@ -114,35 +107,18 @@ class Settings extends Component {
           open={open}
           onClose={this.handleClose}
         >
-          <div style={getModalStyle()} className={classes.paper}>
+          <StyledBox style={getModalStyle()}>
             <Typography variant="h5" id="modal-title">
               {t('Settings')}
             </Typography>
             {this.renderModalContent()}
-          </div>
+          </StyledBox>
         </Modal>
       </div>
     );
   }
 }
 
-const mapStateToProps = ({ layout, appInstance }) => {
-  return {
-    open: layout.settings.open,
-    settings: appInstance.content.settings,
-    activity: Boolean(appInstance.activity.length),
-  };
-};
+const TranslatedComponent = withTranslation()(Settings);
 
-const mapDispatchToProps = {
-  dispatchCloseSettings: closeSettings,
-  dispatchPatchAppInstance: patchAppInstance,
-};
-
-const ConnectedComponent = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(Settings);
-const TranslatedComponent = withTranslation()(ConnectedComponent);
-
-export default withStyles(styles)(TranslatedComponent);
+export default TranslatedComponent;

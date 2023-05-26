@@ -3,9 +3,8 @@ import {
   DIVIDE_SYMBOL,
   KATEX_MINUS_SYMBOL,
   TIMES_SYMBOL,
-} from '../../src/constants/constants';
+} from '../../src/config/constants';
 
-// eslint-disable-next-line import/prefer-default-export
 export const FIXTURES_COMPUTATIONS = [
   {
     name: '1.1',

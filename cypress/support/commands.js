@@ -1,21 +1,10 @@
-const { DEFAULT_MODE } = require('../../src/config/settings');
-const { ANGLE_UNITS, BUTTON_NAMES } = require('../../src/constants/constants');
-const {
-  SCIENTIFIC_MODE_SWITCH_NAME,
+import { ANGLE_UNITS, BUTTON_NAMES } from '../../src/config/constants';
+import {
   ANGLE_UNIT_SWITCH_NAME,
-} = require('../../src/constants/selectors');
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-
-const { LOAD_PAGE_PAUSE, CLICK_BUTTON_PAUSE } = require('../constants');
+  SCIENTIFIC_MODE_SWITCH_NAME,
+} from '../../src/config/selectors';
+import { DEFAULT_MODE } from '../../src/config/settings';
+import { LOAD_PAGE_PAUSE, CLICK_BUTTON_PAUSE } from '../constants';
 
 Cypress.Commands.add(
   'visitAsStudent',

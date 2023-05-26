@@ -1,4 +1,4 @@
-import { RESULT_TEXT_NAME } from '../../src/constants/selectors';
+import { RESULT_TEXT_NAME } from '../../src/config/selectors';
 import { appQueryParameters } from '../fixtures/queryParameters';
 import {
   FIXTURES_COMPUTATIONS,
@@ -23,7 +23,7 @@ import {
   KATEX_MINUS_SYMBOL,
   PI_SYMBOL,
   TIMES_SYMBOL,
-} from '../../src/constants/constants';
+} from '../../src/config/constants';
 import { RESULT_ERROR_MESSAGE } from '../../src/constants/messages';
 import { DEFAULT_MODE } from '../../src/config/settings';
 

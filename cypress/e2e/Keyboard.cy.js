@@ -4,7 +4,7 @@ import {
   TIMES_SYMBOL,
   KATEX_MINUS_SYMBOL,
 } from '../../src/constants/constants';
-import { RESULT_TEXT_NAME } from '../../src/constants/selectors';
+import { RESULT_TEXT_NAME } from '../../src/config/selectors';
 import { appQueryParameters } from '../fixtures/queryParameters';
 
 describe('Keyboard', () => {
