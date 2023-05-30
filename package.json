@@ -7,7 +7,7 @@
     "Kim Lan Phan Hoang"
   ],
   "homepage": ".",
-  "license": "MIT",
+  "license": "AGPL3.0-only",
   "dependencies": {
     "@emotion/react": "11.10.6",
     "@emotion/styled": "11.10.6",
@@ -31,6 +31,7 @@
   "scripts": {
     "start": "npm-run-all --parallel start:local",
     "start:local": "env-cmd -f ./.env.local react-scripts start",
+    "start:ci": "react-scripts start",
     "build": "run-s build:react",
     "build:react": "react-scripts build",
     "build:local": "env-cmd -f ./.env.local yarn build",
