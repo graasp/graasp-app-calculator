@@ -31,20 +31,15 @@ Cypress.Commands.add('equal', () => {
 
 Cypress.Commands.add('toggleAngleUnit', (angleUnit) => {
   const switchSelector = `[data-cy="${ANGLE_UNIT_SWITCH_NAME}"] input`;
-  cy.get(switchSelector)
-    .then((el) => {
-      const isChecked = el.attr('checked');
-      if (
-        (isChecked && angleUnit === ANGLE_UNITS.RAD) ||
-        (!isChecked && angleUnit === ANGLE_UNITS.DEG)
-      ) {
-        return el;
-      }
-      return null;
-    })
-    .should((el) => {
-      if (el) {
-        cy.wrap(el).click();
-      }
-    });
+  cy.get(switchSelector).then((el) => {
+    const isChecked = el.attr('checked');
+    if (
+      (isChecked && angleUnit === ANGLE_UNITS.RAD) ||
+      (!isChecked && angleUnit === ANGLE_UNITS.DEG)
+    ) {
+      return el;
+    }
+    return null;
+  });
+  cy.get(switchSelector).click();
 });
