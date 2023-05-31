@@ -3,16 +3,14 @@ import {
   ANGLE_UNIT_SWITCH_NAME,
   SCIENTIFIC_MODE_SWITCH_NAME,
 } from '../../src/config/selectors';
-import { DEFAULT_MODE } from '../../src/config/settings';
 import { LOAD_PAGE_PAUSE, CLICK_BUTTON_PAUSE } from '../constants';
 
 Cypress.Commands.add(
   'visitAsStudent',
-  ({ appQueryParameters }, mode = DEFAULT_MODE, scientificMode = false) => {
+  ({ appQueryParameters }, scientificMode = false) => {
     cy.visit('/', {
       qs: {
         ...appQueryParameters,
-        mode,
       },
     });
     cy.wait(LOAD_PAGE_PAUSE);

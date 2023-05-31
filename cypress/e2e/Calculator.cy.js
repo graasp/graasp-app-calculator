@@ -25,7 +25,6 @@ import {
   TIMES_SYMBOL,
 } from '../../src/config/constants';
 import { RESULT_ERROR_MESSAGE } from '../../src/config/messages';
-import { DEFAULT_MODE } from '../../src/config/settings';
 
 describe('Calculator', () => {
   const resultSelector = `[data-cy="${RESULT_TEXT_NAME}"] .katex-html`;
@@ -128,7 +127,7 @@ describe('Calculator', () => {
 
   describe('scientific mode = true', () => {
     before(() => {
-      cy.visitAsStudent({ appQueryParameters }, DEFAULT_MODE, true);
+      cy.visitAsStudent({ appQueryParameters }, true);
     });
 
     afterEach(() => {
