@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import { Component } from 'react';
 import * as math from 'mathjs';
 import PropTypes from 'prop-types';
 import InfoIcon from '@mui/icons-material/Info';
@@ -10,7 +10,7 @@ import Grid from '@mui/material/Grid';
 import { withTranslation } from 'react-i18next';
 import Result from './Result';
 import KeyPad from './Keypad';
-import { RESULT_ERROR_MESSAGE } from '../../constants/messages';
+import { RESULT_ERROR_MESSAGE } from '../../config/messages';
 import {
   MAX_NUMBER_PRECISION,
   KEYPAD_BUTTONS,
@@ -30,7 +30,7 @@ import {
   TRIGONOMETRY_FUNCTIONS,
 } from '../../config/constants';
 import { parse } from '../../utils/string';
-import { SCIENTIFIC_MODE_SWITCH_NAME } from '../../constants/selectors';
+import { SCIENTIFIC_MODE_SWITCH_NAME } from '../../config/selectors';
 import AngleUnitSwitch from './AngleUnitSwitch';
 import { Box } from '@mui/material';
 

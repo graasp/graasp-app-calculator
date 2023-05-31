@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import katex from 'katex';
 import Grid from '@mui/material/Grid';
-import { RESULT_TEXT_NAME } from '../../constants/selectors';
+import { RESULT_TEXT_NAME } from '../../config/selectors';
 import { styled } from '@mui/material';
 
 const StyledTypography = styled(Typography)(({ theme }) => ({

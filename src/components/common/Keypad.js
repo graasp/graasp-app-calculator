@@ -2,7 +2,7 @@ import katex from 'katex';
 import PropTypes from 'prop-types';
 import { styled, useTheme } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { KEYPAD_BUTTON_CLASS } from '../../constants/selectors';
+import { KEYPAD_BUTTON_CLASS } from '../../config/selectors';
 import { BUTTONS, SCIENTIFIC_BUTTONS } from '../../config/constants';
 
 const BUTTON_FONT_SIZE = '2.3rem';

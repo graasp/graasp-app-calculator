@@ -1,29 +1,23 @@
-import PropTypes from 'prop-types';
 import TeacherView from './TeacherView';
 import { DEFAULT_VIEW, DASHBOARD_VIEW } from '../../../config/views';
-import Loader from '../../common/Loader';
+import { Loader } from '@graasp/ui';
 
-const TeacherMode = () => {
-  const { view, activity } = this.props;
+type Props = {
+  view: string;
+  activity: boolean;
+};
+
+const TeacherMode = ({ view, activity }: Props): JSX.Element => {
   if (activity) {
     return <Loader />;
   }
+
   switch (view) {
     case DASHBOARD_VIEW:
     case DEFAULT_VIEW:
     default:
       return <TeacherView />;
   }
-};
-
-TeacherMode.propTypes = {
-  view: PropTypes.string,
-  activity: PropTypes.bool,
-};
-
-TeacherMode.defaultProps = {
-  view: 'normal',
-  activity: false,
 };
 
 export default TeacherMode;

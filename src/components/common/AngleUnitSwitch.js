@@ -3,7 +3,7 @@ import Switch from '@mui/material/Switch';
 import Grid from '@mui/material/Grid';
 import { withTranslation } from 'react-i18next';
 import { ANGLE_UNITS } from '../../config/constants';
-import { ANGLE_UNIT_SWITCH_NAME } from '../../constants/selectors';
+import { ANGLE_UNIT_SWITCH_NAME } from '../../config/selectors';
 
 const AngleUnitSwitch = (props) => {
   const { angleUnit, setAngleUnit, t } = props;

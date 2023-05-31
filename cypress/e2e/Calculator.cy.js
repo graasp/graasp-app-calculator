@@ -24,7 +24,7 @@ import {
   PI_SYMBOL,
   TIMES_SYMBOL,
 } from '../../src/config/constants';
-import { RESULT_ERROR_MESSAGE } from '../../src/constants/messages';
+import { RESULT_ERROR_MESSAGE } from '../../src/config/messages';
 import { DEFAULT_MODE } from '../../src/config/settings';
 
 describe('Calculator', () => {
