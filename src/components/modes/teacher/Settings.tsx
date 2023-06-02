@@ -35,7 +35,7 @@ const Settings = ({ settings = {}, activity, open = false }: Props) => {
   const { t } = useTranslation();
 
   const saveSettings = () => {
-    // TODO
+    // TODO: fix header visibility
     // const { settings, dispatchPatchAppInstance } = this.props;
     // const newSettings = {
     //   ...settings,
@@ -47,15 +47,15 @@ const Settings = ({ settings = {}, activity, open = false }: Props) => {
   };
 
   const handleChangeHeaderVisibility = () => {
-    const { headerVisible } = settings;
-    const settingsToChange = {
-      headerVisible: !headerVisible,
-    };
+    // const { headerVisible } = settings;
+    // const settingsToChange = {
+    //   headerVisible: !headerVisible,
+    // };
     // saveSettings(settingsToChange);
   };
 
   const handleClose = () => {
-    // TODO
+    // TODO: fix header visibility
     // const { dispatchCloseSettings } = this.props;
     // dispatchCloseSettings();
   };
