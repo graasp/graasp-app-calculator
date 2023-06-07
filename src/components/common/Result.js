@@ -1,49 +1,53 @@
-import React from 'react';
 import PropTypes from 'prop-types';
-import _ from 'lodash';
-import Typography from '@material-ui/core/Typography';
+import Typography from '@mui/material/Typography';
 import katex from 'katex';
-import { withStyles } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import { RESULT_TEXT_NAME } from '../../constants/selectors';
+import Grid from '@mui/material/Grid';
+import { RESULT_TEXT_NAME } from '../../config/selectors';
+import { styled } from '@mui/material';
 
-const styles = (theme) => ({
-  result: {
-    border: `1px solid ${theme.palette.primary.main}`,
-    wordBreak: 'break-all',
-    minHeight: '4rem',
-    padding: theme.spacing(0, 1),
-    overflowX: 'auto',
+const StyledTypography = styled(Typography)(({ theme }) => ({
+  border: `1px solid ${theme.palette.primary.main}`,
+  wordBreak: 'break-all',
+  minHeight: '4rem',
+  padding: 1,
+  overflowX: 'auto',
 
-    // override katex default styles with app theme
-    '& > span': {
-      color: 'black !important',
+  // override katex default styles with app theme
+  '& > span': {
+    color: 'black !important',
+    fontFamily: theme.typography.fontFamily,
+    fontSize: '3.3rem',
+
+    // message style (infinite, error...)
+    '& .mathnormal': {
       fontFamily: theme.typography.fontFamily,
-      fontSize: '3.3rem',
-
-      // message style (infinite, error...)
-      '& .mathnormal': {
-        fontFamily: theme.typography.fontFamily,
-        fontStyle: 'normal',
-      },
+      fontStyle: 'normal',
     },
   },
-});
+}));
 
-const Result = ({ result, classes }) => {
+const Result = ({ result }) => {
   const html = katex.renderToString(result, {
     throwOnError: false,
   });
 
   // hide curvy parenthesis
-  const parsedHtml = _.replace(html, /[{}]/g, '');
+  const parsedHtml = html.replace(/[{}]/g, '');
 
   return (
-    <Grid item xs={12}>
-      <Typography
+    <Grid
+      item
+      xs={12}
+      sx={{
+        marginRight: 2,
+        paddingTop: 1,
+        paddingBottom: 2,
+        paddingLeft: '0 !important',
+      }}
+    >
+      <StyledTypography
         data-cy={RESULT_TEXT_NAME}
         align="right"
-        className={classes.result}
         variant="h3"
         dangerouslySetInnerHTML={{
           __html: parsedHtml,
@@ -55,9 +59,6 @@ const Result = ({ result, classes }) => {
 
 Result.propTypes = {
   result: PropTypes.string.isRequired,
-  classes: PropTypes.shape({
-    result: PropTypes.string.isRequired,
-  }).isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(Result);
+export default Result;

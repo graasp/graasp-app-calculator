@@ -1,12 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import katex from 'katex';
-import { withStyles } from '@material-ui/core';
-import Grid from '@material-ui/core/Grid';
-import { KEYPAD_BUTTON_CLASS } from '../../constants/selectors';
-import { BUTTONS, SCIENTIFIC_BUTTONS } from '../../constants/constants';
+import PropTypes from 'prop-types';
+import { styled, useTheme } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import { KEYPAD_BUTTON_CLASS } from '../../config/selectors';
+import { BUTTONS, SCIENTIFIC_BUTTONS } from '../../config/constants';
 
-const BUTTON_FONT_SIZE = '2.3rem'
+const BUTTON_FONT_SIZE = '2.3rem';
 const buildButtonWrapperStyles = (theme, fontSize) => ({
   '& .katex': { fontFamily: theme.typography.fontFamily },
 
@@ -30,32 +29,21 @@ const buildButtonWrapperStyles = (theme, fontSize) => ({
       },
     },
   },
-})
-
-const styles = (theme) => ({
-  buttonWrapper: buildButtonWrapperStyles(theme, BUTTON_FONT_SIZE),
-  scientificWrapper: {
-    marginRight: theme.spacing(1),
-    [theme.breakpoints.down('xs')]: {
-      marginRight: theme.spacing(-1),
-      marginBottom: theme.spacing(1),
-    },
-    ...buildButtonWrapperStyles(theme, '1.9rem')
-  },
 });
 
-class KeyPad extends Component {
-  static propTypes = {
-    classes: PropTypes.shape({
-      buttonWrapper: PropTypes.string.isRequired,
-      scientificWrapper: PropTypes.string.isRequired,
-    }).isRequired,
-    onClick: PropTypes.func.isRequired,
-    scientificMode: PropTypes.bool.isRequired,
-  };
+const StyledGrid = styled(Grid)(({ theme }) => ({
+  marginRight: theme.spacing(1),
+  [theme.breakpoints.down('xs')]: {
+    marginRight: theme.spacing(-1),
+    marginBottom: theme.spacing(1),
+  },
+  ...buildButtonWrapperStyles(theme, '1.9rem'),
+}));
 
-  handleOnClick = (e) => {
-    const { onClick } = this.props;
+const Keypad = ({ onClick, scientificMode }) => {
+  const theme = useTheme();
+
+  const handleOnClick = (e) => {
     // the event target might be a child of the button
     const {
       name,
@@ -64,11 +52,14 @@ class KeyPad extends Component {
     onClick({ name, text, katex: katexString, mathjs });
   };
 
-  renderButton = ({ name, text, katex: katexString, mathjs }, xs) => {
-    const { classes } = this.props;
-
+  const renderButton = ({ name, text, katex: katexString, mathjs }, xs) => {
     return (
-      <Grid key={name} item xs={xs} className={classes.buttonWrapper}>
+      <Grid
+        key={name}
+        item
+        xs={xs}
+        sx={buildButtonWrapperStyles(theme, BUTTON_FONT_SIZE)}
+      >
         <button
           data-cy={name}
           type="button"
@@ -78,7 +69,7 @@ class KeyPad extends Component {
           data-text={text}
           data-katex={katexString}
           data-mathjs={mathjs}
-          onClick={this.handleOnClick}
+          onClick={handleOnClick}
           dangerouslySetInnerHTML={{
             __html: katex.renderToString(text, {
               throwOnError: false,
@@ -89,27 +80,23 @@ class KeyPad extends Component {
     );
   };
 
-  render() {
-    const { scientificMode, classes } = this.props;
+  return (
+    <>
+      {scientificMode && (
+        <StyledGrid container sm={6} spacing={2}>
+          {SCIENTIFIC_BUTTONS.map((button) => renderButton(button, 3))}
+        </StyledGrid>
+      )}
+      <Grid container sm={scientificMode ? 6 : 12} spacing={2}>
+        {BUTTONS.map((button) => renderButton(button, 3))}
+      </Grid>
+    </>
+  );
+};
 
-    return (
-      <>
-        {scientificMode && (
-          <Grid
-            container
-            sm={6}
-            spacing={2}
-            className={classes.scientificWrapper}
-          >
-            {SCIENTIFIC_BUTTONS.map((button) => this.renderButton(button, 3))}
-          </Grid>
-        )}
-        <Grid container sm={scientificMode ? 6 : 12} spacing={2}>
-          {BUTTONS.map((button) => this.renderButton(button, 3))}
-        </Grid>
-      </>
-    );
-  }
-}
+Keypad.propTypes = {
+  onClick: PropTypes.func.isRequired,
+  scientificMode: PropTypes.bool.isRequired,
+};
 
-export default withStyles(styles, { withTheme: true })(KeyPad);
+export default Keypad;

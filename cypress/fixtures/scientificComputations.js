@@ -4,7 +4,7 @@ import {
   DIVIDE_SYMBOL,
   PI_SYMBOL,
   KATEX_MINUS_SYMBOL,
-} from '../../src/constants/constants';
+} from '../../src/config/constants';
 
 export const FIXTURES_SCIENTIFIC_COMPUTATIONS = [
   {
@@ -479,7 +479,8 @@ export const FIXTURES_SCIENTIFIC_BACKSPACE = [
     ],
     katex: '44%',
     result: '0.44',
-  },{
+  },
+  {
     name: '(3+3)^2 with equal and backspace',
     selectors: [
       '3',

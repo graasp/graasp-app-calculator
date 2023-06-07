@@ -1,18 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import { Component } from 'react';
 import * as math from 'mathjs';
-import { withStyles } from '@material-ui/core';
 import PropTypes from 'prop-types';
-import InfoIcon from '@material-ui/icons/Info';
+import InfoIcon from '@mui/icons-material/Info';
 import _ from 'lodash';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Switch from '@material-ui/core/Switch';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+import Typography from '@mui/material/Typography';
+import Grid from '@mui/material/Grid';
 import { withTranslation } from 'react-i18next';
 import Result from './Result';
 import KeyPad from './Keypad';
-import { RESULT_ERROR_MESSAGE } from '../../constants/messages';
+import { RESULT_ERROR_MESSAGE } from '../../config/messages';
 import {
   MAX_NUMBER_PRECISION,
   KEYPAD_BUTTONS,
@@ -30,10 +28,11 @@ import {
   ROUND_OFF_ERROR_MARGIN,
   TRIGONOMETRY_SPECIAL_CASES,
   TRIGONOMETRY_FUNCTIONS,
-} from '../../constants/constants';
+} from '../../config/constants';
 import { parse } from '../../utils/string';
-import { SCIENTIFIC_MODE_SWITCH_NAME } from '../../constants/selectors';
+import { SCIENTIFIC_MODE_SWITCH_NAME } from '../../config/selectors';
 import AngleUnitSwitch from './AngleUnitSwitch';
+import { Box } from '@mui/material';
 
 // set up math parser
 const parser = math.parser();
@@ -94,26 +93,17 @@ const getSpecialCase = (value, fn, isRadian) => {
   return res === undefined ? false : res;
 };
 
-const styles = () => ({
-  indicator: {
-    fontSize: '1rem',
-  },
-  wrapper: { margin: 'auto', maxWidth: CALCULATOR_MAX_WIDTH },
-  scientificWrapper: {
-    margin: 'auto',
-    maxWidth: SCIENTIFIC_CALCULATOR_MAX_WIDTH,
-  },
-});
+const scientificWrapperStyles = {
+  margin: 'auto',
+  maxWidth: SCIENTIFIC_CALCULATOR_MAX_WIDTH,
+};
+
+const wrapperStyles = { margin: 'auto', maxWidth: CALCULATOR_MAX_WIDTH };
 
 class Calculator extends Component {
   static propTypes = {
     t: PropTypes.func.isRequired,
-    standalone: PropTypes.bool.isRequired,
-    classes: PropTypes.shape({
-      indicator: PropTypes.string.isRequired,
-      wrapper: PropTypes.string.isRequired,
-      scientificWrapper: PropTypes.string.isRequired,
-    }).isRequired,
+    standalone: PropTypes.bool,
   };
 
   state = {
@@ -126,7 +116,7 @@ class Calculator extends Component {
   };
 
   componentDidMount() {
-    const { standalone } = this.props;
+    const { standalone = true } = this.props;
     const { angleUnit } = this.state;
 
     this.updateAngleUnit(angleUnit);
@@ -550,7 +540,7 @@ class Calculator extends Component {
   };
 
   renderFocusIndicator = () => {
-    const { t, classes } = this.props;
+    const { t } = this.props;
     const { isFocused } = this.state;
     const text = isFocused
       ? t('The keyboard is enabled')
@@ -565,7 +555,7 @@ class Calculator extends Component {
           <Typography
             align="left"
             style={{ color: focusColor }}
-            className={`${classes.indicator}`}
+            sx={{ fontSize: '1rem' }}
             variant="h6"
           >
             {text}
@@ -576,26 +566,17 @@ class Calculator extends Component {
   };
 
   render() {
-    const { classes } = this.props;
     const { result, scientificMode } = this.state;
     return (
-      <div
-        className={scientificMode ? classes.scientificWrapper : classes.wrapper}
-      >
+      <Box sx={scientificMode ? scientificWrapperStyles : wrapperStyles}>
         <Grid container direction="row" justify="center" spacing={2}>
           <Result result={result} />
           <KeyPad onClick={this.updateResult} scientificMode={scientificMode} />
           {this.renderFooter()}
         </Grid>
-      </div>
+      </Box>
     );
   }
 }
 
-const mapStateToProps = ({ context }) => ({
-  standalone: context.standalone,
-});
-
-const ConnectedComponent = connect(mapStateToProps, null)(Calculator);
-const StyledComponent = withStyles(styles)(ConnectedComponent);
-export default withTranslation()(StyledComponent);
+export default withTranslation()(Calculator);
