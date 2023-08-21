@@ -2,6 +2,34 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/graasp/graasp-app-calculator/compare/v0.1.5...v1.0.0) (2023-08-10)
+
+
+### ⚠ BREAKING CHANGES
+
+* update app for Typeorm ([#34](https://github.com/graasp/graasp-app-calculator/issues/34))
+
+### chore
+
+* set rc release ([e6f86c7](https://github.com/graasp/graasp-app-calculator/commit/e6f86c7310bf66f2d238e26f707254f2b32c0a5c))
+
+
+### Features
+
+* update app for Typeorm ([#34](https://github.com/graasp/graasp-app-calculator/issues/34)) ([327e3b2](https://github.com/graasp/graasp-app-calculator/commit/327e3b28d0e89673a47eea9a2836280139201f95))
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graasp/ui to v3.0.0 ([bd8aaf0](https://github.com/graasp/graasp-app-calculator/commit/bd8aaf071a66fc28f9c7cebccd3ec91b6e242cd8))
+* **deps:** update dependency @mui/material to v5.13.6 ([56bbb4f](https://github.com/graasp/graasp-app-calculator/commit/56bbb4f040afed8699a10c8f50119ebcf1994055))
+* **deps:** update dependency mathjs to v11.8.1 ([#47](https://github.com/graasp/graasp-app-calculator/issues/47)) ([7c23819](https://github.com/graasp/graasp-app-calculator/commit/7c23819152669d83558c5ba2579188f6b2720b35))
+* **deps:** update dependency mathjs to v11.8.2 ([a343677](https://github.com/graasp/graasp-app-calculator/commit/a3436774a57e609d123dc557e4170abeeaf53899))
+* **deps:** update mui (non-major) ([1aa298d](https://github.com/graasp/graasp-app-calculator/commit/1aa298dbec660d221334200d9e63a145fa325e3c))
+* **deps:** update mui (non-major) ([#66](https://github.com/graasp/graasp-app-calculator/issues/66)) ([e99897b](https://github.com/graasp/graasp-app-calculator/commit/e99897b17e338ed502926178005c624fb47bc991))
+* update package.json ([64daa03](https://github.com/graasp/graasp-app-calculator/commit/64daa036e3703d4673b803edb7e69d2e764c67f6))
+* update workflow sha ref ([1141701](https://github.com/graasp/graasp-app-calculator/commit/114170174445da21e75a6adb3683805a44a43f47))
+
 ### [0.1.5](https://github.com/graasp/graasp-app-calculator/compare/v0.1.4...v0.1.5) (2022-07-28)
 
 ### Features
