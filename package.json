@@ -11,7 +11,7 @@
   "dependencies": {
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
-    "@graasp/apps-query-client": "2.0.0-rc.1",
+    "@graasp/apps-query-client": "3.4.1",
     "@graasp/ui": "3.0.0",
     "@mui/icons-material": "5.14.3",
     "@mui/lab": "5.0.0-alpha.134",
@@ -70,7 +70,7 @@
     "@typescript-eslint/eslint-plugin": "5.60.1",
     "@typescript-eslint/parser": "5.60.1",
     "cross-env": "7.0.3",
-    "cypress": "12.17.0",
+    "cypress": "13.6.3",
     "env-cmd": "10.1.0",
     "eslint": "8.43.0",
     "eslint-config-airbnb": "19.0.4",
@@ -93,5 +93,5 @@
     "not ie <= 11",
     "not op_mini all"
   ],
-  "packageManager": "yarn@3.6.1"
+  "packageManager": "yarn@4.0.2"
 }
