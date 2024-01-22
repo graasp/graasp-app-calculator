@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/graasp/graasp-app-calculator/compare/v1.0.0...v1.1.0) (2024-01-22)
+
+
+### Features
+
+* update dependencies and set gitlocalize ([#70](https://github.com/graasp/graasp-app-calculator/issues/70)) ([399e370](https://github.com/graasp/graasp-app-calculator/commit/399e370cf4745459dffa0e0e2c8ae79ca61656ed))
+
 ## [1.0.0](https://github.com/graasp/graasp-app-calculator/compare/v0.1.5...v1.0.0) (2023-08-10)
 
 
