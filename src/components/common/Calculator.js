@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState, useEffect } from 'react';
 import * as math from 'mathjs';
 import PropTypes from 'prop-types';
 import InfoIcon from '@mui/icons-material/Info';
@@ -100,99 +100,187 @@ const scientificWrapperStyles = {
 
 const wrapperStyles = { margin: 'auto', maxWidth: CALCULATOR_MAX_WIDTH };
 
-class Calculator extends Component {
-  static propTypes = {
-    t: PropTypes.func.isRequired,
-    standalone: PropTypes.bool,
-  };
+/////////////////////
+const toggleSign = (str) => {
+  // const { t } = this.props;
+  try {
+    // select groups that contain text, number, pi or .
+    // with sign
+    // which might be before or inside parenthesis
+    const groups = new RegExp(
+      `[-+]?[0-9a-z.${PI_SYMBOL}]+\\{?\\(?\\)?\\}?$`,
+      'g',
+    );
+    const matches = [...str.matchAll(groups)];
 
-  state = {
-    angleUnit: ANGLE_UNITS.DEG,
-    mathjs: '',
-    result: '',
-    isFocused: false,
-    scientificMode: false,
-    history: [],
-  };
+    // if no last number group is found, return
+    if (!matches?.length) {
+      return str;
+    }
 
-  componentDidMount() {
-    const { standalone = true } = this.props;
-    const { angleUnit } = this.state;
+    const lastGroup = matches.pop()[0];
+    const start = str.slice(0, str.length - lastGroup.length);
+    const prevOp = str[str.length - lastGroup.length - 1];
 
-    this.updateAngleUnit(angleUnit);
+    // if the group is negative
+    if (lastGroup[0] === '-' || lastGroup[0] === KATEX_MINUS_SYMBOL) {
+      // add + if no operator is found just before, or add nothing
+      // match as well i, e and pi
+      const sign =
+        prevOp && new RegExp(`[0-9ie${PI_SYMBOL}]`).test(prevOp) ? '+' : '';
+      return `${start}${sign}${lastGroup.slice(1)}`;
+    }
+    // if group is positive
+    if (lastGroup[0] === '+') {
+      return `${start}-${lastGroup.slice(1)}`;
+    }
+    // no sign means group is positive
+    return `${start}-${lastGroup}`;
+  } catch (e) {
+    console.error(e);
+    // return t(RESULT_ERROR_MESSAGE);
+  }
+};
+const backSpace = (katexStr, mathjsStr, history) => {
+  try {
+    const lastOperation = history.pop();
 
-    // handle keyboard input
+    let newKatex = katexStr;
+    let newMathjs = mathjsStr;
+
+    // if lastOperation does not exist, remove a char
+    if (!lastOperation) {
+      newKatex = newKatex.slice(0, -1);
+      newMathjs = newMathjs.slice(0, -1);
+    } else {
+      const {
+        name,
+        text,
+        katex: katexExp,
+        mathjs: mathjsExp,
+      } = KEYPAD_BUTTONS.find(
+        ({ name: buttonName }) => buttonName === lastOperation,
+      );
+
+      if (name === BUTTON_NAMES.TOGGLE_SIGN) {
+        return [toggleSign(newKatex), toggleSign(newMathjs)];
+      }
+
+      // find last instance of added operation and remove it
+      const katexReg = new RegExp(parse(`${katexExp || text}$`), 'g').exec(
+        newKatex,
+      );
+      const mathjsReg = new RegExp(parse(`${mathjsExp || text}$`), 'g').exec(
+        newMathjs,
+      );
+      if (katexReg && mathjsReg) {
+        newKatex = newKatex.slice(0, katexReg.index);
+        newMathjs = newMathjs.slice(0, mathjsReg.index);
+      }
+    }
+
+    return [newKatex, newMathjs];
+  } catch (e) {
+    console.error(e);
+    // const error = t(RESULT_ERROR_MESSAGE);
+    // return [error, error];
+  }
+};
+const compute = (mathjs, t) => {
+  // const { t } = this.props;
+  try {
+    let result = parser.evaluate(mathjs);
+
+    // handle complex numbers
+    if (result?.re || result?.im) {
+      return result.format(MAX_NUMBER_PRECISION / 2);
+    }
+    // translate result in case of non-number message
+    if (!_.isNumber(result)) {
+      return t(result);
+    }
+    // prettify number in case of big numbers
+    if (result.toString().length > MAX_NUMBER_PRECISION) {
+      // prevent round-off errors showing up in output
+      result = math.format(result, { precision: MAX_NUMBER_PRECISION });
+    }
+    return result.toString();
+  } catch (e) {
+    console.error(e);
+    return t(RESULT_ERROR_MESSAGE);
+  }
+};
+
+// parse trigonometric functions and given value
+// trigonometric values special cases return wrong result because of numerical precision
+const updateAngleUnit = (angleUnit) => {
+  const isRadian = angleUnit === ANGLE_UNITS.RAD;
+
+  parser.set('tan', (content) => {
+    const value = getSpecialCase(content, TRIGONOMETRY_FUNCTIONS.TAN, isRadian);
+    return value !== false ? value : math.tan(math.unit(content, angleUnit));
+  });
+  parser.set('sin', (content) => {
+    const value = getSpecialCase(content, TRIGONOMETRY_FUNCTIONS.SIN, isRadian);
+    return value !== false ? value : math.sin(math.unit(content, angleUnit));
+  });
+  parser.set('cos', (content) => {
+    const value = getSpecialCase(content, TRIGONOMETRY_FUNCTIONS.COS, isRadian);
+    return value !== false ? value : math.cos(math.unit(content, angleUnit));
+  });
+  parser.set('acos', (content) => {
+    // default is rad
+    const acos = math.acos(content);
+    return isRadian ? acos : radToDegree(acos);
+  });
+  parser.set('asin', (content) => {
+    // default is rad
+    const asin = math.asin(content);
+    return isRadian ? asin : radToDegree(asin);
+  });
+  parser.set('atan', (content) => {
+    // default is rad
+    const atan = math.atan(content);
+    return isRadian ? atan : radToDegree(atan);
+  });
+};
+// todo: handle on focus, blur and add t to outside component
+const Calculator = ({ standalone = false, t }) => {
+  const [angleUnit, setAngleUnit] = useState(ANGLE_UNITS.DEG);
+  const [mathjs, setMathjs] = useState('');
+  const [result, setResult] = useState('');
+  const [isFocused, setIsFocused] = useState(false);
+  const [scientificMode, setScientificMode] = useState(false);
+  const [history, setHistory] = useState([]);
+
+  useEffect(() => {
+    const handleFocus = () => {
+      setIsFocused(true);
+    };
     if (standalone) {
-      this.setState({ isFocused: true });
-      window.addEventListener('keydown', this.handleKeydown);
+      setIsFocused(true);
+      document.addEventListener('keydown', handleKeydown);
     }
     // handle keyboard only when the iframe is focused
     else {
-      window.addEventListener('focus', () => {
-        this.setState({ isFocused: true });
-        return window.addEventListener('keydown', this.handleKeydown);
-      });
-      window.addEventListener('blur', () => {
-        this.setState({ isFocused: false });
-        return window.removeEventListener('keydown', this.handleKeydown);
-      });
+      window.addEventListener('focus', handleFocus, true);
+      window.addEventListener('keydown', handleKeydown);
+      // window.addEventListener('blur', () => {
+      //   console.log('blur');
+      //   setIsFocused(false);
+      //   // return window.removeEventListener('keydown', handleKeydown);
+      // });
     }
-  }
+    return () => {
+      document.removeEventListener('focus', handleFocus, true);
+    };
+  }, []);
 
-  componentDidUpdate(prevProps, { angleUnit: prevAngleUnit }) {
-    const { angleUnit } = this.state;
-    if (prevAngleUnit !== angleUnit) {
-      this.updateAngleUnit(angleUnit);
-    }
-  }
+  useEffect(() => {
+    updateAngleUnit(angleUnit);
+  }, [angleUnit]);
 
-  // parse trigonometric functions and given value
-  // trigonometric values special cases return wrong result because of numerical precision
-  updateAngleUnit = (angleUnit) => {
-    const isRadian = angleUnit === ANGLE_UNITS.RAD;
-
-    parser.set('tan', (content) => {
-      const value = getSpecialCase(
-        content,
-        TRIGONOMETRY_FUNCTIONS.TAN,
-        isRadian,
-      );
-      return value !== false ? value : math.tan(math.unit(content, angleUnit));
-    });
-    parser.set('sin', (content) => {
-      const value = getSpecialCase(
-        content,
-        TRIGONOMETRY_FUNCTIONS.SIN,
-        isRadian,
-      );
-      return value !== false ? value : math.sin(math.unit(content, angleUnit));
-    });
-    parser.set('cos', (content) => {
-      const value = getSpecialCase(
-        content,
-        TRIGONOMETRY_FUNCTIONS.COS,
-        isRadian,
-      );
-      return value !== false ? value : math.cos(math.unit(content, angleUnit));
-    });
-    parser.set('acos', (content) => {
-      // default is rad
-      const acos = math.acos(content);
-      return isRadian ? acos : radToDegree(acos);
-    });
-    parser.set('asin', (content) => {
-      // default is rad
-      const asin = math.asin(content);
-      return isRadian ? asin : radToDegree(asin);
-    });
-    parser.set('atan', (content) => {
-      // default is rad
-      const atan = math.atan(content);
-      return isRadian ? atan : radToDegree(atan);
-    });
-  };
-
-  handleKeydown = (event) => {
+  const handleKeydown = (event) => {
     const { key } = event;
 
     // remove focus on previous clicked element
@@ -255,13 +343,13 @@ class Calculator extends Component {
 
     if (buttonName) {
       const button = KEYPAD_BUTTONS.find(({ name }) => name === buttonName);
-      this.updateResult(button);
+      updateResult(button);
     }
   };
 
-  updateResult = ({ name, text, katex, mathjs }) => {
-    const { t } = this.props;
-    const { result, mathjs: mathjsString, history } = this.state;
+  const updateResult = ({ name, text, katex, mathjs: mathjs2 }) => {
+    // const { t } = this.props;
+    // const { result, mathjs: mathjsString, history } = this.state;
     try {
       const needReset = [
         t(RESULT_ERROR_MESSAGE),
@@ -271,11 +359,11 @@ class Calculator extends Component {
       ].includes(result);
       const isNewComputation = !history.length && !OPERATIONS.includes(name);
       let newResult = needReset ? '' : result;
-      let newMathjs = needReset ? '' : mathjsString;
+      let newMathjs = needReset ? '' : mathjs;
       let newHistory = [...history];
       switch (name) {
         case BUTTON_NAMES.EE: {
-          const resultAsFloat = parseFloat(this.compute(newMathjs));
+          const resultAsFloat = parseFloat(compute(newMathjs, t));
           newMathjs = math.format(resultAsFloat, { notation: 'exponential' });
           // transform exponential notation XXe+YY to katex XXe^(YY)
           const [sign] = newMathjs.match(new RegExp(`[+-](?=[0-9])`));
@@ -287,23 +375,23 @@ class Calculator extends Component {
           break;
         }
         case BUTTON_NAMES.FACTORIAL:
-          newMathjs = math.factorial(this.compute(newResult)).toString();
+          newMathjs = math.factorial(compute(newResult, t)).toString();
           newResult = newMathjs;
           newHistory = [];
           break;
 
         case BUTTON_NAMES.SQRT:
-          newMathjs = this.compute(`sqrt(${newMathjs})`);
+          newMathjs = compute(`sqrt(${newMathjs})`, t);
           newResult = newMathjs;
           newHistory = [];
           break;
         case BUTTON_NAMES.EQUAL:
-          newMathjs = this.compute(newMathjs);
+          newMathjs = compute(newMathjs, t);
           newResult = newMathjs;
           newHistory = [];
           break;
         case BUTTON_NAMES.ABS:
-          newMathjs = this.compute(`abs(${newMathjs})`);
+          newMathjs = compute(`abs(${newMathjs})`, t);
           newResult = newMathjs;
           newHistory = [];
           break;
@@ -313,11 +401,7 @@ class Calculator extends Component {
           newHistory = [];
           break;
         case BUTTON_NAMES.CE:
-          [newResult, newMathjs] = this.backSpace(
-            newResult,
-            newMathjs,
-            newHistory,
-          );
+          [newResult, newMathjs] = backSpace(newResult, newMathjs, newHistory);
           break;
         case BUTTON_NAMES.PI: {
           // start new computation at the end of previous computation
@@ -332,7 +416,7 @@ class Calculator extends Component {
             !_.isNaN(parseInt(lastCharacter, 10)) ||
             lastCharacter === PI_SYMBOL;
           newResult += addTimes ? `${TIMES_SYMBOL}${PI_SYMBOL}` : PI_SYMBOL;
-          newMathjs += addTimes ? `*${mathjs}` : mathjs;
+          newMathjs += addTimes ? `*${mathjs2}` : mathjs2;
           if (addTimes) {
             newHistory.push(BUTTON_NAMES.MULTIPLY);
           }
@@ -340,8 +424,8 @@ class Calculator extends Component {
           break;
         }
         case BUTTON_NAMES.TOGGLE_SIGN: {
-          const toggledResult = this.toggleSign(newResult);
-          const toggledMathjs = this.toggleSign(newMathjs);
+          const toggledResult = toggleSign(newResult);
+          const toggledMathjs = toggleSign(newMathjs);
           // remember operation only on change
           if (newResult !== toggledResult || newMathjs !== toggledMathjs) {
             newMathjs = toggledMathjs;
@@ -356,155 +440,33 @@ class Calculator extends Component {
           newMathjs = isNewComputation ? '' : newMathjs;
 
           newResult += katex || text;
-          newMathjs += mathjs || text;
+          newMathjs += mathjs2 || text;
           newHistory.push(name);
           break;
       }
 
-      this.setState({
-        result: newResult,
-        mathjs: newMathjs,
-        history: newHistory,
-      });
+      setResult(newResult);
+      setMathjs(newMathjs);
+      setHistory(newHistory);
     } catch (e) {
       console.error(e);
-      this.setState({
-        result: t(RESULT_ERROR_MESSAGE),
-        mathjs: t(RESULT_ERROR_MESSAGE),
-        history: [],
-      });
+      setResult(t(RESULT_ERROR_MESSAGE));
+      setMathjs(t(RESULT_ERROR_MESSAGE));
+      setHistory([]);
     }
   };
 
-  compute = (mathjs) => {
-    const { t } = this.props;
-    try {
-      let result = parser.evaluate(mathjs);
-
-      // handle complex numbers
-      if (result?.re || result?.im) {
-        return result.format(MAX_NUMBER_PRECISION / 2);
-      }
-      // translate result in case of non-number message
-      if (!_.isNumber(result)) {
-        return t(result);
-      }
-      // prettify number in case of big numbers
-      if (result.toString().length > MAX_NUMBER_PRECISION) {
-        // prevent round-off errors showing up in output
-        result = math.format(result, { precision: MAX_NUMBER_PRECISION });
-      }
-      return result.toString();
-    } catch (e) {
-      console.error(e);
-      return t(RESULT_ERROR_MESSAGE);
-    }
-  };
-
-  reset = () => {
-    return '';
-  };
-
-  backSpace = (katexStr, mathjsStr, history) => {
-    const { t } = this.props;
-    try {
-      const lastOperation = history.pop();
-
-      let newKatex = katexStr;
-      let newMathjs = mathjsStr;
-
-      // if lastOperation does not exist, remove a char
-      if (!lastOperation) {
-        newKatex = newKatex.slice(0, -1);
-        newMathjs = newMathjs.slice(0, -1);
-      } else {
-        const {
-          name,
-          text,
-          katex: katexExp,
-          mathjs: mathjsExp,
-        } = KEYPAD_BUTTONS.find(
-          ({ name: buttonName }) => buttonName === lastOperation,
-        );
-
-        if (name === BUTTON_NAMES.TOGGLE_SIGN) {
-          return [this.toggleSign(newKatex), this.toggleSign(newMathjs)];
-        }
-
-        // find last instance of added operation and remove it
-        const katexReg = new RegExp(parse(`${katexExp || text}$`), 'g').exec(
-          newKatex,
-        );
-        const mathjsReg = new RegExp(parse(`${mathjsExp || text}$`), 'g').exec(
-          newMathjs,
-        );
-        if (katexReg && mathjsReg) {
-          newKatex = newKatex.slice(0, katexReg.index);
-          newMathjs = newMathjs.slice(0, mathjsReg.index);
-        }
-      }
-
-      return [newKatex, newMathjs];
-    } catch (e) {
-      console.error(e);
-      const error = t(RESULT_ERROR_MESSAGE);
-      return [error, error];
-    }
-  };
-
-  toggleSign = (str) => {
-    const { t } = this.props;
-    try {
-      // select groups that contain text, number, pi or .
-      // with sign
-      // which might be before or inside parenthesis
-      const groups = new RegExp(
-        `[-+]?[0-9a-z.${PI_SYMBOL}]+\\{?\\(?\\)?\\}?$`,
-        'g',
-      );
-      const matches = [...str.matchAll(groups)];
-
-      // if no last number group is found, return
-      if (!matches?.length) {
-        return str;
-      }
-
-      const lastGroup = matches.pop()[0];
-      const start = str.slice(0, str.length - lastGroup.length);
-      const prevOp = str[str.length - lastGroup.length - 1];
-
-      // if the group is negative
-      if (lastGroup[0] === '-' || lastGroup[0] === KATEX_MINUS_SYMBOL) {
-        // add + if no operator is found just before, or add nothing
-        // match as well i, e and pi
-        const sign =
-          prevOp && new RegExp(`[0-9ie${PI_SYMBOL}]`).test(prevOp) ? '+' : '';
-        return `${start}${sign}${lastGroup.slice(1)}`;
-      }
-      // if group is positive
-      if (lastGroup[0] === '+') {
-        return `${start}-${lastGroup.slice(1)}`;
-      }
-      // no sign means group is positive
-      return `${start}-${lastGroup}`;
-    } catch (e) {
-      console.error(e);
-      return t(RESULT_ERROR_MESSAGE);
-    }
-  };
-
-  renderFooter = () => {
-    const { scientificMode, angleUnit } = this.state;
+  const renderFooter = () => {
     return (
       <Grid container justify="center" alignItems="center">
         <Grid container xs={7}>
-          {this.renderFocusIndicator()}
+          {renderFocusIndicator()}
         </Grid>
         <Grid container xs={5} align="right">
-          {this.renderScientificSwitch()}
+          {renderScientificSwitch()}
           {scientificMode && (
             <AngleUnitSwitch
-              setAngleUnit={this.setAngleUnit}
+              setAngleUnit={setAngleUnit}
               angleUnit={angleUnit}
             />
           )}
@@ -513,22 +475,13 @@ class Calculator extends Component {
     );
   };
 
-  setAngleUnit = (angleUnit) => {
-    this.setState({
-      angleUnit,
-    });
-  };
-
-  renderScientificSwitch = () => {
-    const { scientificMode } = this.state;
-    const { t } = this.props;
-
+  const renderScientificSwitch = () => {
     const control = (
       <Switch
         data-cy={SCIENTIFIC_MODE_SWITCH_NAME}
         color="primary"
         checked={scientificMode}
-        onChange={() => this.setState({ scientificMode: !scientificMode })}
+        onChange={() => setScientificMode(!scientificMode)}
         name={t('Scientific Mode')}
       />
     );
@@ -539,9 +492,7 @@ class Calculator extends Component {
     );
   };
 
-  renderFocusIndicator = () => {
-    const { t } = this.props;
-    const { isFocused } = this.state;
+  const renderFocusIndicator = () => {
     const text = isFocused
       ? t('The keyboard is enabled')
       : t('The keyboard is disabled');
@@ -565,18 +516,19 @@ class Calculator extends Component {
     );
   };
 
-  render() {
-    const { result, scientificMode } = this.state;
-    return (
-      <Box sx={scientificMode ? scientificWrapperStyles : wrapperStyles}>
-        <Grid container direction="row" justify="center" spacing={2}>
-          <Result result={result} />
-          <KeyPad onClick={this.updateResult} scientificMode={scientificMode} />
-          {this.renderFooter()}
-        </Grid>
-      </Box>
-    );
-  }
-}
+  return (
+    <Box sx={scientificMode ? scientificWrapperStyles : wrapperStyles}>
+      <Grid container direction="row" justify="center" spacing={2}>
+        <Result result={result} />
+        <KeyPad onClick={updateResult} scientificMode={scientificMode} />
+        {renderFooter()}
+      </Grid>
+    </Box>
+  );
+};
 
+Calculator.propTypes = {
+  standalone: PropTypes.bool,
+  t: PropTypes.func.isRequired,
+};
 export default withTranslation()(Calculator);

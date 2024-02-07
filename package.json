@@ -44,6 +44,7 @@
     "hooks:install": "husky install",
     "hooks:uninstall": "husky uninstall",
     "lint": "eslint .",
+    "type-check": "tsc --noEmit",
     "prettier:check": "prettier --check {src,cypress}/**/*.js",
     "prettier:write": "prettier --write {src,cypress}/**/*.js",
     "test": "react-scripts test",
