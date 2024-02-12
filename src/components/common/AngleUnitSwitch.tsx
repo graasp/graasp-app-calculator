@@ -1,14 +1,19 @@
-import PropTypes from 'prop-types';
 import Switch from '@mui/material/Switch';
 import Grid from '@mui/material/Grid';
-import { withTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
+import { ValueOf } from 'types/math';
 import { ANGLE_UNITS } from '../../config/constants';
 import { ANGLE_UNIT_SWITCH_NAME } from '../../config/selectors';
 
-const AngleUnitSwitch = (props) => {
-  const { angleUnit, setAngleUnit, t } = props;
+type AngleUnitType = ValueOf<typeof ANGLE_UNITS>;
 
-  const onChange = () => {
+interface Props {
+  angleUnit: AngleUnitType;
+  setAngleUnit: (value: AngleUnitType) => void;
+}
+const AngleUnitSwitch = ({ angleUnit, setAngleUnit }: Props): JSX.Element => {
+  const { t } = useTranslation();
+  const onChange = (): void => {
     const newAngleUnit =
       angleUnit === ANGLE_UNITS.DEG ? ANGLE_UNITS.RAD : ANGLE_UNITS.DEG;
     setAngleUnit(newAngleUnit);
@@ -18,8 +23,6 @@ const AngleUnitSwitch = (props) => {
     <Grid
       container
       sx={{ marginRight: 1 }}
-      align="right"
-      justify="flex-end"
       alignItems="center"
       spacing={1}
       justifyContent="right"
@@ -38,10 +41,4 @@ const AngleUnitSwitch = (props) => {
   );
 };
 
-AngleUnitSwitch.propTypes = {
-  angleUnit: PropTypes.oneOf(Object.values(ANGLE_UNITS)).isRequired,
-  setAngleUnit: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
-};
-
-export default withTranslation()(AngleUnitSwitch);
+export default AngleUnitSwitch;

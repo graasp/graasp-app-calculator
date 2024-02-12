@@ -4,17 +4,7 @@ import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useTranslation } from 'react-i18next';
 import { Box, styled } from '@mui/material';
-import { Loader } from '@graasp/ui';
-
-const getModalStyle = () => {
-  const top = 50;
-  const left = 50;
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-};
+import Loader from 'components/common/Loader';
 
 const StyledBox = styled(Box)(({ theme }) => ({
   position: 'absolute',
@@ -23,6 +13,9 @@ const StyledBox = styled(Box)(({ theme }) => ({
   boxShadow: theme.shadows[5],
   padding: theme.spacing(4),
   outline: 'none',
+  top: 50,
+  left: 50,
+  transform: `translate(-50%, -50%)`,
 }));
 
 type Props = {
@@ -31,36 +24,14 @@ type Props = {
   open?: boolean;
 };
 
-const Settings = ({ settings = {}, activity, open = false }: Props) => {
+const Settings = ({
+  settings = {},
+  activity,
+  open = false,
+}: Props): JSX.Element => {
   const { t } = useTranslation();
 
-  const saveSettings = () => {
-    // TODO: fix header visibility
-    // const { settings, dispatchPatchAppInstance } = this.props;
-    // const newSettings = {
-    //   ...settings,
-    //   ...settingsToChange,
-    // };
-    // dispatchPatchAppInstance({
-    //   data: newSettings,
-    // });
-  };
-
-  const handleChangeHeaderVisibility = () => {
-    // const { headerVisible } = settings;
-    // const settingsToChange = {
-    //   headerVisible: !headerVisible,
-    // };
-    // saveSettings(settingsToChange);
-  };
-
-  const handleClose = () => {
-    // TODO: fix header visibility
-    // const { dispatchCloseSettings } = this.props;
-    // dispatchCloseSettings();
-  };
-
-  const renderModalContent = () => {
+  const renderModalContent = (): JSX.Element => {
     const { headerVisible } = settings;
 
     if (activity) {
@@ -71,7 +42,6 @@ const Settings = ({ settings = {}, activity, open = false }: Props) => {
       <Switch
         color="primary"
         checked={headerVisible}
-        onChange={handleChangeHeaderVisibility}
         value="headerVisibility"
       />
     );
@@ -90,9 +60,8 @@ const Settings = ({ settings = {}, activity, open = false }: Props) => {
         aria-labelledby="simple-modal-title"
         aria-describedby="simple-modal-description"
         open={open}
-        onClose={handleClose}
       >
-        <StyledBox style={getModalStyle()}>
+        <StyledBox>
           <Typography variant="h5" id="modal-title">
             {t('Settings')}
           </Typography>

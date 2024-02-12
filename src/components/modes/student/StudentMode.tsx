@@ -1,6 +1,4 @@
 import StudentView from './StudentView';
 
-const StudentMode = () => {
-  return <StudentView />;
-};
+const StudentMode = (): JSX.Element => <StudentView />;
 export default StudentMode;

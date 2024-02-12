@@ -2,9 +2,7 @@ import katex from 'katex';
 import { styled } from '@mui/material';
 import Grid from '@mui/material/Grid';
 import { KEYPAD_BUTTON_CLASS } from '../../config/selectors';
-import { Button } from '../../config/constants';
-
-const BUTTON_FONT_SIZE = '2.3rem';
+import { BUTTON_FONT_SIZE, KatexButton } from '../../config/constants';
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
   '& .katex': { fontFamily: theme.typography.fontFamily },
@@ -33,8 +31,8 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
 
 interface Props {
   xs?: number;
-  button: Button;
-  onClick: (value: Button) => void;
+  button: KatexButton;
+  onClick: (value: KatexButton) => void;
 }
 
 const CalculatorButton = ({ button, xs = 3, onClick }: Props): JSX.Element => {
@@ -49,7 +47,7 @@ const CalculatorButton = ({ button, xs = 3, onClick }: Props): JSX.Element => {
         data-text={text}
         data-katex={katexString}
         data-mathjs={mathjs}
-        aria-label="calc-button"
+        aria-label={`button ${name}`}
         onClick={() => onClick({ name, text, katex: katexString, mathjs })}
         /* eslint-disable-next-line react/no-danger */
         dangerouslySetInnerHTML={{

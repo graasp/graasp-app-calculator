@@ -2,17 +2,15 @@ import Grid from '@mui/material/Grid';
 import Calculator from '../../common/Calculator';
 import Settings from './Settings';
 
-export const TeacherView = () => {
-  return (
-    <>
-      <Grid container spacing={10}>
-        <Grid item xs={12}>
-          <Calculator />
-        </Grid>
+export const TeacherView = (): JSX.Element => (
+  <>
+    <Grid container spacing={10}>
+      <Grid item xs={12}>
+        <Calculator />
       </Grid>
-      <Settings />
-    </>
-  );
-};
+    </Grid>
+    <Settings />
+  </>
+);
 
 export default TeacherView;

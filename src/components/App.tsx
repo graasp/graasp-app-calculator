@@ -5,8 +5,6 @@ import StudentMode from './modes/student/StudentMode';
 // bind katex to the window object
 window.katex = katex;
 
-const App = () => {
-  return <StudentMode />;
-};
+const App = (): JSX.Element => <StudentMode />;
 
 export default App;
