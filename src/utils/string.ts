@@ -1,8 +1,10 @@
-export const replaceAll = (str, search, replacement) => {
-  return str.split(search).join(replacement);
-};
+export const replaceAll = (
+  str: string,
+  search: string,
+  replacement: string,
+): string => str.split(search).join(replacement);
 
-export const parse = (str) => {
+export const parse = (str: string): string => {
   const replacement = [
     ['{', '\\{'],
     ['}', '\\}'],
