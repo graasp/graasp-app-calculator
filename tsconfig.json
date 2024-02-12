@@ -19,7 +19,7 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "types": ["node", "cypress", "i18next"],
-    "baseUrl": "./src"
+    "baseUrl": "./src",
   },
-  "include": ["src"]
+  "include": ["src", "src/types/images.d.ts"],
 }
