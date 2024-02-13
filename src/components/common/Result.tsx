@@ -1,9 +1,8 @@
-import PropTypes from 'prop-types';
 import Typography from '@mui/material/Typography';
 import katex from 'katex';
 import Grid from '@mui/material/Grid';
-import { RESULT_TEXT_NAME } from '../../config/selectors';
 import { styled } from '@mui/material';
+import { RESULT_TEXT_NAME } from '../../config/selectors';
 
 const StyledTypography = styled(Typography)(({ theme }) => ({
   border: `1px solid ${theme.palette.primary.main}`,
@@ -26,7 +25,11 @@ const StyledTypography = styled(Typography)(({ theme }) => ({
   },
 }));
 
-const Result = ({ result }) => {
+interface Props {
+  result: string;
+}
+
+const Result = ({ result }: Props): JSX.Element => {
   const html = katex.renderToString(result, {
     throwOnError: false,
   });
@@ -55,10 +58,6 @@ const Result = ({ result }) => {
       />
     </Grid>
   );
-};
-
-Result.propTypes = {
-  result: PropTypes.string.isRequired,
 };
 
 export default Result;

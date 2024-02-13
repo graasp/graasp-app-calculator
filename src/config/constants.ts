@@ -1,3 +1,5 @@
+import { SpecialCases, ValueOf } from 'types/math';
+
 export const MAX_NUMBER_PRECISION = 15;
 export const CALCULATOR_MAX_WIDTH = 500;
 export const SCIENTIFIC_CALCULATOR_MAX_WIDTH = 700;
@@ -63,7 +65,14 @@ export const KATEX_MINUS_SYMBOL = '−';
  * {string=} BUTTONS[].katex: operation to be displayed using katex
  * {string=} BUTTONS[].mathjs: operation to be computed using mathjs
  * */
-export const BUTTONS = [
+export interface KatexButton {
+  name: ValueOf<typeof BUTTON_NAMES>;
+  text: string;
+  katex?: string;
+  mathjs?: string;
+}
+
+export const BUTTONS: KatexButton[] = [
   { name: BUTTON_NAMES.CLEAR, text: 'C' },
   { name: BUTTON_NAMES.OPEN_PARENTHESIS, text: '(', katex: '{(' },
   { name: BUTTON_NAMES.CLOSE_PARENTHESIS, text: ')', katex: ')}' },
@@ -93,7 +102,7 @@ export const BUTTONS = [
  * {string=} SCIENTIFIC_BUTTONS[].katex: operation to be displayed using katex
  * {string=} SCIENTIFIC_BUTTONS[].mathjs: operation to be computed using mathjs
  * */
-export const SCIENTIFIC_BUTTONS = [
+export const SCIENTIFIC_BUTTONS: KatexButton[] = [
   { name: BUTTON_NAMES.SQUARE, text: 'x^2', katex: '^{(2)}', mathjs: '^(2)' },
   { name: BUTTON_NAMES.SQRT, text: '\\sqrt{x}' },
   { name: BUTTON_NAMES.POWER, text: '^', katex: '^{(', mathjs: '^(' },
@@ -147,9 +156,9 @@ export const TRIGONOMETRY_FUNCTIONS = {
   TAN: 'tan',
   COS: 'cos',
   SIN: 'sin',
-};
+} as const;
 
-export const TRIGONOMETRY_SPECIAL_CASES = {
+export const TRIGONOMETRY_SPECIAL_CASES: SpecialCases = {
   [TRIGONOMETRY_FUNCTIONS.TAN]: {
     0: 0,
     45: 1,
@@ -174,3 +183,4 @@ export const TRIGONOMETRY_SPECIAL_CASES = {
 };
 
 export const ROUND_OFF_ERROR_MARGIN = 1.58;
+export const BUTTON_FONT_SIZE = '1.9rem';

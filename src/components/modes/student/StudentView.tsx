@@ -1,8 +1,7 @@
-import { withTranslation } from 'react-i18next';
 import Grid from '@mui/material/Grid';
 import Calculator from '../../common/Calculator';
 
-export const StudentView = () => (
+export const StudentView = (): JSX.Element => (
   <Grid container spacing={10}>
     <Grid
       item
@@ -17,4 +16,4 @@ export const StudentView = () => (
   </Grid>
 );
 
-export default withTranslation()(StudentView);
+export default StudentView;

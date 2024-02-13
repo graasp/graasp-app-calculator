@@ -6,6 +6,7 @@
     "skipLibCheck": true,
     "strictNullChecks": true,
     "noImplicitAny": true,
+    "noErrorTruncation": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "strict": true,
@@ -17,7 +18,8 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["node", "cypress", "i18next"]
+    "types": ["node", "cypress", "i18next"],
+    "baseUrl": "./src",
   },
-  "include": ["src"]
+  "include": ["src", "src/types/images.d.ts"],
 }
