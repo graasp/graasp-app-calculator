@@ -1,0 +1,13 @@
+{
+  "translations": {
+    "Calculator": "Calcolatrice",
+    "Error": "Errore",
+    "Infinity": "Infinito",
+    "-Infinity": "-Infinito",
+    "The keyboard is enabled": "La tastiera è abilitata",
+    "The keyboard is disabled": "La tastiera è disabilitata",
+    "Radian": "Radiante",
+    "Degree": "Gradi",
+    "Scientific Mode": "Modalità scientifica"
+  }
+}
