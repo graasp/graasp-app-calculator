@@ -4,7 +4,6 @@ export default defineConfig({
   e2e: {
     testIsolation: false,
     retries: { runMode: 1, openMode: 0 },
-    env: {},
     baseUrl: `http://localhost:${process.env.PORT || 3017}`,
   },
 });

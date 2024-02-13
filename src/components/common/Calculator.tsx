@@ -91,8 +91,9 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
             break;
           }
           case BUTTON_NAMES.FACTORIAL:
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any
-            newMathjs = math.factorial(compute(newResult, t) as any).toString();
+            newMathjs = math
+              .factorial(Number(compute(newResult, t)))
+              .toString();
             newResult = newMathjs;
             newHistory = [];
             break;
@@ -173,8 +174,8 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
         setHistory(newHistory);
       } catch (e) {
         console.error(e, 'error');
-        setResult(t(RESULT_ERROR_MESSAGE) || 'Error');
-        setMathjs(t(RESULT_ERROR_MESSAGE) || 'Error');
+        setResult(t(RESULT_ERROR_MESSAGE));
+        setMathjs(t(RESULT_ERROR_MESSAGE));
         setHistory([]);
       }
     },
@@ -184,7 +185,7 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
   const handleKeydown = useCallback(
     (event: KeyboardEvent): void => {
       const { key } = event;
-
+      setIsFocused(true);
       const buttonName = getButtonName(key);
       if (buttonName) {
         const button = KEYPAD_BUTTONS.find(({ name }) => name === buttonName);
@@ -207,6 +208,11 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
     updateAngleUnit(angleUnit);
   }, [angleUnit]);
 
+  useEffect(() => {
+    if (standalone) {
+      setIsFocused(true);
+    }
+  }, [standalone]);
   return (
     <Box sx={scientificMode ? scientificWrapperStyles : wrapperStyles}>
       <Grid container direction="row" spacing={2}>
@@ -215,11 +221,7 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
         {/* Footer */}
         <Grid container alignItems="center">
           <Grid container xs={7}>
-            <FocusIndicator
-              isFocused={isFocused}
-              setIsFocused={setIsFocused}
-              standalone={standalone}
-            />
+            <FocusIndicator isFocused={isFocused} />
           </Grid>
           <Grid container xs={5}>
             <ScientificSwitch

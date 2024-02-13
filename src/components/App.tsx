@@ -1,10 +1,10 @@
 import katex from 'katex';
 import 'katex/dist/katex.min.css';
-import StudentMode from './modes/student/StudentMode';
+import StudentView from './modes/student/StudentView';
 
 // bind katex to the window object
 window.katex = katex;
 
-const App = (): JSX.Element => <StudentMode />;
+const App = (): JSX.Element => <StudentView />;
 
 export default App;

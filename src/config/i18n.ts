@@ -15,6 +15,11 @@ declare module 'react-i18next' {
     resources: (typeof resources)['en'];
   }
 }
+declare module 'i18next' {
+  interface CustomTypeOptions {
+    returnNull: false;
+  }
+}
 
 i18n.use(initReactI18next).init({
   resources,
@@ -23,6 +28,7 @@ i18n.use(initReactI18next).init({
   debug: process.env.NODE_ENV !== 'production',
   ns: [defaultNS],
   defaultNS,
+  returnNull: false,
   keySeparator: false,
   interpolation: {
     escapeValue: false,

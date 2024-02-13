@@ -2,13 +2,14 @@ import { Switch, Grid, FormControlLabel } from '@mui/material';
 import { SCIENTIFIC_MODE_SWITCH_NAME } from 'config/selectors';
 import { useTranslation } from 'react-i18next';
 
+interface Props {
+  scientificMode: boolean;
+  setScientificMode: (val: boolean) => void;
+}
 const ScientificSwitch = ({
   scientificMode,
   setScientificMode,
-}: {
-  scientificMode: boolean;
-  setScientificMode: (val: boolean) => void;
-}): JSX.Element => {
+}: Props): JSX.Element => {
   const { t } = useTranslation();
 
   const control = (
@@ -17,7 +18,7 @@ const ScientificSwitch = ({
       color="primary"
       checked={scientificMode}
       onChange={() => setScientificMode(!scientificMode)}
-      // name={t('Scientific Mode')}
+      name={t('Scientific Mode')}
     />
   );
   return (

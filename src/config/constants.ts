@@ -183,4 +183,4 @@ export const TRIGONOMETRY_SPECIAL_CASES: SpecialCases = {
 };
 
 export const ROUND_OFF_ERROR_MARGIN = 1.58;
-export const BUTTON_FONT_SIZE = '2.3rem';
+export const BUTTON_FONT_SIZE = '1.9rem';

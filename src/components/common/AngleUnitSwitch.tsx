@@ -14,9 +14,9 @@ interface Props {
 const AngleUnitSwitch = ({ angleUnit, setAngleUnit }: Props): JSX.Element => {
   const { t } = useTranslation();
   const onChange = (): void => {
-    const newAngleUnit =
+    const val =
       angleUnit === ANGLE_UNITS.DEG ? ANGLE_UNITS.RAD : ANGLE_UNITS.DEG;
-    setAngleUnit(newAngleUnit);
+    setAngleUnit(val);
   };
 
   return (

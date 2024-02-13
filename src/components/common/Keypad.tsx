@@ -13,29 +13,6 @@ const StyledGrid = styled(Grid)(({ theme }) => ({
     marginRight: theme.spacing(-1),
     marginBottom: theme.spacing(1),
   },
-  // ...buildButtonWrapperStyles(theme, '1.9rem'),
-  '& .katex': { fontFamily: theme.typography.fontFamily },
-
-  '& button': {
-    width: '100%',
-    height: '100%',
-    background: theme.palette.primary.main,
-    fontSize: '1.9rem',
-    border: 'none',
-    padding: theme.spacing(1, 0),
-
-    // override katex default styles with app theme
-    '& > span': {
-      fontSize: '1.9rem',
-      color: `${theme.palette.secondary.main} !important`,
-
-      // message style (infinite, error...)
-      '& .mathnormal': {
-        fontFamily: theme.typography.fontFamily,
-        fontStyle: 'normal',
-      },
-    },
-  },
 }));
 
 interface Props {

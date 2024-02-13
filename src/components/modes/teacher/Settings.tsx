@@ -4,7 +4,7 @@ import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { useTranslation } from 'react-i18next';
 import { Box, styled } from '@mui/material';
-import Loader from 'components/common/Loader';
+import { Loader } from '@graasp/ui';
 
 const StyledBox = styled(Box)(({ theme }) => ({
   position: 'absolute',
@@ -13,8 +13,8 @@ const StyledBox = styled(Box)(({ theme }) => ({
   boxShadow: theme.shadows[5],
   padding: theme.spacing(4),
   outline: 'none',
-  top: 50,
-  left: 50,
+  top: '50%',
+  left: '50%',
   transform: `translate(-50%, -50%)`,
 }));
 

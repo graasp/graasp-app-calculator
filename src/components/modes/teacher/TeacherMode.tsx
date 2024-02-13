@@ -1,4 +1,4 @@
-import Loader from 'components/common/Loader';
+import { Loader } from '@graasp/ui';
 import TeacherView from './TeacherView';
 import { DEFAULT_VIEW, DASHBOARD_VIEW } from '../../../config/views';
 

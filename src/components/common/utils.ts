@@ -98,7 +98,7 @@ export const toggleSign = (str: string): string | undefined => {
     }
     return `${start}-${lastGroup}`;
   }
-  // no sign means group is positive
+  // no sign means group is positive, no return
 };
 
 export const backSpace = (

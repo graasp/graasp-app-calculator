@@ -6,8 +6,6 @@ export interface SpecialCase {
   [angle: number]: TrigonometryValue;
 }
 
-export interface SpecialCases {
-  tan: SpecialCase;
-  sin: SpecialCase;
-  cos: SpecialCase;
-}
+export type SpecialCases = {
+  [key in 'tan' | 'sin' | 'cos']: SpecialCase;
+};
