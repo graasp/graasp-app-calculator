@@ -29,11 +29,8 @@ jobs:
           NODE_ENV: test
         with:
           install: false
-          build: yarn build
           config: baseUrl=http://localhost:3017
           start: yarn preview:test
-          wait-on: 'http://localhost:3017'
-          wait-on-timeout: 180
           browser: chrome
           quiet: true
           # point to new cypress@10 config file
