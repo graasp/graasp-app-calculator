@@ -23,17 +23,16 @@ jobs:
       - name: cypress run
         uses: cypress-io/github-action@v5
         env:
-          REACT_APP_API_HOST: http://localhost:3636
-          REACT_APP_GRAASP_DOMAIN: localhost
-          REACT_APP_GRAASP_APP_KEY: id-1234567890
-          REACT_APP_ENABLE_MOCK_API: true
+          VITE_GRAASP_APP_KEY: id-1234567890
+          VITE_ENABLE_MOCK_API: true
+          VITE_GRAASP_API_HOST: ${{ vars.VITE_GRAASP_API_HOST }}
           NODE_ENV: test
         with:
           install: false
           build: yarn build
-          config: baseUrl=http://localhost:3000
-          start: yarn start:ci
-          wait-on: 'http://localhost:3000'
+          config: baseUrl=http://localhost:3017
+          start: yarn preview:test
+          wait-on: 'http://localhost:3017'
           wait-on-timeout: 180
           browser: chrome
           quiet: true

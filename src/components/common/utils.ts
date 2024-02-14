@@ -1,4 +1,7 @@
 import { TrigonometryValue, ValueOf } from 'types/math';
+import * as math from 'mathjs';
+import _ from 'lodash';
+import { RESULT_ERROR_MESSAGE } from '../../config/messages';
 import {
   ROUND_OFF_ERROR_MARGIN,
   TRIGONOMETRY_SPECIAL_CASES,
@@ -10,10 +13,7 @@ import {
   ANGLE_UNITS,
   TRIGONOMETRY_FUNCTIONS,
   POWER_SYMBOL,
-} from 'config/constants';
-import { RESULT_ERROR_MESSAGE } from 'config/messages';
-import * as math from 'mathjs';
-import _ from 'lodash';
+} from '../../config/constants';
 import { parse } from '../../utils/string';
 
 // set up math parser

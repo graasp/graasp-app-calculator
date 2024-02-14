@@ -1,7 +1,7 @@
 import { Grid, Typography } from '@mui/material';
-import { ENABLED_COLOR, DISABLED_COLOR } from 'config/constants';
 import { useTranslation } from 'react-i18next';
 import InfoIcon from '@mui/icons-material/Info';
+import { ENABLED_COLOR, DISABLED_COLOR } from '../config/constants';
 
 const FocusIndicator = ({ isFocused }: { isFocused: boolean }): JSX.Element => {
   const { t } = useTranslation();
