@@ -12,8 +12,8 @@ declare global {
   namespace Cypress {
     interface Chainable {
       setUpApi(
-        database: Partial<Database>,
-        appContext: Partial<LocalContext>,
+        database?: Partial<Database>,
+        appContext?: Partial<LocalContext>,
       ): void;
 
       visitAsStudent(

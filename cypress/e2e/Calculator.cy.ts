@@ -32,7 +32,7 @@ describe('Calculator', () => {
 
   describe('scientific mode = false', () => {
     before(() => {
-      cy.setUpApi({}, {});
+      cy.setUpApi();
       cy.visitAsStudent({ appQueryParameters });
     });
 
