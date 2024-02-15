@@ -1,0 +1,11 @@
+{
+  "translations": {
+    "Calculator": "Calculadora",
+    "Error": "Error",
+    "The keyboard is enabled": "El teclado está habilitado.",
+    "The keyboard is disabled": "El teclado está deshabilitado",
+    "Radian": "Radián",
+    "Degree": "Grado",
+    "Scientific Mode": "Modo científico"
+  }
+}
