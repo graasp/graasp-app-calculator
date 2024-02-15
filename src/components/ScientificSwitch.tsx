@@ -1,6 +1,6 @@
 import { Switch, Grid, FormControlLabel } from '@mui/material';
-import { SCIENTIFIC_MODE_SWITCH_NAME } from 'config/selectors';
 import { useTranslation } from 'react-i18next';
+import { SCIENTIFIC_MODE_SWITCH_NAME } from '../config/selectors';
 
 interface Props {
   scientificMode: boolean;

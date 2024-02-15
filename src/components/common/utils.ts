@@ -1,4 +1,6 @@
 import { TrigonometryValue, ValueOf } from 'types/math';
+import * as math from 'mathjs';
+import isNumber from 'lodash.isnumber';
 import {
   ROUND_OFF_ERROR_MARGIN,
   TRIGONOMETRY_SPECIAL_CASES,
@@ -10,11 +12,9 @@ import {
   ANGLE_UNITS,
   TRIGONOMETRY_FUNCTIONS,
   POWER_SYMBOL,
-} from 'config/constants';
-import { RESULT_ERROR_MESSAGE } from 'config/messages';
-import * as math from 'mathjs';
-import _ from 'lodash';
-import { parse } from '../../utils/string';
+} from '@/config/constants';
+import { RESULT_ERROR_MESSAGE } from '@/config/messages';
+import { parse } from '@/utils/string';
 
 // set up math parser
 export const parser = math.parser();
@@ -165,7 +165,7 @@ export const compute = (mathjs: string, t: (s: string) => string): string => {
       return result.format(MAX_NUMBER_PRECISION / 2);
     }
     // translate result in case of non-number message
-    if (!_.isNumber(result)) {
+    if (!isNumber(result)) {
       return t(result);
     }
     // prettify number in case of big numbers
