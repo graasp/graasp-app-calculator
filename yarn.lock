@@ -2235,6 +2235,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@faker-js/faker@npm:8.4.0":
+  version: 8.4.0
+  resolution: "@faker-js/faker@npm:8.4.0"
+  checksum: f9253d0b4846ab0fd769cd78be88c4ea24741d9201cccb0038b3627ac21041a2aef150b0f843b2f63d5a056737bec28bcdf493e0b72201a892df4423be0dff79
+  languageName: node
+  linkType: hard
+
 "@fastify/ajv-compiler@npm:^3.5.0":
   version: 3.5.0
   resolution: "@fastify/ajv-compiler@npm:3.5.0"
@@ -2405,6 +2412,20 @@ __metadata:
     uuid: "npm:9.0.1"
     validator: "npm:13.11.0"
   checksum: 12a11bfb2ff35d4fdccc38ad10fab8fe4ee4f7cea2a26ac17040d8758e2cf86070cbfa0c02243bb7efc3410f1abd5d0e18834dc6f6226bb216b33e0f83b19e2d
+  languageName: node
+  linkType: hard
+
+"@graasp/sdk@npm:3.8.2":
+  version: 3.8.2
+  resolution: "@graasp/sdk@npm:3.8.2"
+  dependencies:
+    "@faker-js/faker": "npm:8.4.0"
+    js-cookie: "npm:3.0.5"
+    validator: "npm:13.11.0"
+  peerDependencies:
+    date-fns: ^3
+    uuid: ^9
+  checksum: 1f39b6e6cf28b8045b88669afac2a57876ccb83e963d575777f3337e623937c0bc2629d117c701c8135e84bfaf0dc3c2eaea63f3bf2ff4f32e497a8f12fe3b05
   languageName: node
   linkType: hard
 
@@ -3085,6 +3106,43 @@ __metadata:
   version: 1.2.5
   resolution: "@sqltools/formatter@npm:1.2.5"
   checksum: ce9335025cd033f8f1ac997d290af22d5a5cdbd5f04cbf0fa18d5388871e980a4fc67875037821799b356032f851732dee1017b2ee7de84f5c2a2b8bfd5604f5
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-core@npm:5.20.5":
+  version: 5.20.5
+  resolution: "@tanstack/query-core@npm:5.20.5"
+  checksum: ca495a213850a79a23ea45a4e22982e06eea07959f7cf5062c154dc8c7fc01f7cc7f1f8abf74cdb2a9f38347f1df9a39238fbee6cd49662e464064d92cf1c48b
+  languageName: node
+  linkType: hard
+
+"@tanstack/query-devtools@npm:5.20.2":
+  version: 5.20.2
+  resolution: "@tanstack/query-devtools@npm:5.20.2"
+  checksum: 231833261784eb9c58c83795470b1ac83f6e126c0d70be4d9e676e45917211ac06afef94593fdb6599db60d3fb646d6fef1836cdd9e94720643b5cd7b243af7a
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query-devtools@npm:5.20.5":
+  version: 5.20.5
+  resolution: "@tanstack/react-query-devtools@npm:5.20.5"
+  dependencies:
+    "@tanstack/query-devtools": "npm:5.20.2"
+  peerDependencies:
+    "@tanstack/react-query": ^5.20.5
+    react: ^18.0.0
+  checksum: 30eede2313065e2eeaeabab90712c25e7c3aad195503724099bbf912924a3643d2f1d41cf66ceea2155aceaea54292ec6a823489eea291557ca3e5ac408a7b8a
+  languageName: node
+  linkType: hard
+
+"@tanstack/react-query@npm:5.20.5":
+  version: 5.20.5
+  resolution: "@tanstack/react-query@npm:5.20.5"
+  dependencies:
+    "@tanstack/query-core": "npm:5.20.5"
+  peerDependencies:
+    react: ^18.0.0
+  checksum: 77b3129f8a44a0dcca4cc5eb34b877cce08c8ee41f13585bed4fe1b1b9c4a8823e454e8989b6dc4c240cda69604efa70dd7c6b954f4e4f6aefcf518254079f96
   languageName: node
   linkType: hard
 
@@ -6979,10 +7037,13 @@ __metadata:
     "@emotion/react": "npm:11.11.1"
     "@emotion/styled": "npm:11.11.0"
     "@graasp/apps-query-client": "npm:3.4.1"
+    "@graasp/sdk": "npm:3.8.2"
     "@graasp/ui": "npm:3.0.0"
     "@mui/icons-material": "npm:5.14.3"
     "@mui/lab": "npm:5.0.0-alpha.134"
     "@mui/material": "npm:5.14.4"
+    "@tanstack/react-query": "npm:5.20.5"
+    "@tanstack/react-query-devtools": "npm:5.20.5"
     "@types/katex": "npm:0.16.0"
     "@types/lodash.isnan": "npm:3.0.9"
     "@types/lodash.isnumber": "npm:3.0.9"
