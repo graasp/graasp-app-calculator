@@ -1,21 +1,37 @@
 import _ from 'lodash';
 import { toast } from 'react-toastify';
+import { Notifier } from '@graasp/apps-query-client';
 import { UNEXPECTED_ERROR_MESSAGE } from '../config/messages';
 
-const showErrorToast = (payload: { message: string }): void => {
-  let message = UNEXPECTED_ERROR_MESSAGE;
-  if (_.isString(payload)) {
-    message = payload;
-  } else if (_.isObject(payload)) {
-    if (payload.message) {
-      ({ message } = payload);
-    }
-  }
+type ErrorPayload = Parameters<Notifier>[0]['payload'] & {
+  failure?: unknown[];
+};
 
-  toast.error(message, {
-    toastId: message,
-    position: 'bottom-right',
-  });
+type SuccessPayload = {
+  message?: string;
+};
+
+type Payload = ErrorPayload & SuccessPayload;
+
+const showErrorToast = ({
+  // type,
+  payload,
+}: {
+  // type: string;
+  payload?: Payload;
+}): void => {
+  const message = payload?.message || UNEXPECTED_ERROR_MESSAGE;
+
+  // error notification
+  if (payload?.error) {
+    toast.error(message);
+  }
+  // success notification
+  else if (message) {
+    // TODO: enable if not websockets
+    // allow resend invitation
+    toast.success(message);
+  }
 };
 
 export { showErrorToast };
