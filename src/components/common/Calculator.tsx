@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import * as math from 'mathjs';
-import _ from 'lodash';
+import isNaN from 'lodash.isnan';
 
 import Grid from '@mui/material/Grid';
 import { useTranslation } from 'react-i18next';
@@ -136,7 +136,7 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
             // we add a times operation if the last entry is a number or pi
             const lastCharacter = newResult.slice(-1);
             const addTimes =
-              !_.isNaN(parseInt(lastCharacter, 10)) ||
+              !isNaN(parseInt(lastCharacter, 10)) ||
               lastCharacter === PI_SYMBOL;
             newResult += addTimes ? `${TIMES_SYMBOL}${PI_SYMBOL}` : PI_SYMBOL;
             newMathjs += addTimes ? `*${mathjs2}` : mathjs2;

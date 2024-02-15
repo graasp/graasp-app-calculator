@@ -1,6 +1,6 @@
 import { TrigonometryValue, ValueOf } from 'types/math';
 import * as math from 'mathjs';
-import { isNumber } from 'lodash';
+import isNumber from 'lodash.isnumber';
 import {
   ROUND_OFF_ERROR_MARGIN,
   TRIGONOMETRY_SPECIAL_CASES,
