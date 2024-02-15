@@ -31,15 +31,13 @@ jobs:
           VITE_VERSION: cypress-tests
 
       - name: cypress run
-        uses: cypress-io/github-action@v5
+        uses: cypress-io/github-action@v6
         env:
           VITE_GRAASP_APP_KEY: id-1234567890
           VITE_ENABLE_MOCK_API: true
           VITE_GRAASP_API_HOST: ${{ vars.VITE_GRAASP_API_HOST }}
-          NODE_ENV: test
         with:
           install: false
-          config: baseUrl=http://localhost:3017
           start: yarn preview:test
           browser: chrome
           quiet: true

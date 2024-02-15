@@ -103,7 +103,7 @@
     },
     "import/resolver": {
       "typescript": {
-        "alwaysTryTypes": true
+        "directory": "./tsconfig.json"
       },
       "node": {
         "extensions": [".js", ".jsx", ".ts", ".tsx"]

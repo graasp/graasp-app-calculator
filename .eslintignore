@@ -3,4 +3,3 @@ public
 coverage
 src/registerServiceWorker.js
 cypress/integration/examples
-vite.config.ts
