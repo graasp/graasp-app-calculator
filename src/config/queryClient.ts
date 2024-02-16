@@ -11,13 +11,12 @@ const {
   ReactQueryDevtools,
 } = configureQueryClient({
   API_HOST,
-  //   notifier,
   refetchOnWindowFocus: !import.meta.env.DEV,
   keepPreviousData: true,
   // avoid refetching when same data are closely fetched
   staleTime: 1000, // ms
   GRAASP_APP_KEY,
-  isStandalone: true,
+  isStandalone: MOCK_API,
 });
 
 export {
