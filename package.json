@@ -55,7 +55,7 @@
     "test": "yarn build:test && concurrently -k -s first \"yarn preview:test\" \"yarn cypress:run\"",
     "cypress:run": "env-cmd -f ./.env.test cypress run --browser chrome",
     "report": "cat ./coverage/lcov.info | codacy-coverage",
-    "cypress:open": "cypress open",
+    "cypress:open": "env-cmd -f ./.env.test cypress open",
     "cypress": "npm-run-all --parallel start cypress:open",
     "postinstall": "husky install"
   },
