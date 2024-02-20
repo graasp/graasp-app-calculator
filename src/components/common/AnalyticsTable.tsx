@@ -13,6 +13,12 @@ import {
 } from '@mui/material';
 import { AnalyticColumn } from '@/types/table';
 import { useTranslation } from 'react-i18next';
+import {
+  ANALYTIC_ROW_CALC_ID,
+  ANALYTIC_ROW_CREATED_AT_ID,
+  ANALYTIC_ROW_MEMBER_ID,
+  buildAnalyticRowId,
+} from '@/config/selectors';
 
 interface Props {
   columns: AnalyticColumn[];
@@ -41,14 +47,21 @@ const AnalyticsTable = ({ columns, rows }: Props): JSX.Element => {
           </TableHead>
           <TableBody>
             {rows.map((row) => (
-              <TableRow hover tabIndex={-1} key={row.id}>
-                <TableCell>
+              <TableRow
+                hover
+                tabIndex={-1}
+                key={row.id}
+                id={buildAnalyticRowId(row.id)}
+              >
+                <TableCell id={ANALYTIC_ROW_MEMBER_ID}>
                   <Typography noWrap>{row.member?.name || '-'}</Typography>
                 </TableCell>
-                <TableCell>
+                <TableCell id={ANALYTIC_ROW_CALC_ID}>
                   {(row.data as { mathjs: string })?.mathjs || '-'}
                 </TableCell>
-                <TableCell>{dateColumnFormatter(row.createdAt)}</TableCell>
+                <TableCell id={ANALYTIC_ROW_CREATED_AT_ID}>
+                  {dateColumnFormatter(row.createdAt)}
+                </TableCell>
               </TableRow>
             ))}
             {rows.length < 1 && (
