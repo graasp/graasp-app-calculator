@@ -27,8 +27,8 @@ const dateColumnFormatter = (value: string): string =>
 const AnalyticsTable = ({ columns, rows }: Props): JSX.Element => {
   const { t } = useTranslation();
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
+    <Paper sx={{ width: '100%', overflow: 'hidden', height: '100%' }}>
+      <TableContainer sx={{ maxHeight: '100%' }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

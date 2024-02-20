@@ -11,7 +11,6 @@ const AnalyticView = (): JSX.Element => {
   const { data, isLoading } = hooks.useAppActions();
   const { t } = useTranslation();
 
-  // never changes, so we can use useMemo
   const columns = useMemo<AnalyticColumn[]>(
     () => [
       {
@@ -31,11 +30,7 @@ const AnalyticView = (): JSX.Element => {
   );
 
   if (data) {
-    return (
-      <Box>
-        <AnalyticsTable columns={columns} rows={data} />
-      </Box>
-    );
+    return <AnalyticsTable columns={columns} rows={data} />;
   }
   if (isLoading) {
     return <Loader />;
