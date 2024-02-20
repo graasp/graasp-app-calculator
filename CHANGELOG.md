@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/graasp/graasp-app-calculator/compare/v1.1.0...v1.2.0) (2024-02-20)
+
+
+### Features
+
+* add spanish translations ([#81](https://github.com/graasp/graasp-app-calculator/issues/81)) ([bdff97b](https://github.com/graasp/graasp-app-calculator/commit/bdff97bf5cb7bb84f2f3af388e2a29221d7db78e))
+* setup vite ([#79](https://github.com/graasp/graasp-app-calculator/issues/79)) ([5880255](https://github.com/graasp/graasp-app-calculator/commit/588025528ee01c29b06df8d2313c80d5b0d024db))
+* translate it.json via GitLocalize ([#78](https://github.com/graasp/graasp-app-calculator/issues/78)) ([a243b8d](https://github.com/graasp/graasp-app-calculator/commit/a243b8d89ed3e2c145d2e8d54e18ab6750ace098))
+* using ts and functional component ([#76](https://github.com/graasp/graasp-app-calculator/issues/76)) ([ffba470](https://github.com/graasp/graasp-app-calculator/commit/ffba4707432a75a0531a8c67dc25198893a5e8eb))
+
+
+### Bug Fixes
+
+* fix deploy workflows ([#74](https://github.com/graasp/graasp-app-calculator/issues/74)) ([f3121b6](https://github.com/graasp/graasp-app-calculator/commit/f3121b66bf688c654b4de1834d1ada7c1a8cdd80))
+
 ## [1.1.0](https://github.com/graasp/graasp-app-calculator/compare/v1.0.0...v1.1.0) (2024-01-22)
 
 
