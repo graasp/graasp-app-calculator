@@ -48,7 +48,6 @@ export const mockItem: DiscriminatedItem = {
   creator: mockMembers[0],
   createdAt: new Date().toISOString(),
   updatedAt: new Date().toISOString(),
-  lang: 'en',
 };
 
 const buildDatabase = (members?: CompleteMember[]): Database => ({

@@ -18,7 +18,7 @@
     "isolatedModules": true,
     "noEmit": true,
     "jsx": "react-jsx",
-    "types": ["vite/client", "cypress"],
+    "types": ["vite/client", "cypress", "node"],
     "baseUrl": "./src",
     "paths": {
       "@/*": ["./*"]
