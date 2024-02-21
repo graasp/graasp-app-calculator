@@ -185,4 +185,6 @@ export const TRIGONOMETRY_SPECIAL_CASES: SpecialCases = {
 export const ROUND_OFF_ERROR_MARGIN = 1.58;
 export const BUTTON_FONT_SIZE = '1.9rem';
 
-export const CALCULATION_TRIGGER = 'calculation-operation';
+export enum CalculationTriggers {
+  EQUATION = 'calculation-equation',
+}

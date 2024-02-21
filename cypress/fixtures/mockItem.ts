@@ -1,11 +1,7 @@
+import { AppItemFactory } from '@graasp/sdk';
 import { MEMBERS } from './members';
 
-export const MOCK_SERVER_ITEM = {
-  id: '123456789',
-  name: 'app-starter-ts-vite',
-  path: '',
-  settings: {},
-  creator: MEMBERS[0],
-  createdAt: new Date(),
-  updatedAt: new Date(),
-};
+export const MOCK_APP_ITEM = AppItemFactory({
+  name: 'calc1',
+  creator: MEMBERS.ANNA,
+});

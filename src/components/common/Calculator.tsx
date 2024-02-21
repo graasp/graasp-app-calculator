@@ -13,11 +13,9 @@ import {
   SCIENTIFIC_CALCULATOR_MAX_WIDTH,
   ANGLE_UNITS,
   OPERATIONS,
-  CALCULATION_TRIGGER,
+  CalculationTriggers,
 } from '@/config/constants';
 import { mutations } from '@/config/queryClient';
-import { useLocalContext } from '@graasp/apps-query-client';
-import { Context } from '@graasp/sdk';
 import FocusIndicator from '../FocusIndicator';
 import ScientificSwitch from '../ScientificSwitch';
 import Result from './Result';
@@ -53,15 +51,12 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
   const [history, setHistory] = useState<string[]>([]);
 
   const { mutate: postAction } = mutations.usePostAppAction();
-  const { context } = useLocalContext();
 
-  const saveAction = (data: { mathjs: string }): void => {
-    if (context === Context.Player) {
-      postAction({
-        data,
-        type: CALCULATION_TRIGGER,
-      });
-    }
+  const saveAction = (data: { equation: string; result: string }): void => {
+    postAction({
+      data,
+      type: CalculationTriggers.EQUATION,
+    });
   };
   const updateResult = useCallback(
     ({
@@ -184,7 +179,7 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
         }
         // to trigger action on equality operation
         if (name === BUTTON_NAMES.EQUAL) {
-          saveAction({ mathjs });
+          saveAction({ equation: mathjs, result: newResult });
         }
         setResult(newResult);
         setMathjs(newMathjs);
