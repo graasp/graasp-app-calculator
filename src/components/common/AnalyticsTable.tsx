@@ -1,6 +1,5 @@
 import React from 'react';
-import i18n from '@/config/i18n';
-import { AppAction, formatDate } from '@graasp/sdk';
+import { AppAction } from '@graasp/sdk';
 import {
   Paper,
   Table,
@@ -9,38 +8,58 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TableSortLabel,
   Typography,
 } from '@mui/material';
-import { AnalyticColumn } from '@/types/table';
+import katex from 'katex';
 import { useTranslation } from 'react-i18next';
+import { ActionData, AnalyticColumn, Order } from '@/types/table';
 import {
-  ANALYTIC_ROW_CALC_ID,
+  ANALYTIC_ROW_EQUATION_ID,
+  ANALYTIC_ROW_RESULT_ID,
   ANALYTIC_ROW_CREATED_AT_ID,
   ANALYTIC_ROW_MEMBER_ID,
   buildAnalyticRowId,
 } from '@/config/selectors';
+import { PI_SYMBOL } from '@/config/constants';
+import { dateColumnFormatter } from '@/utils/action';
 
 interface Props {
   columns: AnalyticColumn[];
   rows: AppAction[];
+  orderBy: string;
+  order: Order;
+  handleSort: (property: string) => void;
 }
 
-const dateColumnFormatter = (value: string): string =>
-  formatDate(value, {
-    locale: i18n.language,
-    defaultValue: 'unknown',
-  });
-const AnalyticsTable = ({ columns, rows }: Props): JSX.Element => {
+const AnalyticsTable = ({
+  columns,
+  rows,
+  orderBy,
+  order,
+  handleSort,
+}: Props): JSX.Element => {
   const { t } = useTranslation();
+
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden', height: '100%' }}>
       <TableContainer sx={{ maxHeight: '100%' }}>
-        <Table stickyHeader aria-label="sticky table">
+        <Table stickyHeader aria-label="analytics table">
           <TableHead>
             <TableRow>
               {columns.map((column) => (
                 <TableCell key={column.id} sx={{ fontWeight: 'bold' }}>
-                  {column.label}
+                  {column.sortable ? (
+                    <TableSortLabel
+                      active={orderBy === column.id}
+                      direction={orderBy === column.id ? order : Order.ASC}
+                      onClick={() => handleSort(column.id)}
+                    >
+                      {column.label}
+                    </TableSortLabel>
+                  ) : (
+                    column.label
+                  )}
                 </TableCell>
               ))}
             </TableRow>
@@ -56,8 +75,24 @@ const AnalyticsTable = ({ columns, rows }: Props): JSX.Element => {
                 <TableCell id={ANALYTIC_ROW_MEMBER_ID}>
                   <Typography noWrap>{row.member?.name || '-'}</Typography>
                 </TableCell>
-                <TableCell id={ANALYTIC_ROW_CALC_ID}>
-                  {(row.data as { mathjs: string })?.mathjs || '-'}
+                <TableCell id={ANALYTIC_ROW_EQUATION_ID}>
+                  <div
+                    // eslint-disable-next-line react/no-danger
+                    dangerouslySetInnerHTML={{
+                      __html: katex.renderToString(
+                        (row.data as ActionData)?.equation.replaceAll(
+                          'pi',
+                          PI_SYMBOL,
+                        ),
+                        {
+                          throwOnError: false,
+                        },
+                      ),
+                    }}
+                  />
+                </TableCell>
+                <TableCell id={ANALYTIC_ROW_RESULT_ID}>
+                  {(row.data as ActionData)?.result}
                 </TableCell>
                 <TableCell id={ANALYTIC_ROW_CREATED_AT_ID}>
                   {dateColumnFormatter(row.createdAt)}

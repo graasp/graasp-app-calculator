@@ -1,14 +1,15 @@
-import { CALCULATION_TRIGGER } from '@/config/constants';
+import { CalculationTriggers } from '@/config/constants';
 import { MEMBERS } from './members';
 import { APP_ITEM } from './mockItem';
+import { ActionData } from '../../src/types/table';
 
 export const MOCK_ADD_CALC_ACTION = {
   id: '123456789',
   name: 'app-starter-ts-vite',
   member: MEMBERS.BOB,
   createdAt: '2020-01-01T01:01:01Z',
-  data: { mathjs: '5+5' } as { mathjs: string },
-  type: CALCULATION_TRIGGER,
+  data: { equation: '5+5', result: '10' } as ActionData,
+  type: CalculationTriggers.EQUATION,
   item: APP_ITEM,
 };
 
@@ -17,8 +18,8 @@ export const MOCK_SUBTRACT_CALC_ACTION = {
   name: 'app-starter-ts-vite',
   member: MEMBERS.ANNA,
   createdAt: '2024-02-20T01:01:01Z',
-  data: { mathjs: '5588-788' } as { mathjs: string },
-  type: CALCULATION_TRIGGER,
+  data: { equation: '5588-788', result: '4800' } as ActionData,
+  type: CalculationTriggers.EQUATION,
   item: APP_ITEM,
 };
 

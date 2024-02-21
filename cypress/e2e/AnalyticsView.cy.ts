@@ -1,6 +1,7 @@
 import { Context, formatDate } from '@graasp/sdk';
 import {
-  ANALYTIC_ROW_CALC_ID,
+  ANALYTIC_ROW_EQUATION_ID,
+  ANALYTIC_ROW_RESULT_ID,
   ANALYTIC_ROW_CREATED_AT_ID,
   ANALYTIC_ROW_MEMBER_ID,
   buildAnalyticRowId,
@@ -25,10 +26,16 @@ describe('Analytic view', () => {
       ).should('have.text', itemAction.member.name);
     });
 
-    it(`test that table has action calculation`, () => {
+    it(`test that table has equation column`, () => {
       cy.get(
-        `#${buildAnalyticRowId(itemAction.id)} #${ANALYTIC_ROW_CALC_ID}`,
-      ).should('have.text', itemAction.data.mathjs);
+        `#${buildAnalyticRowId(itemAction.id)} #${ANALYTIC_ROW_EQUATION_ID}`,
+      ).should('have.text', itemAction.data.equation);
+    });
+
+    it(`test that table has result column`, () => {
+      cy.get(
+        `#${buildAnalyticRowId(itemAction.id)} #${ANALYTIC_ROW_RESULT_ID}`,
+      ).should('have.text', itemAction.data.result);
     });
 
     it(`test that table has created date`, () => {

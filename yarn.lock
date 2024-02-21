@@ -3857,6 +3857,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/lodash.sortby@npm:^4":
+  version: 4.7.9
+  resolution: "@types/lodash.sortby@npm:4.7.9"
+  dependencies:
+    "@types/lodash": "npm:*"
+  checksum: b5f0159d51ff2928b9d54ab8ed5f95be8d4d4d7ff24a46eef24654e5523ec3e9b371125ed9a24e9e88abb4a337bbff05379a51c3c174ca424d68714151cbe158
+  languageName: node
+  linkType: hard
+
 "@types/lodash@npm:*":
   version: 4.14.202
   resolution: "@types/lodash@npm:4.14.202"
@@ -7978,6 +7987,7 @@ __metadata:
     "@types/lodash.isnumber": "npm:3.0.9"
     "@types/lodash.isobject": "npm:3.0.9"
     "@types/lodash.isstring": "npm:4.0.9"
+    "@types/lodash.sortby": "npm:^4"
     "@types/node": "npm:20.11.19"
     "@types/react": "npm:18.2.39"
     "@types/react-dom": "npm:18.2.6"
@@ -8006,6 +8016,7 @@ __metadata:
     lodash.isnumber: "npm:3.0.3"
     lodash.isobject: "npm:3.0.2"
     lodash.isstring: "npm:4.0.1"
+    lodash.sortby: "npm:4.7.0"
     mathjs: "npm:11.8.2"
     prettier: "npm:3.2.4"
     prop-types: "npm:15.8.1"
@@ -9355,6 +9366,13 @@ __metadata:
   version: 4.1.1
   resolution: "lodash.snakecase@npm:4.1.1"
   checksum: 82ed40935d840477ef8fee64f9f263f75989c6cde36b84aae817246d95826228e1b5a7f6093c51de324084f86433634c7af244cb89496633cacfe443071450d0
+  languageName: node
+  linkType: hard
+
+"lodash.sortby@npm:4.7.0":
+  version: 4.7.0
+  resolution: "lodash.sortby@npm:4.7.0"
+  checksum: 38df19ae28608af2c50ac342fc1f414508309d53e1d58ed9adfb2c3cd17c3af290058c0a0478028d932c5404df3d53349d19fa364ef6bed6145a6bc21320399e
   languageName: node
   linkType: hard
 
