@@ -28,7 +28,7 @@ describe('Analytic view', () => {
 
     it(`test that table has equation column`, () => {
       cy.get(
-        `#${buildAnalyticRowId(itemAction.id)} #${ANALYTIC_ROW_EQUATION_ID}`,
+        `#${buildAnalyticRowId(itemAction.id)} #${ANALYTIC_ROW_EQUATION_ID} .katex-html`,
       ).should('have.text', itemAction.data.equation);
     });
 

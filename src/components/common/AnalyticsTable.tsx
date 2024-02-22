@@ -72,11 +72,14 @@ const AnalyticsTable = ({
                 key={row.id}
                 id={buildAnalyticRowId(row.id)}
               >
-                <TableCell id={ANALYTIC_ROW_MEMBER_ID}>
-                  <Typography noWrap>{row.member?.name || '-'}</Typography>
+                <TableCell>
+                  <Typography id={ANALYTIC_ROW_MEMBER_ID} noWrap>
+                    {row.member?.name || '-'}
+                  </Typography>
                 </TableCell>
-                <TableCell id={ANALYTIC_ROW_EQUATION_ID}>
+                <TableCell>
                   <div
+                    id={ANALYTIC_ROW_EQUATION_ID}
                     // eslint-disable-next-line react/no-danger
                     dangerouslySetInnerHTML={{
                       __html: katex.renderToString(
