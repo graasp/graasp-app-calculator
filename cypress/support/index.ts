@@ -1,5 +1,6 @@
 // cypress/support/index.ts
 
+import { Database, LocalContext } from '@graasp/apps-query-client';
 import { ANGLE_UNITS } from 'config/constants';
 import { ValueOf } from 'types/math';
 
@@ -10,6 +11,11 @@ declare global {
   // eslint-disable-next-line @typescript-eslint/no-namespace
   namespace Cypress {
     interface Chainable {
+      setUpApi(
+        database?: Partial<Database>,
+        appContext?: Partial<LocalContext>,
+      ): void;
+
       visitAsStudent(
         args: { appQueryParameters: AppQueryParameters },
         scientificMode?: boolean,

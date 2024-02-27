@@ -4,6 +4,30 @@ import {
   SCIENTIFIC_MODE_SWITCH_NAME,
 } from '../../src/config/selectors';
 import { LOAD_PAGE_PAUSE, CLICK_BUTTON_PAUSE } from '../constants';
+import { CURRENT_MEMBER, MEMBERS } from '../fixtures/members';
+import { MOCK_APP_ITEM } from '../fixtures/mockItem';
+
+Cypress.Commands.add('setUpApi', (database = {}, appContext = {}) => {
+  Cypress.on('window:before:load', (win: Window) => {
+    win.indexedDB.deleteDatabase('graasp-app-cypress');
+    // eslint-disable-next-line no-param-reassign
+    win.appContext = {
+      memberId: CURRENT_MEMBER.id,
+      itemId: MOCK_APP_ITEM.id,
+      apiHost: Cypress.env('VITE_API_HOST'),
+      ...appContext,
+    };
+    // eslint-disable-next-line no-param-reassign
+    win.database = {
+      appData: [],
+      appActions: [],
+      appSettings: [],
+      members: Object.values(MEMBERS),
+      items: [MOCK_APP_ITEM],
+      ...database,
+    };
+  });
+});
 
 Cypress.Commands.add(
   'visitAsStudent',

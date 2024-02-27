@@ -12,6 +12,7 @@ describe('Keyboard', () => {
   const resultErrorSelector = `[data-cy="${RESULT_TEXT_NAME}"] .katex-error`;
 
   before(() => {
+    cy.setUpApi();
     cy.visitAsStudent({ appQueryParameters });
   });
 

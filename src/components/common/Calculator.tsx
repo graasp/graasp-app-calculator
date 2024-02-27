@@ -1,15 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import * as math from 'mathjs';
 import isNaN from 'lodash.isnan';
-
 import Grid from '@mui/material/Grid';
 import { useTranslation } from 'react-i18next';
 import { Box } from '@mui/material';
-import FocusIndicator from '../FocusIndicator';
-import ScientificSwitch from '../ScientificSwitch';
-import Result from './Result';
-import KeyPad from './Keypad';
-import { RESULT_ERROR_MESSAGE } from '../../config/messages';
 import {
   KEYPAD_BUTTONS,
   BUTTON_NAMES,
@@ -19,7 +13,14 @@ import {
   SCIENTIFIC_CALCULATOR_MAX_WIDTH,
   ANGLE_UNITS,
   OPERATIONS,
-} from '../../config/constants';
+  CalculationTriggers,
+} from '@/config/constants';
+import { mutations } from '@/config/queryClient';
+import FocusIndicator from '../FocusIndicator';
+import ScientificSwitch from '../ScientificSwitch';
+import Result from './Result';
+import KeyPad from './Keypad';
+import { RESULT_ERROR_MESSAGE } from '../../config/messages';
 import AngleUnitSwitch from './AngleUnitSwitch';
 import {
   backSpace,
@@ -49,6 +50,14 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
   const [scientificMode, setScientificMode] = useState(false);
   const [history, setHistory] = useState<string[]>([]);
 
+  const { mutate: postAction } = mutations.usePostAppAction();
+
+  const saveAction = (data: { equation: string; result: string }): void => {
+    postAction({
+      data,
+      type: CalculationTriggers.EQUATION,
+    });
+  };
   const updateResult = useCallback(
     ({
       name,
@@ -168,7 +177,10 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
             newHistory.push(name);
             break;
         }
-
+        // to trigger action on equality operation
+        if (name === BUTTON_NAMES.EQUAL) {
+          saveAction({ equation: mathjs, result: newResult });
+        }
         setResult(newResult);
         setMathjs(newMathjs);
         setHistory(newHistory);
@@ -179,7 +191,8 @@ const Calculator = ({ standalone = false }: Props): JSX.Element => {
         setHistory([]);
       }
     },
-    [history, mathjs, result, t],
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [history, mathjs, result],
   );
 
   const handleKeydown = useCallback(
