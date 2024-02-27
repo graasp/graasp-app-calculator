@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/graasp/graasp-app-calculator/compare/v1.2.0...v1.3.0) (2024-02-27)
+
+
+### Features
+
+* Apps query client connection and save calculation action ([#82](https://github.com/graasp/graasp-app-calculator/issues/82)) ([9490126](https://github.com/graasp/graasp-app-calculator/commit/94901264383a0b639acfe4eed42e44d670310c72))
+
 ## [1.2.0](https://github.com/graasp/graasp-app-calculator/compare/v1.1.0...v1.2.0) (2024-02-20)
 
 
