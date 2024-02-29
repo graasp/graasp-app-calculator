@@ -12,8 +12,8 @@
   "dependencies": {
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
-    "@graasp/apps-query-client": "3.4.6",
-    "@graasp/sdk": "3.10.0",
+    "@graasp/apps-query-client": "https://github.com/graasp/graasp-apps-query-client.git#main",
+    "@graasp/sdk": "4.0.1",
     "@graasp/ui": "4.8.1",
     "@mui/icons-material": "5.14.3",
     "@mui/lab": "5.0.0-alpha.134",
@@ -22,6 +22,7 @@
     "@tanstack/react-query-devtools": "4.36.1",
     "date-fns": "3.3.1",
     "i18next": "22.5.1",
+    "interweave": "13.1.0",
     "katex": "0.16.7",
     "lodash.isnan": "3.0.2",
     "lodash.isnumber": "3.0.3",

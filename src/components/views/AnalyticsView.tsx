@@ -4,12 +4,13 @@ import { useTranslation } from 'react-i18next';
 import { Loader } from '@graasp/ui';
 import { Box, Typography } from '@mui/material';
 
-import { AnalyticColumn, Order } from '@/types/table';
+import { AnalyticsColumn, AppActionData, Order } from '@/types/table';
 import { sortData } from '@/utils/action';
+import { AppAction } from '@graasp/sdk';
 import AnalyticsTable from '../common/AnalyticsTable';
 
-const AnalyticView = (): JSX.Element => {
-  const { data, isLoading } = hooks.useAppActions();
+const AnalyticsView = (): JSX.Element => {
+  const { data, isLoading } = hooks.useAppActions({ getUpdates: true });
   const { t } = useTranslation();
   const [orderBy, setOrderBy] = useState('createdAt');
   const [order, setOrder] = useState<Order>(Order.DESC);
@@ -20,7 +21,7 @@ const AnalyticView = (): JSX.Element => {
     setOrderBy(property);
   };
 
-  const columns = useMemo<AnalyticColumn[]>(
+  const columns = useMemo<AnalyticsColumn[]>(
     () => [
       {
         label: t('Member Name'),
@@ -46,7 +47,7 @@ const AnalyticView = (): JSX.Element => {
     [t],
   );
 
-  const rows = useMemo(() => {
+  const rows: AppAction<AppActionData>[] = useMemo(() => {
     if (data) {
       return sortData(data, orderBy, order);
     }
@@ -73,4 +74,4 @@ const AnalyticView = (): JSX.Element => {
   );
 };
 
-export default AnalyticView;
+export default AnalyticsView;

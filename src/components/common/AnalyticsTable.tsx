@@ -13,20 +13,21 @@ import {
 } from '@mui/material';
 import katex from 'katex';
 import { useTranslation } from 'react-i18next';
-import { ActionData, AnalyticColumn, Order } from '@/types/table';
+import { AnalyticsColumn, AppActionData, Order } from '@/types/table';
 import {
-  ANALYTIC_ROW_EQUATION_ID,
-  ANALYTIC_ROW_RESULT_ID,
-  ANALYTIC_ROW_CREATED_AT_ID,
-  ANALYTIC_ROW_MEMBER_ID,
-  buildAnalyticRowId,
+  ANALYTICS_ROW_EQUATION_ID,
+  ANALYTICS_ROW_RESULT_ID,
+  ANALYTICS_ROW_CREATED_AT_ID,
+  ANALYTICS_ROW_MEMBER_ID,
+  buildAnalyticsRowId,
 } from '@/config/selectors';
 import { PI_SYMBOL } from '@/config/constants';
 import { dateColumnFormatter } from '@/utils/action';
+import HtmlParser from './HtmlParser';
 
 interface Props {
-  columns: AnalyticColumn[];
-  rows: AppAction[];
+  columns: AnalyticsColumn[];
+  rows: AppAction<AppActionData>[];
   orderBy: string;
   order: Order;
   handleSort: (property: string) => void;
@@ -65,47 +66,49 @@ const AnalyticsTable = ({
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow
-                hover
-                tabIndex={-1}
-                key={row.id}
-                id={buildAnalyticRowId(row.id)}
-              >
-                <TableCell>
-                  <Typography id={ANALYTIC_ROW_MEMBER_ID} noWrap>
-                    {row.member?.name || '-'}
-                  </Typography>
-                </TableCell>
-                <TableCell>
-                  <div
-                    id={ANALYTIC_ROW_EQUATION_ID}
-                    // eslint-disable-next-line react/no-danger
-                    dangerouslySetInnerHTML={{
-                      __html: katex.renderToString(
-                        (row.data as ActionData)?.equation.replaceAll(
-                          'pi',
-                          PI_SYMBOL,
-                        ),
+            {rows.length ? (
+              rows.map((row) => (
+                <TableRow
+                  hover
+                  tabIndex={-1}
+                  key={row.id}
+                  id={buildAnalyticsRowId(row.id)}
+                >
+                  <TableCell>
+                    <Typography id={ANALYTICS_ROW_MEMBER_ID} noWrap>
+                      {row.member?.name || '-'}
+                    </Typography>
+                  </TableCell>
+                  <TableCell id={ANALYTICS_ROW_EQUATION_ID}>
+                    <HtmlParser
+                      content={katex.renderToString(
+                        row.data?.equation?.replaceAll('pi', PI_SYMBOL),
                         {
                           throwOnError: false,
                         },
-                      ),
-                    }}
-                  />
-                </TableCell>
-                <TableCell id={ANALYTIC_ROW_RESULT_ID}>
-                  {(row.data as ActionData)?.result}
-                </TableCell>
-                <TableCell id={ANALYTIC_ROW_CREATED_AT_ID}>
-                  {dateColumnFormatter(row.createdAt)}
-                </TableCell>
-              </TableRow>
-            ))}
-            {rows.length < 1 && (
+                      )}
+                    />
+                    <div />
+                  </TableCell>
+                  <TableCell id={ANALYTICS_ROW_RESULT_ID}>
+                    <HtmlParser
+                      content={katex.renderToString(
+                        row.data?.result?.replaceAll('pi', PI_SYMBOL),
+                        {
+                          throwOnError: false,
+                        },
+                      )}
+                    />
+                  </TableCell>
+                  <TableCell id={ANALYTICS_ROW_CREATED_AT_ID}>
+                    {dateColumnFormatter(row.createdAt)}
+                  </TableCell>
+                </TableRow>
+              ))
+            ) : (
               <TableRow hover tabIndex={-1} sx={{ height: '200px' }}>
-                <TableCell colSpan={6} align="center">
-                  {t('No records for this item')}
+                <TableCell colSpan={columns.length} align="center">
+                  {t('NO_COMPUTATIONS_YET')}
                 </TableCell>
               </TableRow>
             )}

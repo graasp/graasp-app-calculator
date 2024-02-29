@@ -2,8 +2,9 @@ import katex from 'katex';
 import 'katex/dist/katex.min.css';
 import { useLocalContext } from '@graasp/apps-query-client';
 import { Context } from '@graasp/sdk';
+import PlayerView from './views/PlayerView';
 import BuilderView from './views/BuilderView';
-import AnalyticView from './views/AnalyticView';
+import AnalyticsView from './views/AnalyticsView';
 
 // bind katex to the window object
 window.katex = katex;
@@ -13,9 +14,10 @@ const App = (): JSX.Element => {
 
   switch (context) {
     case Context.Analytics:
-      return <AnalyticView />;
-    case Context.Builder:
+      return <AnalyticsView />;
     case Context.Player:
+      return <PlayerView />;
+    case Context.Builder:
     default:
       return <BuilderView />;
   }

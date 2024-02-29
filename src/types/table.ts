@@ -1,4 +1,4 @@
-export interface AnalyticColumn {
+export interface AnalyticsColumn {
   id: string;
   label: string;
   sortable?: boolean;
@@ -13,3 +13,7 @@ export enum Order {
   ASC = 'asc',
   DESC = 'desc',
 }
+
+export type AppActionData = ActionData & {
+  [key: string]: string; // Extending ActionData to include the index signature
+};

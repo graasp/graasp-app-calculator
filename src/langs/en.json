@@ -13,7 +13,7 @@
     "Equation": "Equation",
     "Result": "Result",
     "Created At": "Created At",
-    "No records for this item": "No records for this item",
+    "NO_COMPUTATIONS_YET": "No computations yes. Computations will appear here once users interact with the app.",
     "Something went wrong": "Something went wrong"
   }
 }
