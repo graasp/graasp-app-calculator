@@ -4,16 +4,12 @@ export interface AnalyticsColumn {
   sortable?: boolean;
 }
 
-export interface ActionData {
+export type ActionData = {
   equation: string;
   result: string;
-}
+};
 
 export enum Order {
   ASC = 'asc',
   DESC = 'desc',
 }
-
-export type AppActionData = ActionData & {
-  [key: string]: string; // Extending ActionData to include the index signature
-};

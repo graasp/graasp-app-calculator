@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Loader } from '@graasp/ui';
 import { Box, Typography } from '@mui/material';
 
-import { AnalyticsColumn, AppActionData, Order } from '@/types/table';
+import { AnalyticsColumn, ActionData, Order } from '@/types/table';
 import { sortData } from '@/utils/action';
 import { AppAction } from '@graasp/sdk';
 import AnalyticsTable from '../common/AnalyticsTable';
@@ -47,7 +47,7 @@ const AnalyticsView = (): JSX.Element => {
     [t],
   );
 
-  const rows: AppAction<AppActionData>[] = useMemo(() => {
+  const rows: AppAction<ActionData>[] = useMemo(() => {
     if (data) {
       return sortData(data, orderBy, order);
     }

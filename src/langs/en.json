@@ -13,7 +13,8 @@
     "Equation": "Equation",
     "Result": "Result",
     "Created At": "Created At",
-    "NO_COMPUTATIONS_YET": "No computations yes. Computations will appear here once users interact with the app.",
-    "Something went wrong": "Something went wrong"
+    "NO_COMPUTATIONS_YET": "No computations yet. Computations will appear here once users interact with the app.",
+    "Something went wrong": "Something went wrong",
+    "Unknown": "Unknown"
   }
 }

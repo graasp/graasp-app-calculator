@@ -13,7 +13,7 @@ import {
 } from '@mui/material';
 import katex from 'katex';
 import { useTranslation } from 'react-i18next';
-import { AnalyticsColumn, AppActionData, Order } from '@/types/table';
+import { AnalyticsColumn, ActionData, Order } from '@/types/table';
 import {
   ANALYTICS_ROW_EQUATION_ID,
   ANALYTICS_ROW_RESULT_ID,
@@ -27,7 +27,7 @@ import HtmlParser from './HtmlParser';
 
 interface Props {
   columns: AnalyticsColumn[];
-  rows: AppAction<AppActionData>[];
+  rows: AppAction<ActionData>[];
   orderBy: string;
   order: Order;
   handleSort: (property: string) => void;
@@ -76,7 +76,7 @@ const AnalyticsTable = ({
                 >
                   <TableCell>
                     <Typography id={ANALYTICS_ROW_MEMBER_ID} noWrap>
-                      {row.member?.name || '-'}
+                      {row.member?.name || t('Unknown')}
                     </Typography>
                   </TableCell>
                   <TableCell id={ANALYTICS_ROW_EQUATION_ID}>

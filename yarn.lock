@@ -2505,9 +2505,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/apps-query-client@https://github.com/graasp/graasp-apps-query-client.git#main":
-  version: 3.4.6
-  resolution: "@graasp/apps-query-client@https://github.com/graasp/graasp-apps-query-client.git#commit=d55b531d225c692292c3f13560f6988fb17b42d3"
+"@graasp/apps-query-client@npm:3.4.7":
+  version: 3.4.7
+  resolution: "@graasp/apps-query-client@npm:3.4.7"
   dependencies:
     "@emotion/react": "npm:11.11.4"
     "@emotion/styled": "npm:11.11.0"
@@ -2528,7 +2528,7 @@ __metadata:
     date-fns: ^3.3.0
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 89f6ddfb62114fa547e7a016b3c01ed0b76aa1de24f3e528a99dab4d8bfcdf3c817764a8a98620a8c6471970cffc29ad18948074e7c83a78ac4eb8870883996e
+  checksum: 92c197cbb25e05cf11318171c10f5071ec9e654f9647563fe92ecaaad26309242007657db5bc87ea0407aa8c519579e1dd2ec475ba06f90e271e4eb23b0d5db2
   languageName: node
   linkType: hard
 
@@ -7986,7 +7986,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:17.6.5"
     "@emotion/react": "npm:11.11.1"
     "@emotion/styled": "npm:11.11.0"
-    "@graasp/apps-query-client": "https://github.com/graasp/graasp-apps-query-client.git#main"
+    "@graasp/apps-query-client": "npm:3.4.7"
     "@graasp/sdk": "npm:4.0.1"
     "@graasp/ui": "npm:4.8.1"
     "@mui/icons-material": "npm:5.14.3"
