@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.0](https://github.com/graasp/graasp-app-calculator/compare/v1.3.0...v1.4.0) (2024-03-05)
+
+
+### Features
+
+* analytics view ([#84](https://github.com/graasp/graasp-app-calculator/issues/84)) ([5e58d64](https://github.com/graasp/graasp-app-calculator/commit/5e58d64973ec45bca109867f9cab37d47cce78e7))
+* translate it.json via GitLocalize ([#85](https://github.com/graasp/graasp-app-calculator/issues/85)) ([cd736e7](https://github.com/graasp/graasp-app-calculator/commit/cd736e7cc7ae134ea940b5bdaf91e843c37ce475))
+
 ## [1.3.0](https://github.com/graasp/graasp-app-calculator/compare/v1.2.0...v1.3.0) (2024-02-27)
 
 
