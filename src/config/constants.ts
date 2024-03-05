@@ -188,3 +188,5 @@ export const BUTTON_FONT_SIZE = '1.9rem';
 export enum CalculationTriggers {
   EQUATION = 'calculation-equation',
 }
+
+export const ANALYTICS_TABLE_ROW_HEIGHT = 50;

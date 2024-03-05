@@ -8,6 +8,13 @@
     "The keyboard is disabled": "The keyboard is disabled",
     "Radian": "Radian",
     "Degree": "Degree",
-    "Scientific Mode": "Scientific Mode"
+    "Scientific Mode": "Scientific Mode",
+    "Member Name": "Member Name",
+    "Equation": "Equation",
+    "Result": "Result",
+    "Created At": "Created At",
+    "NO_COMPUTATIONS_YET": "No computations yet. Computations will appear here once users interact with the app.",
+    "Something went wrong": "Something went wrong",
+    "Unknown": "Unknown"
   }
 }

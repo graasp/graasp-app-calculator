@@ -5,6 +5,7 @@ import {
 } from '../../src/config/selectors';
 import { LOAD_PAGE_PAUSE, CLICK_BUTTON_PAUSE } from '../constants';
 import { CURRENT_MEMBER, MEMBERS } from '../fixtures/members';
+
 import { MOCK_APP_ITEM } from '../fixtures/mockItem';
 
 Cypress.Commands.add('setUpApi', (database = {}, appContext = {}) => {
@@ -13,8 +14,8 @@ Cypress.Commands.add('setUpApi', (database = {}, appContext = {}) => {
     // eslint-disable-next-line no-param-reassign
     win.appContext = {
       memberId: CURRENT_MEMBER.id,
+      apiHost: Cypress.env('VITE_GRAASP_API_HOST'),
       itemId: MOCK_APP_ITEM.id,
-      apiHost: Cypress.env('VITE_API_HOST'),
       ...appContext,
     };
     // eslint-disable-next-line no-param-reassign
