@@ -43,8 +43,8 @@ const AnalyticsTable = ({
   const { t } = useTranslation();
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden', height: '100%' }}>
-      <TableContainer sx={{ maxHeight: '100%' }}>
+    <Paper sx={{ width: '100%' }}>
+      <TableContainer sx={{ maxHeight: '700px' }}>
         <Table stickyHeader aria-label="analytics table">
           <TableHead>
             <TableRow>
