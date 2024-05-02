@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.2](https://github.com/graasp/graasp-app-calculator/compare/v1.4.1...v1.4.2) (2024-05-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @graasp/apps-query-client to v3.4.13 ([#88](https://github.com/graasp/graasp-app-calculator/issues/88)) ([9c7d10e](https://github.com/graasp/graasp-app-calculator/commit/9c7d10ee41e6897e59628080b19e7fb4c0bb1f10))
+
 ## [1.4.1](https://github.com/graasp/graasp-app-calculator/compare/v1.4.0...v1.4.1) (2024-04-24)
 
 
