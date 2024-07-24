@@ -8,6 +8,13 @@
     "The keyboard is disabled": "Le clavier est désactivé",
     "Radian": "Radians",
     "Degree": "Degrés",
-    "Scientific Mode": "Mode Scientifique"
+    "Scientific Mode": "Mode Scientifique",
+    "Member Name": "Nom de membre",
+    "Equation": "Équation",
+    "Result": "Résultat",
+    "Created At": "Créé à",
+    "NO_COMPUTATIONS_YET": "Aucun calcul pour l'instant. Les calculs apparaîtront ici une fois que les utilisateurs interagissent avec l'application.",
+    "Something went wrong": "Quelque chose s'est mal passé",
+    "Unknown": "Inconnu"
   }
 }
