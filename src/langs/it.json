@@ -8,6 +8,13 @@
     "The keyboard is disabled": "La tastiera è disabilitata",
     "Radian": "Radianti",
     "Degree": "Gradi",
-    "Scientific Mode": "Modalità scientifica"
+    "Scientific Mode": "Modalità scientifica",
+    "Member Name": "Nome del membro",
+    "Equation": "Equazione",
+    "Result": "Risultato",
+    "Created At": "Creato a",
+    "NO_COMPUTATIONS_YET": "Nessun calcolo ancora. I calcoli verranno visualizzati qui una volta che gli utenti interagiscono con l'app.",
+    "Something went wrong": "Qualcosa è andato storto",
+    "Unknown": "Sconosciuto"
   }
 }
