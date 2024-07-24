@@ -1,0 +1,20 @@
+{
+  "translations": {
+    "Calculator": "Taschenrechner",
+    "Error": "Fehler",
+    "Infinity": "Unendlichkeit",
+    "-Infinity": "-Unendlichkeit",
+    "The keyboard is enabled": "Die Tastatur ist aktiviert",
+    "The keyboard is disabled": "Die Tastatur ist deaktiviert",
+    "Radian": "Radiant",
+    "Degree": "Grad",
+    "Scientific Mode": "Wissenschaftlicher Modus",
+    "Member Name": "Mitgliedsname",
+    "Equation": "Gleichung",
+    "Result": "Ergebnis",
+    "Created At": "Hergestellt in",
+    "NO_COMPUTATIONS_YET": "Noch keine Berechnungen. Berechnungen werden hier angezeigt, sobald Benutzer mit der App interagieren.",
+    "Something went wrong": "Etwas ist schief gelaufen",
+    "Unknown": "Unbekannt"
+  }
+}
