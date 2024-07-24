@@ -1,0 +1,20 @@
+{
+  "translations": {
+    "Calculator": "آلة حاسبة",
+    "Error": "خطأ",
+    "Infinity": "ما لا نهاية",
+    "-Infinity": "-ما لا نهاية",
+    "The keyboard is enabled": "تم تمكين لوحة المفاتيح",
+    "The keyboard is disabled": "تم تعطيل لوحة المفاتيح",
+    "Radian": "راديان",
+    "Degree": "درجة",
+    "Scientific Mode": "الوضع العلمي",
+    "Member Name": "اسم عضو",
+    "Equation": "معادلة",
+    "Result": "نتيجة",
+    "Created At": "أنشئت في",
+    "NO_COMPUTATIONS_YET": "لا توجد حسابات حتى الآن. ستظهر الحسابات هنا بمجرد تفاعل المستخدمين مع التطبيق.",
+    "Something went wrong": "هناك خطأ ما",
+    "Unknown": "مجهول"
+  }
+}
