@@ -1,9 +1,9 @@
 import {
   BUTTON_NAMES,
-  TIMES_SYMBOL,
   DIVIDE_SYMBOL,
-  PI_SYMBOL,
   KATEX_MINUS_SYMBOL,
+  PI_SYMBOL,
+  TIMES_SYMBOL,
 } from '../../src/config/constants';
 
 export const FIXTURES_SCIENTIFIC_COMPUTATIONS = [

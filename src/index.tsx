@@ -1,13 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
+
 import {
-  mockApi,
-  buildDatabase,
   MockSolution,
+  buildDatabase,
+  mockApi,
 } from '@graasp/apps-query-client';
+
 import Root from './components/Root';
 import { MOCK_API } from './config/env';
+import './index.css';
 import { defaultMockContext, mockMembers } from './mocks/db';
 
 // setup mocked api for cypress or standalone app

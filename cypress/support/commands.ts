@@ -3,9 +3,8 @@ import {
   ANGLE_UNIT_SWITCH_NAME,
   SCIENTIFIC_MODE_SWITCH_NAME,
 } from '../../src/config/selectors';
-import { LOAD_PAGE_PAUSE, CLICK_BUTTON_PAUSE } from '../constants';
+import { CLICK_BUTTON_PAUSE, LOAD_PAGE_PAUSE } from '../constants';
 import { CURRENT_MEMBER, MEMBERS } from '../fixtures/members';
-
 import { MOCK_APP_ITEM } from '../fixtures/mockItem';
 
 Cypress.Commands.add('setUpApi', (database = {}, appContext = {}) => {

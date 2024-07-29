@@ -1,7 +1,10 @@
-import Switch from '@mui/material/Switch';
-import Grid from '@mui/material/Grid';
 import { useTranslation } from 'react-i18next';
+
+import Grid from '@mui/material/Grid';
+import Switch from '@mui/material/Switch';
+
 import { ValueOf } from 'types/math';
+
 import { ANGLE_UNITS } from '../../config/constants';
 import { ANGLE_UNIT_SWITCH_NAME } from '../../config/selectors';
 

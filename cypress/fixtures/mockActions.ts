@@ -1,8 +1,10 @@
-import { CalculationTriggers } from '@/config/constants';
 import { AppAction } from '@graasp/sdk';
+
+import { CalculationTriggers } from '@/config/constants';
+
+import { ActionData } from '../../src/types/table';
 import { MEMBERS } from './members';
 import { MOCK_APP_ITEM } from './mockItem';
-import { ActionData } from '../../src/types/table';
 
 export const MOCK_ADD_CALC_ACTION: AppAction<ActionData> = {
   id: '123456789',

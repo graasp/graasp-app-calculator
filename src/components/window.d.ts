@@ -1,4 +1,5 @@
 import { Database, LocalContext } from '@graasp/apps-query-client';
+
 import katex from 'katex';
 
 declare global {

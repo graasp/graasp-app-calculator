@@ -1,6 +1,6 @@
 // cypress/support/index.ts
-
 import { Database, LocalContext } from '@graasp/apps-query-client';
+
 import { ANGLE_UNITS } from 'config/constants';
 import { ValueOf } from 'types/math';
 

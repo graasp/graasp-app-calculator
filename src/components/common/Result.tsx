@@ -1,7 +1,9 @@
-import Typography from '@mui/material/Typography';
-import katex from 'katex';
-import Grid from '@mui/material/Grid';
 import { styled } from '@mui/material';
+import Grid from '@mui/material/Grid';
+import Typography from '@mui/material/Typography';
+
+import katex from 'katex';
+
 import { RESULT_TEXT_NAME } from '../../config/selectors';
 
 const StyledTypography = styled(Typography)(({ theme }) => ({

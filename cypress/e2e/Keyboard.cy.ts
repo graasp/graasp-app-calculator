@@ -1,8 +1,8 @@
 import {
   BUTTON_NAMES,
   DIVIDE_SYMBOL,
-  TIMES_SYMBOL,
   KATEX_MINUS_SYMBOL,
+  TIMES_SYMBOL,
 } from '../../src/config/constants';
 import { RESULT_TEXT_NAME } from '../../src/config/selectors';
 import { appQueryParameters } from '../fixtures/queryParameters';

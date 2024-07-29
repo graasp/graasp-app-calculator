@@ -1,5 +1,7 @@
-import sortBy from 'lodash.sortby';
 import { formatDate } from '@graasp/sdk';
+
+import sortBy from 'lodash.sortby';
+
 import i18n from '@/config/i18n';
 import { Order } from '@/types/table';
 
