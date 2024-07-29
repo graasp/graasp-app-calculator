@@ -1,16 +1,20 @@
 import { I18nextProvider } from 'react-i18next';
-import { ThemeProvider } from '@mui/material/styles';
 import { ToastContainer } from 'react-toastify';
-import { Loader, theme } from '@graasp/ui';
 import 'react-toastify/dist/ReactToastify.css';
+
+import { ThemeProvider } from '@mui/material/styles';
+
 import {
   GraaspContextDevTool,
   WithLocalContext,
   WithTokenContext,
   useObjectState,
 } from '@graasp/apps-query-client';
+import { Loader, theme } from '@graasp/ui';
+
 import { QueryClientProvider, hooks, queryClient } from '@/config/queryClient';
 import { defaultMockContext, mockMembers } from '@/mocks/db';
+
 import i18nConfig from '../config/i18n';
 import App from './App';
 

@@ -1,27 +1,31 @@
-import { useState, useEffect, useCallback } from 'react';
-import * as math from 'mathjs';
-import isNaN from 'lodash.isnan';
-import Grid from '@mui/material/Grid';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+
 import { Box } from '@mui/material';
+import Grid from '@mui/material/Grid';
+
+import isNaN from 'lodash.isnan';
+import * as math from 'mathjs';
+
 import {
-  KEYPAD_BUTTONS,
+  ANGLE_UNITS,
   BUTTON_NAMES,
   CALCULATOR_MAX_WIDTH,
-  PI_SYMBOL,
-  TIMES_SYMBOL,
-  SCIENTIFIC_CALCULATOR_MAX_WIDTH,
-  ANGLE_UNITS,
-  OPERATIONS,
   CalculationTriggers,
+  KEYPAD_BUTTONS,
+  OPERATIONS,
+  PI_SYMBOL,
+  SCIENTIFIC_CALCULATOR_MAX_WIDTH,
+  TIMES_SYMBOL,
 } from '@/config/constants';
 import { mutations } from '@/config/queryClient';
+
+import { RESULT_ERROR_MESSAGE } from '../../config/messages';
 import FocusIndicator from '../FocusIndicator';
 import ScientificSwitch from '../ScientificSwitch';
-import Result from './Result';
-import KeyPad from './Keypad';
-import { RESULT_ERROR_MESSAGE } from '../../config/messages';
 import AngleUnitSwitch from './AngleUnitSwitch';
+import KeyPad from './Keypad';
+import Result from './Result';
 import {
   backSpace,
   compute,

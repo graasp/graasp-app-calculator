@@ -1,17 +1,18 @@
-import { TrigonometryValue, ValueOf } from 'types/math';
-import * as math from 'mathjs';
 import isNumber from 'lodash.isnumber';
+import * as math from 'mathjs';
+import { TrigonometryValue, ValueOf } from 'types/math';
+
 import {
-  ROUND_OFF_ERROR_MARGIN,
-  TRIGONOMETRY_SPECIAL_CASES,
-  PI_SYMBOL,
+  ANGLE_UNITS,
+  BUTTON_NAMES,
   KATEX_MINUS_SYMBOL,
   KEYPAD_BUTTONS,
-  BUTTON_NAMES,
   MAX_NUMBER_PRECISION,
-  ANGLE_UNITS,
-  TRIGONOMETRY_FUNCTIONS,
+  PI_SYMBOL,
   POWER_SYMBOL,
+  ROUND_OFF_ERROR_MARGIN,
+  TRIGONOMETRY_FUNCTIONS,
+  TRIGONOMETRY_SPECIAL_CASES,
 } from '@/config/constants';
 import { RESULT_ERROR_MESSAGE } from '@/config/messages';
 import { parse } from '@/utils/string';

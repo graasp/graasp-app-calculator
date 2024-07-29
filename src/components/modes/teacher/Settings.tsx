@@ -1,9 +1,11 @@
-import Typography from '@mui/material/Typography';
+import { useTranslation } from 'react-i18next';
+
+import { Box, styled } from '@mui/material';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import Modal from '@mui/material/Modal';
 import Switch from '@mui/material/Switch';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import { useTranslation } from 'react-i18next';
-import { Box, styled } from '@mui/material';
+import Typography from '@mui/material/Typography';
+
 import { Loader } from '@graasp/ui';
 
 const StyledBox = styled(Box)(({ theme }) => ({
