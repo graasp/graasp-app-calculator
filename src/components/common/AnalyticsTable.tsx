@@ -1,5 +1,6 @@
 import React from 'react';
-import { AppAction } from '@graasp/sdk';
+import { useTranslation } from 'react-i18next';
+
 import {
   Paper,
   Table,
@@ -11,18 +12,22 @@ import {
   TableSortLabel,
   Typography,
 } from '@mui/material';
+
+import { AppAction } from '@graasp/sdk';
+
 import katex from 'katex';
-import { useTranslation } from 'react-i18next';
-import { AnalyticsColumn, ActionData, Order } from '@/types/table';
+
+import { PI_SYMBOL } from '@/config/constants';
 import {
-  ANALYTICS_ROW_EQUATION_ID,
-  ANALYTICS_ROW_RESULT_ID,
   ANALYTICS_ROW_CREATED_AT_ID,
+  ANALYTICS_ROW_EQUATION_ID,
   ANALYTICS_ROW_MEMBER_ID,
+  ANALYTICS_ROW_RESULT_ID,
   buildAnalyticsRowId,
 } from '@/config/selectors';
-import { PI_SYMBOL } from '@/config/constants';
+import { ActionData, AnalyticsColumn, Order } from '@/types/table';
 import { dateColumnFormatter } from '@/utils/action';
+
 import HtmlParser from './HtmlParser';
 
 interface Props {

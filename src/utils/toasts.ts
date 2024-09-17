@@ -1,6 +1,8 @@
+import { toast } from 'react-toastify';
+
 import isObject from 'lodash.isobject';
 import isString from 'lodash.isstring';
-import { toast } from 'react-toastify';
+
 import { UNEXPECTED_ERROR_MESSAGE } from '../config/messages';
 
 const showErrorToast = (payload: { message: string }): void => {

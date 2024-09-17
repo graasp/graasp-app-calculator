@@ -1,16 +1,20 @@
-import React, { useMemo, useState } from 'react';
-import { hooks } from '@/config/queryClient';
+import { useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Loader } from '@graasp/ui';
+
 import { Box, Typography } from '@mui/material';
 
-import { AnalyticsColumn, ActionData, Order } from '@/types/table';
+import { Loader } from '@graasp/ui';
+
+import { hooks } from '@/config/queryClient';
+import { ActionData, AnalyticsColumn, Order } from '@/types/table';
 import { sortData } from '@/utils/action';
-import { AppAction } from '@graasp/sdk';
+
 import AnalyticsTable from '../common/AnalyticsTable';
 
 const AnalyticsView = (): JSX.Element => {
-  const { data, isLoading } = hooks.useAppActions({ getUpdates: true });
+  const { data, isLoading } = hooks.useAppActions<ActionData>({
+    getUpdates: true,
+  });
   const { t } = useTranslation();
   const [orderBy, setOrderBy] = useState('createdAt');
   const [order, setOrder] = useState<Order>(Order.DESC);
@@ -47,12 +51,13 @@ const AnalyticsView = (): JSX.Element => {
     [t],
   );
 
-  const rows: AppAction<ActionData>[] = useMemo(() => {
+  const rows = useMemo(() => {
     if (data) {
       return sortData(data, orderBy, order);
     }
     return [];
   }, [data, orderBy, order]);
+
   if (data) {
     return (
       <AnalyticsTable

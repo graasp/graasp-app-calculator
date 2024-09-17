@@ -1,6 +1,7 @@
 import { Loader } from '@graasp/ui';
+
+import { DASHBOARD_VIEW, DEFAULT_VIEW } from '../../../config/views';
 import TeacherView from './TeacherView';
-import { DEFAULT_VIEW, DASHBOARD_VIEW } from '../../../config/views';
 
 type Props = {
   view: string;

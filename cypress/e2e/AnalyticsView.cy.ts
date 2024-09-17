@@ -1,13 +1,15 @@
 import { Context, formatDate } from '@graasp/sdk';
+
 import {
-  ANALYTICS_ROW_EQUATION_ID,
-  ANALYTICS_ROW_RESULT_ID,
   ANALYTICS_ROW_CREATED_AT_ID,
+  ANALYTICS_ROW_EQUATION_ID,
   ANALYTICS_ROW_MEMBER_ID,
+  ANALYTICS_ROW_RESULT_ID,
   buildAnalyticsRowId,
 } from '@/config/selectors';
-import { appQueryParameters } from '../fixtures/queryParameters';
+
 import { MOCK_APP_ACTIONS } from '../fixtures/mockActions';
+import { appQueryParameters } from '../fixtures/queryParameters';
 
 describe('Analytic view', () => {
   describe('check analytic table is rendered with the right data', () => {

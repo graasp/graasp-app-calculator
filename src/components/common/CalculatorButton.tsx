@@ -1,8 +1,10 @@
-import katex from 'katex';
 import { styled } from '@mui/material';
 import Grid from '@mui/material/Grid';
-import { KEYPAD_BUTTON_CLASS } from '../../config/selectors';
+
+import katex from 'katex';
+
 import { BUTTON_FONT_SIZE, KatexButton } from '../../config/constants';
+import { KEYPAD_BUTTON_CLASS } from '../../config/selectors';
 
 const StyledGrid = styled(Grid)(({ theme }) => ({
   '& .katex': { fontFamily: theme.typography.fontFamily },

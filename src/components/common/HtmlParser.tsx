@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Interweave } from 'interweave';
 
 const HtmlParser = ({ content }: { content: string }): JSX.Element => (
