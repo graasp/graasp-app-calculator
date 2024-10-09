@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.4.2](https://github.com/graasp/graasp-app-calculator/compare/v1.4.1...v1.4.2) (2024-10-09)
+
+
+### Bug Fixes
+
+* **arabic:** update translations ([#101](https://github.com/graasp/graasp-app-calculator/issues/101)) ([34e8507](https://github.com/graasp/graasp-app-calculator/commit/34e8507fe81e5921c20b660800298d0b13eb034d))
+* **deps:** update dependency @graasp/apps-query-client to v3.4.13 ([#88](https://github.com/graasp/graasp-app-calculator/issues/88)) ([9c7d10e](https://github.com/graasp/graasp-app-calculator/commit/9c7d10ee41e6897e59628080b19e7fb4c0bb1f10))
+* **french:** update translations ([#97](https://github.com/graasp/graasp-app-calculator/issues/97)) ([47267c5](https://github.com/graasp/graasp-app-calculator/commit/47267c5fe24fb2a87305b3b05cb879d5d9a96361))
+* **german:** update translations ([#100](https://github.com/graasp/graasp-app-calculator/issues/100)) ([5d5fb11](https://github.com/graasp/graasp-app-calculator/commit/5d5fb11b384194a4015790f6cc9c20648e7fdc04))
+* **italian:** update translations ([#98](https://github.com/graasp/graasp-app-calculator/issues/98)) ([f1b1404](https://github.com/graasp/graasp-app-calculator/commit/f1b1404ec2d8c92fe103e794dbb1f0589ef29b6c))
+* **spanish:** update translations ([#99](https://github.com/graasp/graasp-app-calculator/issues/99)) ([220970d](https://github.com/graasp/graasp-app-calculator/commit/220970d49137c4e7a6d679454c2ac93832a41855))
+* udpate readme docs ([#109](https://github.com/graasp/graasp-app-calculator/issues/109)) ([2b15031](https://github.com/graasp/graasp-app-calculator/commit/2b150318fdfc255e454df3134f7eaba79b484935))
+* update deps ([#103](https://github.com/graasp/graasp-app-calculator/issues/103)) ([d9a3a4a](https://github.com/graasp/graasp-app-calculator/commit/d9a3a4aa942871dab24fce006c1c8c4a6c8f5368))
+
 ## [1.4.1](https://github.com/graasp/graasp-app-calculator/compare/v1.4.0...v1.4.1) (2024-04-24)
 
 
