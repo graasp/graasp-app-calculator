@@ -3049,9 +3049,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@graasp/apps-query-client@npm:3.5.1":
-  version: 3.5.1
-  resolution: "@graasp/apps-query-client@npm:3.5.1"
+"@graasp/apps-query-client@npm:3.5.2":
+  version: 3.5.2
+  resolution: "@graasp/apps-query-client@npm:3.5.2"
   dependencies:
     "@emotion/react": "npm:11.13.0"
     "@emotion/styled": "npm:11.13.0"
@@ -3072,7 +3072,7 @@ __metadata:
     date-fns: ^3.3.0
     react: ^18.0.0
     react-dom: ^18.0.0
-  checksum: 172c54c482ea016b501975124363f5fe89bd8611708b29e636003cc93cd3abc2313ba2312f22f981dea72b91cdc8d20f0100aad0fe6246650a27a0031f860f0b
+  checksum: bcf267ff6c93e30be76b52d1b61914a18c28d72ad04b419fb71146253884683292f27994c727b9ce9fd2e2969ad154e6cf0549ed47de94356cd5c2a266397d1c
   languageName: node
   linkType: hard
 
@@ -9030,7 +9030,7 @@ __metadata:
     "@commitlint/config-conventional": "npm:19.2.2"
     "@emotion/react": "npm:11.13.0"
     "@emotion/styled": "npm:11.13.0"
-    "@graasp/apps-query-client": "npm:3.5.1"
+    "@graasp/apps-query-client": "npm:3.5.2"
     "@graasp/sdk": "npm:4.22.0"
     "@graasp/ui": "npm:4.23.0"
     "@mui/icons-material": "npm:5.16.4"
