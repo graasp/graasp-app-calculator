@@ -10,8 +10,8 @@
   "type": "module",
   "license": "AGPL3.0-only",
   "dependencies": {
-    "@emotion/react": "11.13.0",
-    "@emotion/styled": "11.13.0",
+    "@emotion/react": "11.13.5",
+    "@emotion/styled": "11.13.5",
     "@graasp/apps-query-client": "3.5.1",
     "@graasp/sdk": "4.22.0",
     "@graasp/ui": "4.23.0",
